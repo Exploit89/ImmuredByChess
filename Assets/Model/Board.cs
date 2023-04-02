@@ -2,8 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[RequireComponent(typeof(Player))]
-
 public class Board : MonoBehaviour
 {
     [SerializeField] private Player _player;

@@ -27,8 +27,10 @@ public class Board : MonoBehaviour
         Debug.Log($"Стартовая позиция врага (черные) = {EnemyStartPosition.position}");
         SetPlayerStartPosition();
         Debug.Log($"Стартовая позиция игрока (белые) = {PlayerStartPosition.position}");
+        Debug.Log($"Стартовая позиция врага (черные) = {EnemyStartPosition.position}");
     }
 
+    // TODO сделать расчет от заполненных тайлов вместо размера всей тайловой сетки
     private void SetPlayerStartPosition()
     {
         if (TryGetCorrectBoardSize())
@@ -36,7 +38,7 @@ public class Board : MonoBehaviour
             int xLength = _tilemap.size.x;
             int yLength = _tilemap.size.y;
             int xStartPosition = Convert.ToInt32(_tilemap.transform.position.x) - (xLength - (_possibleFiguresRows * _possiblePlayersCount)) / _possiblePlayersCount;
-            int yStartPosition = yLength - (_player.FiguresCount / _possibleFiguresRows); //TODO допилить
+            int yStartPosition = Convert.ToInt32(_tilemap.transform.position.y) - (yLength - _possibleFiguresColumns);
             PlayerStartPosition.position = new Vector3(xStartPosition, yStartPosition);
         }
         else

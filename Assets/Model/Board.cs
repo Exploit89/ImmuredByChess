@@ -22,8 +22,12 @@ public class Board : MonoBehaviour
         PlayerStartPosition.position = new Vector3 (transform.position.x - 3.5f, _tilemap.transform.position.y - 2.5f);
         EnemyStartPosition.position = new Vector3(transform.position.x - 3.5f, _tilemap.transform.position.y + 4.5f);
         Debug.Log($"Размер Tilemap = {_tilemap.size}");
-        
+
+        _tilemap.CompressBounds();// это удалить после тестов
+        bool hastile = _tilemap.HasTile(new Vector3Int(-5, -4, 0));// это удалить после тестов -5,-5 - false / -5,-4 - true
+        Debug.Log(hastile);// это удалить после тестов
         Debug.Log($"Размер Tilemap = {_tilemap.size}"); // это удалить после тестов
+
         Debug.Log($"Размер клетки Tilemap = {_tilemap.cellSize}");
         Debug.Log($"Стартовая позиция игрока (белые) = {PlayerStartPosition.position}");
         Debug.Log($"Стартовая позиция врага (черные) = {EnemyStartPosition.position}");

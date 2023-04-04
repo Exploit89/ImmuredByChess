@@ -5,6 +5,8 @@ public class Board : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private Formation _formation;
+    [SerializeField] private Unit _prefab;
+    [SerializeField] private FigureSpawner _spawner;
 
     private Tilemap _tilemap;
     private int _maxPlayersCount = 2;
@@ -23,6 +25,8 @@ public class Board : MonoBehaviour
         SetStartPositions();
         Debug.Log($"Стартовая позиция игрока (белые) = {PlayerStartPosition.position}");
         Debug.Log($"Стартовая позиция врага (черные) = {EnemyStartPosition.position}");
+        _formation.CreateFiguresPoints(PlayerStartPosition.position, EnemyStartPosition.position);
+        _spawner.SpawnFigures();
     }
 
     private void SetStartPositions()
@@ -38,9 +42,10 @@ public class Board : MonoBehaviour
 
     private bool IsCorrectBoardSize()
     {
-        Vector3 minBoardSize = new Vector3(_maxPlayersCount * _formation.MaxFiguresRows, _formation.MaxFiguresColumns, 0);
+        int minBoardSizeX = _maxPlayersCount * _formation.MaxFiguresRows;
+        int minBoarrdSizeY = _formation.MaxFiguresColumns;
 
-        if(_tilemap.localBounds.max.x >= minBoardSize.x && _tilemap.localBounds.max.y >= minBoardSize.y)
+        if(_tilemap.localBounds.max.x >= minBoardSizeX && _tilemap.localBounds.max.y >= minBoarrdSizeY)
             return false;
         else
             return true;

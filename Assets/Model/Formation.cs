@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,45 +6,54 @@ public class Formation : MonoBehaviour
 {
     private enum Figure
     {
-        Rook,
-        Knight,
-        Bishop,
+        LeftRook,
+        LeftKnight,
+        LeftBishop,
         Queen,
         King,
-        Pawn
+        RightBishop,
+        RightKnight,
+        RightRook,
+        Pawn1,
+        Pawn2,
+        Pawn3,
+        Pawn4,
+        Pawn5,
+        Pawn6,
+        Pawn7,
+        Pawn8
     }
 
-    private int[] _figuresFormationKeys;
-    private Dictionary<String, Vector3> _playerFiguresPoints;
-    private Dictionary<Figure, Vector3> _enemyFiguresPoints;
+    private Dictionary<String, Vector3> _playerFiguresPoints = new Dictionary<string, Vector3>();
+    private Dictionary<String, Vector3> _enemyFiguresPoints = new Dictionary<string, Vector3>();
 
-    public int MaxFiguresRows { get; private set; }
-    public int MaxFiguresColumns { get; private set; }
+    public int MaxFiguresRows { get; private set; } = 2;
+    public int MaxFiguresColumns { get; private set; } = 8;
 
-    private void Awake()
-    {
-        _figuresFormationKeys = new int[] { 0, 1, 2, 3, 4, 2, 1, 0, 5, 5, 5, 5, 5, 5, 5, 5 };
-        MaxFiguresRows = 2;
-        MaxFiguresColumns = 8;
-        _playerFiguresPoints = new Dictionary<String, Vector3>();
-        _enemyFiguresPoints = new Dictionary<Figure, Vector3>();
-
-        CreatePlayerFiguresPoints(new Vector3(0,0));
-    }
-
-    public void CreatePlayerFiguresPoints(Vector3 startPosition)
+    public void CreateFiguresPoints(Vector3 playerStartPosition, Vector3 enemyStartPosition)
     {
         _playerFiguresPoints.Clear();
+        _enemyFiguresPoints.Clear();
 
-        for (int i = 0; i < _figuresFormationKeys.Length; i++)
+        for (int i = 0; i < MaxFiguresColumns * MaxFiguresRows; i++)
         {
-            _playerFiguresPoints.Add(Enum.GetName(typeof(Figure), _figuresFormationKeys[i]), new Vector3(startPosition.x + i, startPosition.y));
-            Debug.Log(_playerFiguresPoints[Enum.GetName(typeof(Figure), _figuresFormationKeys[i])]);
+            if(i < MaxFiguresColumns)
+            {
+                _playerFiguresPoints.Add(Enum.GetName(typeof(Figure), i), new Vector3(playerStartPosition.x + i, playerStartPosition.y));
+                _enemyFiguresPoints.Add(Enum.GetName(typeof(Figure), i), new Vector3(enemyStartPosition.x + i, enemyStartPosition.y));
+            }
+            else
+            {
+                _playerFiguresPoints.Add(Enum.GetName(typeof(Figure), i), new Vector3(playerStartPosition.x - MaxFiguresColumns + i, playerStartPosition.y + 1));
+                _enemyFiguresPoints.Add(Enum.GetName(typeof(Figure), i), new Vector3(enemyStartPosition.x - MaxFiguresColumns + i, enemyStartPosition.y - 1));
+            }
         }
     }
 
-    public void CreateEnemyFiguresPoints(Vector3 startPosition)
+    public Dictionary<String, Vector3> GetPlayerFiguresPoints()
     {
-        _enemyFiguresPoints.Clear();
+        Dictionary<String, Vector3> playerFiguresPoints = new Dictionary<String, Vector3>();
+        playerFiguresPoints = _playerFiguresPoints;
+        return playerFiguresPoints;
     }
 }

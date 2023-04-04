@@ -15,7 +15,8 @@ public class Formation : MonoBehaviour
         Pawn
     }
 
-    private int[] _figuresFormationKeys;
+    private int[] _playerFiguresFormationKeys;
+    private int[] _enemyFiguresFormationKeys;
 
     private Dictionary<Figure, Vector3> _playerFiguresPoints;
     private Dictionary<Figure, Vector3> _enemyFiguresPoints;
@@ -25,6 +26,8 @@ public class Formation : MonoBehaviour
 
     private void Awake()
     {
+        _playerFiguresFormationKeys = new int[] { 0, 1, 2, 3, 4, 2, 1, 0, 5, 5, 5, 5, 5, 5, 5, 5 };
+        _enemyFiguresFormationKeys = new int[] { 0, 1, 2, 3, 4, 2, 1, 0, 5, 5, 5, 5, 5, 5, 5, 5 };
         MaxFiguresRows = 2;
         MaxFiguresColumns = 8;
         _playerFiguresPoints = new Dictionary<Figure, Vector3>();

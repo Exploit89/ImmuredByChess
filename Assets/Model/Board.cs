@@ -15,15 +15,11 @@ public class Board : MonoBehaviour
 
     private void Awake()
     {
-        _tilemap = GetComponent<Tilemap>();
         PlayerStartPosition = new GameObject().transform;
         EnemyStartPosition = new GameObject().transform;
-        Debug.Log($"Размер Tilemap исходный = {_tilemap.size}");
+        _tilemap = GetComponent<Tilemap>();
         _tilemap.CompressBounds();
-        Debug.Log($"Размер Tilemap после компрессии = {_tilemap.size}");
         SetStartPositions();
-        Debug.Log($"Стартовая позиция игрока (белые) = {PlayerStartPosition.position}");
-        Debug.Log($"Стартовая позиция врага (черные) = {EnemyStartPosition.position}");
         _formation.CreateFiguresPoints(PlayerStartPosition.position, EnemyStartPosition.position);
         _spawner.SpawnFigures();
     }

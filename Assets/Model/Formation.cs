@@ -53,15 +53,15 @@ public class Formation : MonoBehaviour
 
         for (int i = 0; i < MaxFiguresColumns * MaxFiguresRows; i++)
         {
-            if(i < MaxFiguresColumns)
+            if (i < MaxFiguresColumns)
             {
                 _playerFiguresPoints.Add(Enum.GetName(typeof(Figure), i), new Vector3(playerStartPosition.x + i, playerStartPosition.y));
-                _enemyFiguresPoints.Add(Enum.GetName(typeof(Figure), i), new Vector3(enemyStartPosition.x + i, enemyStartPosition.y));
+                _enemyFiguresPoints.Add(Enum.GetName(typeof(Figure), i + MaxFiguresColumns * MaxFiguresRows), new Vector3(enemyStartPosition.x + i, enemyStartPosition.y));
             }
             else
             {
                 _playerFiguresPoints.Add(Enum.GetName(typeof(Figure), i), new Vector3(playerStartPosition.x - MaxFiguresColumns + i, playerStartPosition.y + 1));
-                _enemyFiguresPoints.Add(Enum.GetName(typeof(Figure), i), new Vector3(enemyStartPosition.x - MaxFiguresColumns + i, enemyStartPosition.y - 1));
+                _enemyFiguresPoints.Add(Enum.GetName(typeof(Figure), i + MaxFiguresColumns * MaxFiguresRows), new Vector3(enemyStartPosition.x - MaxFiguresColumns + i, enemyStartPosition.y - 1));
             }
         }
     }

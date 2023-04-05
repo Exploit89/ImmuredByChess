@@ -4,8 +4,9 @@ using UnityEngine;
 public class FigureSpawner : MonoBehaviour
 {
     [SerializeField] private Board _board;
-    [SerializeField] private Unit _prefab;
+    [SerializeField] private List<Unit> _prefabs;
     [SerializeField] private Formation _formation;
+    [SerializeField] private Player _player;
 
     private Dictionary<string, Vector3> _playerFiguresPositions = new Dictionary<string, Vector3>();
 
@@ -17,6 +18,18 @@ public class FigureSpawner : MonoBehaviour
         Vector3 rightRookPosition = new Vector3();
         _playerFiguresPositions.TryGetValue("RightRook", out rightRookPosition);
 
-        Instantiate(_prefab, rightRookPosition, Quaternion.identity, _board.transform);
+        //Instantiate(_prefabs, rightRookPosition, Quaternion.identity, _board.transform);
+    }
+
+    public void SpawnFigures2()
+    {
+        _playerFiguresPositions = _formation.GetPlayerFiguresPoints();
+        List<Unit> _playerUnits = _player.GetUnits();
+
+        foreach(Unit unit in _playerUnits)
+        {
+            _playerFiguresPositions.TryGetValue(unit.name, out Vector3 position);
+            Instantiate(unit, position, Quaternion.identity, _board.transform);
+        }
     }
 }

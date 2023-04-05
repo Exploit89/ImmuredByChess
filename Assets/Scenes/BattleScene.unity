@@ -1056,7 +1056,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 667107839}
   _formation: {fileID: 1884208406}
-  _prefab: {fileID: -1683494447399535459, guid: 8b77cd71277b18d4e8afbac309258ae3, type: 3}
   _spawner: {fileID: 1301796278}
 --- !u!1 &667107838
 GameObject:
@@ -1087,6 +1086,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa0d670758ea4442bb92f8fc4fc8009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _units:
+  - {fileID: -1683494447399535459, guid: 8b77cd71277b18d4e8afbac309258ae3, type: 3}
 --- !u!4 &667107840
 Transform:
   m_ObjectHideFlags: 0
@@ -1307,8 +1308,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _board: {fileID: 377257739}
-  _prefab: {fileID: -1683494447399535459, guid: 8b77cd71277b18d4e8afbac309258ae3, type: 3}
+  _prefabs:
+  - {fileID: -1683494447399535459, guid: 8b77cd71277b18d4e8afbac309258ae3, type: 3}
   _formation: {fileID: 1884208406}
+  _player: {fileID: 667107839}
 --- !u!4 &1301796279
 Transform:
   m_ObjectHideFlags: 0

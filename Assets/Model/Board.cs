@@ -5,7 +5,6 @@ public class Board : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private Formation _formation;
-    [SerializeField] private Unit _prefab;
     [SerializeField] private FigureSpawner _spawner;
 
     private Tilemap _tilemap;
@@ -26,7 +25,7 @@ public class Board : MonoBehaviour
         Debug.Log($"Стартовая позиция игрока (белые) = {PlayerStartPosition.position}");
         Debug.Log($"Стартовая позиция врага (черные) = {EnemyStartPosition.position}");
         _formation.CreateFiguresPoints(PlayerStartPosition.position, EnemyStartPosition.position);
-        _spawner.SpawnFigures();
+        _spawner.SpawnFigures2();
     }
 
     private void SetStartPositions()

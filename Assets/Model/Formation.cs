@@ -6,22 +6,38 @@ public class Formation : MonoBehaviour
 {
     private enum Figure
     {
-        LeftRook,
-        LeftKnight,
-        LeftBishop,
-        Queen,
-        King,
-        RightBishop,
-        RightKnight,
-        RightRook,
-        Pawn1,
-        Pawn2,
-        Pawn3,
-        Pawn4,
-        Pawn5,
-        Pawn6,
-        Pawn7,
-        Pawn8
+        WLeftRook,
+        WLeftKnight,
+        WLeftBishop,
+        WQueen,
+        WKing,
+        WRightBishop,
+        WRightKnight,
+        WRightRook,
+        WPawn1,
+        WPawn2,
+        WPawn3,
+        WPawn4,
+        WPawn5,
+        WPawn6,
+        WPawn7,
+        WPawn8,
+        BLeftRook,
+        BLeftKnight,
+        BLeftBishop,
+        BQueen,
+        BKing,
+        BRightBishop,
+        BRightKnight,
+        BRightRook,
+        BPawn1,
+        BPawn2,
+        BPawn3,
+        BPawn4,
+        BPawn5,
+        BPawn6,
+        BPawn7,
+        BPawn8,
     }
 
     private Dictionary<String, Vector3> _playerFiguresPoints = new Dictionary<string, Vector3>();
@@ -55,5 +71,12 @@ public class Formation : MonoBehaviour
         Dictionary<String, Vector3> playerFiguresPoints = new Dictionary<String, Vector3>();
         playerFiguresPoints = _playerFiguresPoints;
         return playerFiguresPoints;
+    }
+
+    public Dictionary<String, Vector3> GetEnemyFiguresPoints()
+    {
+        Dictionary<String, Vector3> enemyFiguresPoints = new Dictionary<String, Vector3>();
+        enemyFiguresPoints = _enemyFiguresPoints;
+        return enemyFiguresPoints;
     }
 }

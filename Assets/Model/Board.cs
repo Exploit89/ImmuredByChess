@@ -25,7 +25,7 @@ public class Board : MonoBehaviour
         Debug.Log($"Стартовая позиция игрока (белые) = {PlayerStartPosition.position}");
         Debug.Log($"Стартовая позиция врага (черные) = {EnemyStartPosition.position}");
         _formation.CreateFiguresPoints(PlayerStartPosition.position, EnemyStartPosition.position);
-        _spawner.SpawnFigures2();
+        _spawner.SpawnFigures();
     }
 
     private void SetStartPositions()

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
@@ -11,7 +12,6 @@ public class UnitMover : MonoBehaviour
 
     public Transform _position { get; private set; }
 
-    // переделать
     public void OnClick()
     {
         _position = new GameObject().transform;
@@ -19,11 +19,12 @@ public class UnitMover : MonoBehaviour
         _position.position = cam.ScreenToWorldPoint(new Vector3(Mouse.current.position.x.ReadValue(), Mouse.current.position.y.ReadValue(), 1));
         Debug.Log(_position.position);
 
-        RaycastHit2D hit = Physics2D.Raycast(_position.position, transform.forward);
-        bool hitt = Physics.Raycast(_position.position, transform.forward, out var hutt);
-        Debug.Log(hutt.collider.gameObject.transform.position);
-        Debug.Log(hit.collider.gameObject.name);
-        Debug.Log(hit.collider.gameObject.transform.position);
-        Debug.Log(_board.GetTile(Vector3Int.FloorToInt(hit.collider.gameObject.transform.position)));
+        //Vector3Int cellPosition = _board.LocalToCell(_position.position);
+        //transform.localPosition = _board.GetCellCenterLocal(cellPosition);
+        //Debug.Log(transform.localPosition);
+
+        Vector3Int cellPosition = _board.WorldToCell(transform.position);
+        transform.position = _board.GetCellCenterWorld(cellPosition);
+        Debug.Log(transform.position);
     }
 }

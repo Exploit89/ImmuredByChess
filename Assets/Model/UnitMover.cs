@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
@@ -22,6 +23,9 @@ public class UnitMover : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(_position.position);
 
         Vector3 oldPosition = new Vector3(transform.localPosition.x, transform.localPosition.y);
+
+        var wtc = _board.WorldToCell(_position.position);
+        Debug.Log(wtc);
 
         if (Physics.Raycast(ray, out hit))
         {

@@ -14,13 +14,21 @@ public class UnitMover : MonoBehaviour
     public void OnClick()
     {
         _position = new GameObject().transform;
-        _position.position = new Vector3();
+        _position.SetParent(_board.transform);
         _position.position = _camera.ScreenToWorldPoint(new Vector3(Mouse.current.position.x.ReadValue(), Mouse.current.position.y.ReadValue(), 1));
+        Debug.Log(_position.position);
 
-        Vector3Int cellPosition = _board.LocalToCell(_position.position);
-        transform.localPosition = _board.GetCellCenterLocal(cellPosition);
+        RaycastHit hit = new RaycastHit();
+        Ray ray = Camera.main.ScreenPointToRay(_position.position);
 
-        Vector3Int cellPositionAnother = _board.WorldToCell(transform.position);
-        transform.position = _board.GetCellCenterWorld(cellPosition);
+        Vector3 oldPosition = new Vector3(transform.localPosition.x, transform.localPosition.y);
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            Debug.Log("RayCast On");
+            Debug.Log(hit.collider.gameObject.name);
+            Debug.Log(hit.collider.gameObject.transform);
+            Destroy(hit.collider.gameObject);
+        }
     }
 }

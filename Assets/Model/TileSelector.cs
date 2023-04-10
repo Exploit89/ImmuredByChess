@@ -34,7 +34,6 @@ public class TileSelector : MonoBehaviour
                 if (GameManager.instance.DoesPieceBelongToCurrentPlayer(selectedPiece))
                 {
                     GameManager.instance.SelectPiece(selectedPiece);
-                    // Reference Point 1: add ExitState call here later
                     ExitState(selectedPiece);
                 }
             }

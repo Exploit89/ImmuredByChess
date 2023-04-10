@@ -1,35 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player
 {
-    [SerializeField] private List<Unit> _units;
+    private List<GameObject> _pieces;
+    private List<GameObject> _capturedPieces;
 
-    private List<Item> _inventory;
-    private string _name;
-    private int _level;
-    private int _experience;
+    public string Name { get; private set; }
+    public int Forward { get; private set; }
 
-    public void ChangeName(string name)
+    public Player(string name, bool positiveZMovement)
     {
-        _name = name;
+        Name = name;
+        _pieces = new List<GameObject>();
+        _capturedPieces = new List<GameObject>();
+
+        if (positiveZMovement == true)
+        {
+            Forward = 1;
+        }
+        else
+        {
+            Forward = -1;
+        }
     }
-    
-    public void ChangeExperience(int experience)
+
+    public void AddPiece(GameObject pieceObject)
     {
-        _experience += experience;
+        _pieces.Add(pieceObject);
     }
 
-    public void IncreaseLevel()
+    public void AddCapturedPiece(GameObject pieceToCapture)
     {
-        _level++;
+        _capturedPieces.Add(pieceToCapture);
     }
 
-    public List<Unit> GetUnits()
+    public bool ContainsPiece(GameObject piece)
     {
-        List <Unit> units = new List<Unit>();
-        units = _units;
-        return units;
+        return _pieces.Contains(piece);
     }
 }

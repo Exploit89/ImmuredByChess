@@ -1,48 +1,44 @@
-using UnityEngine;
-using UnityEngine.Tilemaps;
+п»їusing UnityEngine;
 
 public class Board : MonoBehaviour
 {
-    [SerializeField] private Player _player;
-    [SerializeField] private Formation _formation;
-    [SerializeField] private FigureSpawner _spawner;
+    [SerializeField] private Material _defaultMaterial;
+    [SerializeField] private Material _selectedMaterial;
 
-    private Tilemap _tilemap;
-    private int _maxPlayersCount = 2;
-
-    public Transform PlayerStartPosition { get; private set; }
-    public Transform EnemyStartPosition { get; private set; }
+    private PointConverter _pointConverter;
 
     private void Awake()
     {
-        PlayerStartPosition = new GameObject().transform;
-        EnemyStartPosition = new GameObject().transform;
-        _tilemap = GetComponent<Tilemap>();
-        _tilemap.CompressBounds();
-        SetStartPositions();
-        _formation.CreateFiguresPoints(PlayerStartPosition.position, EnemyStartPosition.position);
-        _spawner.SpawnFigures();
+        _pointConverter = new PointConverter();
     }
 
-    private void SetStartPositions()
+    public GameObject AddPiece(GameObject piece, int column, int row)
     {
-        if (IsCorrectBoardSize())
-        {
-            PlayerStartPosition.position = new Vector3(_tilemap.localBounds.min.x, _tilemap.localBounds.min.y, 0);
-            EnemyStartPosition.position = new Vector3(_tilemap.localBounds.min.x, _tilemap.localBounds.max.y - 1, 0);
-        }
-        else
-            Debug.Log("Размер доски меньше допустимого");
+        Vector2Int gridPoint = _pointConverter.GridPoint(column, row);
+        GameObject newPiece = Instantiate(piece, _pointConverter.PointFromGrid(gridPoint), Quaternion.identity, gameObject.transform);
+        Debug.Log("instantiate" + newPiece.name);
+        return newPiece;
     }
 
-    private bool IsCorrectBoardSize()
+    public void RemovePiece(GameObject piece)
     {
-        int minBoardSizeX = _maxPlayersCount * _formation.MaxFiguresRows;
-        int minBoarrdSizeY = _formation.MaxFiguresColumns;
+        Destroy(piece);
+    }
 
-        if(_tilemap.localBounds.max.x >= minBoardSizeX && _tilemap.localBounds.max.y >= minBoarrdSizeY)
-            return false;
-        else
-            return true;
+    public void MovePiece(GameObject piece, Vector2Int gridPoint)
+    {
+        piece.transform.position = _pointConverter.PointFromGrid(gridPoint);
+    }
+
+    public void SelectPiece(GameObject piece)
+    {
+        MeshRenderer renderers = piece.GetComponentInChildren<MeshRenderer>();
+        renderers.material = _selectedMaterial;
+    }
+
+    public void DeselectPiece(GameObject piece)
+    {
+        MeshRenderer renderers = piece.GetComponentInChildren<MeshRenderer>();
+        renderers.material = _defaultMaterial;
     }
 }

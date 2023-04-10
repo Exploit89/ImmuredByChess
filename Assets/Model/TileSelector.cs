@@ -3,15 +3,15 @@ using UnityEngine;
 public class TileSelector : MonoBehaviour
 {
     [SerializeField] private GameObject _tileHighlightPrefab;
+    [SerializeField] private PiecesCreator _piecesCreator;
 
     private GameObject _tileHighlight;
-    private Geometry _geometry;
+    private PointConverter _gridPoints;
 
     void Start()
     {
-        _geometry = GetComponent<Geometry>();
-        Vector2Int gridPoint = _geometry.GridPoint(0, 0);
-        Vector3 point = _geometry.PointFromGrid(gridPoint);
+        Vector2Int gridPoint = _gridPoints.GridPoint(0, 0);
+        Vector3 point = _gridPoints.PointFromGrid(gridPoint);
         _tileHighlight = Instantiate(_tileHighlightPrefab, point, Quaternion.identity, gameObject.transform);
         _tileHighlight.SetActive(false);
     }
@@ -19,21 +19,22 @@ public class TileSelector : MonoBehaviour
     void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         RaycastHit hit;
+
         if (Physics.Raycast(ray, out hit))
         {
             Vector3 point = hit.point;
-            Vector2Int gridPoint = _geometry.GridFromPoint(point);
-
+            Vector2Int gridPoint = _gridPoints.GridFromPoint(point);
             _tileHighlight.SetActive(true);
-            _tileHighlight.transform.position = _geometry.PointFromGrid(gridPoint);
+            _tileHighlight.transform.position = _gridPoints.PointFromGrid(gridPoint);
+
             if (Input.GetMouseButtonDown(0))
             {
-                GameObject selectedPiece = GameManager.instance.PieceAtGrid(gridPoint);
-                if (GameManager.instance.DoesPieceBelongToCurrentPlayer(selectedPiece))
+                GameObject selectedPiece = _piecesCreator.PieceAtGrid(gridPoint);
+
+                if (_piecesCreator.DoesPieceBelongToCurrentPlayer(selectedPiece))
                 {
-                    GameManager.instance.SelectPiece(selectedPiece);
+                    _piecesCreator.SelectPiece(selectedPiece);
                     ExitState(selectedPiece);
                 }
             }

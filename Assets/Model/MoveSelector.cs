@@ -6,8 +6,9 @@ public class MoveSelector : MonoBehaviour
     [SerializeField] private GameObject _moveLocationPrefab;
     [SerializeField] private GameObject _tileHighlightPrefab;
     [SerializeField] private GameObject _attackLocationPrefab;
+    [SerializeField] private PiecesCreator _piecesCreator;
 
-    private Geometry _geometry;
+    private PointConverter _gridPoints;
     private GameObject _tileHighlight;
     private GameObject _movingPiece;
     private List<Vector2Int> _moveLocations;
@@ -15,9 +16,12 @@ public class MoveSelector : MonoBehaviour
 
     void Start()
     {
+        Vector2Int zeroVector = new Vector2Int(0,0);
         enabled = false;
-        _tileHighlight = Instantiate(_tileHighlightPrefab, _geometry.PointFromGrid(new Vector2Int(0, 0)),
-            Quaternion.identity, gameObject.transform);
+        Debug.Log(_tileHighlightPrefab);
+        Debug.Log(_gridPoints.PointFromGrid(zeroVector));
+        Debug.Log(gameObject.transform);
+        _tileHighlight = Instantiate(_tileHighlightPrefab, _gridPoints.PointFromGrid(new Vector2Int(0, 0)), Quaternion.identity, gameObject.transform);
         _tileHighlight.SetActive(false);
     }
 
@@ -29,10 +33,10 @@ public class MoveSelector : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             Vector3 point = hit.point;
-            Vector2Int gridPoint = _geometry.GridFromPoint(point);
+            Vector2Int gridPoint = _gridPoints.GridFromPoint(point);
 
             _tileHighlight.SetActive(true);
-            _tileHighlight.transform.position = _geometry.PointFromGrid(gridPoint);
+            _tileHighlight.transform.position = _gridPoints.PointFromGrid(gridPoint);
             if (Input.GetMouseButtonDown(0))
             {
                 if (!_moveLocations.Contains(gridPoint))
@@ -40,14 +44,14 @@ public class MoveSelector : MonoBehaviour
                     return;
                 }
 
-                if (GameManager.instance.PieceAtGrid(gridPoint) == null)
+                if (_piecesCreator.PieceAtGrid(gridPoint) == null)
                 {
-                    GameManager.instance.Move(_movingPiece, gridPoint);
+                    _piecesCreator.Move(_movingPiece, gridPoint);
                 }
                 else
                 {
-                    GameManager.instance.CapturePieceAt(gridPoint);
-                    GameManager.instance.Move(_movingPiece, gridPoint);
+                    _piecesCreator.CapturePieceAt(gridPoint);
+                    _piecesCreator.Move(_movingPiece, gridPoint);
                 }
                 ExitState();
             }
@@ -67,7 +71,7 @@ public class MoveSelector : MonoBehaviour
             Destroy(highlight);
         }
 
-        GameManager.instance.DeselectPiece(_movingPiece);
+        _piecesCreator.DeselectPiece(_movingPiece);
         TileSelector selector = GetComponent<TileSelector>();
         selector.EnterState();
     }
@@ -77,7 +81,7 @@ public class MoveSelector : MonoBehaviour
         _movingPiece = piece;
         enabled = true;
 
-        _moveLocations = GameManager.instance.MovesForPiece(_movingPiece);
+        _moveLocations = _piecesCreator.MovesForPiece(_movingPiece);
         _locationHighlights = new List<GameObject>();
 
         if (_moveLocations.Count == 0)
@@ -88,13 +92,13 @@ public class MoveSelector : MonoBehaviour
         foreach (Vector2Int loc in _moveLocations)
         {
             GameObject highlight;
-            if (GameManager.instance.PieceAtGrid(loc))
+            if (_piecesCreator.PieceAtGrid(loc))
             {
-                highlight = Instantiate(_attackLocationPrefab, _geometry.PointFromGrid(loc), Quaternion.identity, gameObject.transform);
+                highlight = Instantiate(_attackLocationPrefab, _gridPoints.PointFromGrid(loc), Quaternion.identity, gameObject.transform);
             }
             else
             {
-                highlight = Instantiate(_moveLocationPrefab, _geometry.PointFromGrid(loc), Quaternion.identity, gameObject.transform);
+                highlight = Instantiate(_moveLocationPrefab, _gridPoints.PointFromGrid(loc), Quaternion.identity, gameObject.transform);
             }
             _locationHighlights.Add(highlight);
         }
@@ -105,10 +109,11 @@ public class MoveSelector : MonoBehaviour
         enabled = false;
         TileSelector selector = GetComponent<TileSelector>();
         _tileHighlight.SetActive(false);
-        GameManager.instance.DeselectPiece(_movingPiece);
+        _piecesCreator.DeselectPiece(_movingPiece);
         _movingPiece = null;
-        GameManager.instance.NextPlayer();
+        _piecesCreator.NextPlayer();
         selector.EnterState();
+
         foreach (GameObject highlight in _locationHighlights)
         {
             Destroy(highlight);

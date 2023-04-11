@@ -28,15 +28,18 @@ public class Player
     public void AddPiece(GameObject pieceObject)
     {
         _pieces.Add(pieceObject);
+        Debug.Log("added piece to player" + pieceObject.name);
     }
 
     public void AddCapturedPiece(GameObject pieceToCapture)
     {
         _capturedPieces.Add(pieceToCapture);
+        Debug.Log("added captured piece to player" + pieceToCapture.name);
     }
 
     public bool ContainsPiece(GameObject piece)
     {
+        Debug.Log("contains piece" + piece);
         return _pieces.Contains(piece);
     }
 }

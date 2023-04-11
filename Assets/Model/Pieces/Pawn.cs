@@ -3,9 +3,11 @@ using UnityEngine;
 
 public class Pawn : Piece
 {
+    private PiecesCreator piecesCreator;
+
     public override List<Vector2Int> MoveLocations(Vector2Int gridPoint)
     {
-        PiecesCreator piecesCreator = new PiecesCreator();
+        piecesCreator = GetComponent<PiecesCreator>();
         List<Vector2Int> locations = new List<Vector2Int>();
 
         int forwardDirection = piecesCreator.currentPlayer.Forward;

@@ -7,12 +7,12 @@ public class TileSelector : MonoBehaviour
 
     private GameObject _tileHighlight;
     private PointConverter _gridPoints;
+    private Vector3 _gridOffset = new Vector3(0.5f, 0, 0.5f);
 
     void Start()
     {
         _gridPoints = new PointConverter();
-        Vector2Int gridPoint = new Vector2Int(0, 0);
-        gridPoint = _gridPoints.GridPoint(0, 0);
+        Vector2Int gridPoint = _gridPoints.GridPoint(0, 0);
         Vector3 point = _gridPoints.PointFromGrid(gridPoint);
         _tileHighlight = Instantiate(_tileHighlightPrefab, point, Quaternion.identity, gameObject.transform);
         _tileHighlight.SetActive(false);
@@ -25,7 +25,7 @@ public class TileSelector : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            Vector3 point = hit.point;
+            Vector3 point = hit.point + _gridOffset;
             Vector2Int gridPoint = _gridPoints.GridFromPoint(point);
             _tileHighlight.SetActive(true);
             _tileHighlight.transform.position = _gridPoints.PointFromGrid(gridPoint);

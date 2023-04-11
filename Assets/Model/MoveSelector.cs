@@ -13,15 +13,14 @@ public class MoveSelector : MonoBehaviour
     private GameObject _movingPiece;
     private List<Vector2Int> _moveLocations;
     private List<GameObject> _locationHighlights;
+    private Vector3 _gridOffset = new Vector3(0.5f, 0, 0.5f);
 
     void Start()
     {
+        _moveLocations = new List<Vector2Int>();
         _gridPoints = new PointConverter();
-        Vector2Int zeroVector = new Vector2Int(0,0);
+        Vector2Int zeroVector = new Vector2Int(0, 0);
         enabled = false;
-        Debug.Log(_tileHighlightPrefab);
-        Debug.Log(_gridPoints.PointFromGrid(zeroVector));
-        Debug.Log(gameObject.transform);
         _tileHighlight = Instantiate(_tileHighlightPrefab, _gridPoints.PointFromGrid(zeroVector), Quaternion.identity, gameObject.transform);
         _tileHighlight.SetActive(false);
     }
@@ -29,19 +28,21 @@ public class MoveSelector : MonoBehaviour
     void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         RaycastHit hit;
+
         if (Physics.Raycast(ray, out hit))
         {
-            Vector3 point = hit.point;
+            Vector3 point = hit.point + _gridOffset;
             Vector2Int gridPoint = _gridPoints.GridFromPoint(point);
-
             _tileHighlight.SetActive(true);
             _tileHighlight.transform.position = _gridPoints.PointFromGrid(gridPoint);
+
             if (Input.GetMouseButtonDown(0))
             {
                 if (!_moveLocations.Contains(gridPoint))
                 {
+                    Debug.Log(_moveLocations);
+                    Debug.Log(gridPoint);
                     return;
                 }
 

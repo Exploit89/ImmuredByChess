@@ -16,7 +16,6 @@ public class Board : MonoBehaviour
     {
         Vector2Int gridPoint = _pointConverter.GridPoint(column, row);
         GameObject newPiece = Instantiate(piece, _pointConverter.PointFromGrid(gridPoint), Quaternion.identity, gameObject.transform);
-        Debug.Log("instantiate" + newPiece.name);
         return newPiece;
     }
 
@@ -28,6 +27,7 @@ public class Board : MonoBehaviour
     public void MovePiece(GameObject piece, Vector2Int gridPoint)
     {
         piece.transform.position = _pointConverter.PointFromGrid(gridPoint);
+        Debug.Log(piece.transform.position.x + piece.transform.position.y + piece.transform.position.z);
     }
 
     public void SelectPiece(GameObject piece)

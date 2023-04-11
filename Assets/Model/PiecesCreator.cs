@@ -103,6 +103,7 @@ public class PiecesCreator : MonoBehaviour
     public void Move(GameObject piece, Vector2Int gridPoint)
     {
         Piece pieceComponent = piece.GetComponent<Piece>();
+
         if (pieceComponent.type == PieceType.Pawn && !HasPawnMoved(piece))
         {
             _movedPawns.Add(piece);
@@ -129,7 +130,7 @@ public class PiecesCreator : MonoBehaviour
         GameObject pieceToCapture = PieceAtGrid(gridPoint);
         if (pieceToCapture.GetComponent<Piece>().type == PieceType.King)
         {
-            Debug.Log(currentPlayer.Name + " wins!");
+            Debug.Log(currentPlayer.Name + " wins!"); // delete this
             Destroy(_board.GetComponent<TileSelector>());
             Destroy(_board.GetComponent<MoveSelector>());
         }

@@ -16,12 +16,13 @@ public class MoveSelector : MonoBehaviour
 
     void Start()
     {
+        _gridPoints = new PointConverter();
         Vector2Int zeroVector = new Vector2Int(0,0);
         enabled = false;
         Debug.Log(_tileHighlightPrefab);
         Debug.Log(_gridPoints.PointFromGrid(zeroVector));
         Debug.Log(gameObject.transform);
-        _tileHighlight = Instantiate(_tileHighlightPrefab, _gridPoints.PointFromGrid(new Vector2Int(0, 0)), Quaternion.identity, gameObject.transform);
+        _tileHighlight = Instantiate(_tileHighlightPrefab, _gridPoints.PointFromGrid(zeroVector), Quaternion.identity, gameObject.transform);
         _tileHighlight.SetActive(false);
     }
 

@@ -10,7 +10,9 @@ public class TileSelector : MonoBehaviour
 
     void Start()
     {
-        Vector2Int gridPoint = _gridPoints.GridPoint(0, 0);
+        _gridPoints = new PointConverter();
+        Vector2Int gridPoint = new Vector2Int(0, 0);
+        gridPoint = _gridPoints.GridPoint(0, 0);
         Vector3 point = _gridPoints.PointFromGrid(gridPoint);
         _tileHighlight = Instantiate(_tileHighlightPrefab, point, Quaternion.identity, gameObject.transform);
         _tileHighlight.SetActive(false);

@@ -176,11 +176,12 @@ public class PiecesCreator : MonoBehaviour
 
                 if (_pieces[i, j] == piece)
                 {
+                    Debug.Log("Norm" + new Vector2Int(i, j));
                     return new Vector2Int(i, j);
                 }
             }
         }
-
+        Debug.Log("Ne norm" + new Vector2Int(-1, -1));
         return new Vector2Int(-1, -1);
     }
 

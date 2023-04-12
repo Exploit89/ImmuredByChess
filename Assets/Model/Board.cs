@@ -14,9 +14,19 @@ public class Board : MonoBehaviour
 
     public GameObject AddPiece(GameObject piece, int column, int row)
     {
+        Quaternion knightRotation = Quaternion.Euler(0, -90, 0);
         Vector2Int gridPoint = _pointConverter.GridPoint(column, row);
-        GameObject newPiece = Instantiate(piece, _pointConverter.PointFromGrid(gridPoint), Quaternion.identity, gameObject.transform);
-        return newPiece;
+
+        if (piece.name == "White_Knight")
+        {
+            GameObject newPiece = Instantiate(piece, _pointConverter.PointFromGrid(gridPoint), knightRotation, gameObject.transform);
+            return newPiece;
+        }
+        else
+        {
+            GameObject newPiece = Instantiate(piece, _pointConverter.PointFromGrid(gridPoint), Quaternion.Euler(0, 90, 0), gameObject.transform);
+            return newPiece;
+        }
     }
 
     public void RemovePiece(GameObject piece)

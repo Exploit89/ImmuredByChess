@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 1985090683}
   m_Layer: 0
   m_Name: PiecesCreator
-  m_TagString: Untagged
+  m_TagString: PiecesCreator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -517,7 +517,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef4a3c5f34484f9449b91642b8cff66e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultMaterial: {fileID: 2100000, guid: d09888fb380864d7d820ffed5c260deb, type: 2}
+  _whiteMaterial: {fileID: 2100000, guid: d09888fb380864d7d820ffed5c260deb, type: 2}
+  _blackMaterial: {fileID: 2100000, guid: ce80d7520e4604c6faaad086dc1a7590, type: 2}
   _selectedMaterial: {fileID: 2100000, guid: c1e5e36a939a1df4ebde4db4e33baad2, type: 2}
 --- !u!4 &2021277653
 Transform:

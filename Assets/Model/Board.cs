@@ -2,7 +2,8 @@
 
 public class Board : MonoBehaviour
 {
-    [SerializeField] private Material _defaultMaterial;
+    [SerializeField] private Material _whiteMaterial;
+    [SerializeField] private Material _blackMaterial;
     [SerializeField] private Material _selectedMaterial;
 
     private PointConverter _pointConverter;
@@ -37,7 +38,6 @@ public class Board : MonoBehaviour
     public void MovePiece(GameObject piece, Vector2Int gridPoint)
     {
         piece.transform.position = _pointConverter.PointFromGrid(gridPoint);
-        Debug.Log(piece.transform.position.x + piece.transform.position.y + piece.transform.position.z);
     }
 
     public void SelectPiece(GameObject piece)
@@ -49,6 +49,14 @@ public class Board : MonoBehaviour
     public void DeselectPiece(GameObject piece)
     {
         MeshRenderer renderers = piece.GetComponentInChildren<MeshRenderer>();
-        renderers.material = _defaultMaterial;
+
+        if(piece.tag == "White")
+        {
+            renderers.material = _whiteMaterial;
+        }
+        else
+        {
+            renderers.material = _blackMaterial;
+        }
     }
 }

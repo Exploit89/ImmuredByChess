@@ -22,8 +22,8 @@ public class PiecesCreator : MonoBehaviour
     private Player _player;
     private Player _enemy;
 
-    public Player currentPlayer;
-    public Player otherPlayer;
+    public Player CurrentPlayer { get; private set; }
+    public Player OtherPlayer { get; private set; }
 
     void Start()
     {
@@ -33,8 +33,8 @@ public class PiecesCreator : MonoBehaviour
         _player = new Player("_player", true);
         _enemy = new Player("_enemy", false);
 
-        currentPlayer = _player;
-        otherPlayer = _enemy;
+        CurrentPlayer = _player;
+        OtherPlayer = _enemy;
 
         InitialSetup();
     }
@@ -88,11 +88,8 @@ public class PiecesCreator : MonoBehaviour
 
     public List<Vector2Int> MovesForPiece(GameObject pieceObject)
     {
-        Debug.Log("pieceObject in piecesCreator " + pieceObject);
         Piece piece = pieceObject.GetComponent<Piece>();
-        Debug.Log("piece in piecesCreator " + piece);
         Vector2Int gridPoint = GridForPiece(pieceObject);
-        Debug.Log("gridPoint in piecesCreator " + gridPoint);
         List<Vector2Int> locations = piece.MoveLocations(gridPoint);
 
         locations.RemoveAll(gp => gp.x < 0 || gp.x > 7 || gp.y < 0 || gp.y > 7);
@@ -129,13 +126,14 @@ public class PiecesCreator : MonoBehaviour
     public void CapturePieceAt(Vector2Int gridPoint)
     {
         GameObject pieceToCapture = PieceAtGrid(gridPoint);
+
         if (pieceToCapture.GetComponent<Piece>().type == PieceType.King)
         {
-            Debug.Log(currentPlayer.Name + " wins!"); // delete this
+            Debug.Log(CurrentPlayer.Name + " wins!"); // delete this
             Destroy(_board.GetComponent<TileSelector>());
             Destroy(_board.GetComponent<MoveSelector>());
         }
-        currentPlayer.AddCapturedPiece(pieceToCapture);
+        CurrentPlayer.AddCapturedPiece(pieceToCapture);
         _pieces[gridPoint.x, gridPoint.y] = null;
         Destroy(pieceToCapture);
     }
@@ -152,14 +150,13 @@ public class PiecesCreator : MonoBehaviour
 
     public bool DoesPieceBelongToCurrentPlayer(GameObject piece)
     {
-        return currentPlayer.ContainsPiece(piece);
+        return CurrentPlayer.ContainsPiece(piece);
     }
 
     public GameObject PieceAtGrid(Vector2Int gridPoint)
     {
         if (gridPoint.x > 7 || gridPoint.y > 7 || gridPoint.x < 0 || gridPoint.y < 0)
         {
-            Debug.Log("PieceAtGrid = null");
             return null;
         }
         return _pieces[gridPoint.x, gridPoint.y];
@@ -171,17 +168,12 @@ public class PiecesCreator : MonoBehaviour
         {
             for (int j = 0; j < 8; j++)
             {
-                Debug.Log($"{_pieces[i, j].name} + {i} + {j}");
-                Debug.Log(piece);
-
                 if (_pieces[i, j] == piece)
                 {
-                    Debug.Log("Norm" + new Vector2Int(i, j));
                     return new Vector2Int(i, j);
                 }
             }
         }
-        Debug.Log("Ne norm" + new Vector2Int(-1, -1));
         return new Vector2Int(-1, -1);
     }
 
@@ -194,7 +186,7 @@ public class PiecesCreator : MonoBehaviour
             return false;
         }
 
-        if (otherPlayer.ContainsPiece(piece))
+        if (OtherPlayer.ContainsPiece(piece))
         {
             return false;
         }
@@ -203,8 +195,8 @@ public class PiecesCreator : MonoBehaviour
 
     public void NextPlayer()
     {
-        Player tempPlayer = currentPlayer;
-        currentPlayer = otherPlayer;
-        otherPlayer = tempPlayer;
+        Player tempPlayer = CurrentPlayer;
+        CurrentPlayer = OtherPlayer;
+        OtherPlayer = tempPlayer;
     }
 }

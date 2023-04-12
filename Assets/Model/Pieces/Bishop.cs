@@ -5,7 +5,9 @@ public class Bishop : Piece
 {
     public override List<Vector2Int> MoveLocations(Vector2Int gridPoint)
     {
-        PiecesCreator piecesCreator = new PiecesCreator();
+        GameObject piecesCreator = GameObject.FindGameObjectWithTag("PiecesCreator");
+        PiecesCreator _piecesCreator = piecesCreator.GetComponent<PiecesCreator>();
+
         List<Vector2Int> locations = new List<Vector2Int>();
 
         foreach (Vector2Int dir in BishopDirections)
@@ -14,7 +16,7 @@ public class Bishop : Piece
             {
                 Vector2Int nextGridPoint = new Vector2Int(gridPoint.x + i * dir.x, gridPoint.y + i * dir.y);
                 locations.Add(nextGridPoint);
-                if (piecesCreator.PieceAtGrid(nextGridPoint))
+                if (_piecesCreator.PieceAtGrid(nextGridPoint))
                 {
                     break;
                 }

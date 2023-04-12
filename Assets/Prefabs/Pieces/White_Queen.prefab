@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -8258317744069274961}
   m_Layer: 0
   m_Name: White_Queen
-  m_TagString: Untagged
+  m_TagString: White
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

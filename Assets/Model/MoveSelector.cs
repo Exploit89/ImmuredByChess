@@ -39,15 +39,8 @@ public class MoveSelector : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                // somewhere here null reference error
-                Debug.Log("mouse clicked in MoveSelector");
-                bool atata = _moveLocations.Contains(gridPoint);
-                Debug.Log("moveLocations.Contains(gridPoint) " + atata);
-
                 if (!_moveLocations.Contains(gridPoint))
                 {
-                    Debug.Log(_moveLocations);
-                    Debug.Log(gridPoint);
                     return;
                 }
 
@@ -87,11 +80,8 @@ public class MoveSelector : MonoBehaviour
     {
         _movingPiece = piece;
         enabled = true;
-        Debug.Log("111");
-        // now looking here
         _moveLocations = _piecesCreator.MovesForPiece(_movingPiece);
         _locationHighlights = new List<GameObject>();
-        Debug.Log("222");
 
         if (_moveLocations.Count == 0)
         {
@@ -101,6 +91,7 @@ public class MoveSelector : MonoBehaviour
         foreach (Vector2Int loc in _moveLocations)
         {
             GameObject highlight;
+
             if (_piecesCreator.PieceAtGrid(loc))
             {
                 highlight = Instantiate(_attackLocationPrefab, _gridPoints.PointFromGrid(loc), Quaternion.identity, gameObject.transform);

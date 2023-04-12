@@ -38,7 +38,6 @@ public class TileSelector : MonoBehaviour
                 if (_piecesCreator.DoesPieceBelongToCurrentPlayer(selectedPiece))
                 {
                     _piecesCreator.SelectPiece(selectedPiece);
-                    Debug.Log("selected piece " + selectedPiece);
                     ExitState(selectedPiece);
                 }
             }
@@ -59,9 +58,6 @@ public class TileSelector : MonoBehaviour
         enabled = false;
         _tileHighlight.SetActive(false);
         MoveSelector move = GetComponent<MoveSelector>();
-        Debug.Log("move get component" + move);
         move.EnterState(movingPiece);
-        Debug.Log(movingPiece);
-        Debug.Log($"move - {move}, and movingPiece - {movingPiece}");
     }
 }

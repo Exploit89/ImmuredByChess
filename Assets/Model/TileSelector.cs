@@ -32,11 +32,15 @@ public class TileSelector : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                GameObject selectedPiece = _piecesCreator.PieceAtGrid(gridPoint);
+                Debug.Log("LB mouse clicked");
+                GameObject selectedPiece = new GameObject();
+                selectedPiece = _piecesCreator.PieceAtGrid(gridPoint);
+                Debug.Log("selected piece is " + selectedPiece);
 
                 if (_piecesCreator.DoesPieceBelongToCurrentPlayer(selectedPiece))
                 {
                     _piecesCreator.SelectPiece(selectedPiece);
+                    Debug.Log("selected piece " + selectedPiece);
                     ExitState(selectedPiece);
                 }
             }
@@ -54,9 +58,12 @@ public class TileSelector : MonoBehaviour
 
     private void ExitState(GameObject movingPiece)
     {
+        Debug.Log("exit state entered");
         enabled = false;
+        Debug.Log("enabled = false");
         _tileHighlight.SetActive(false);
         MoveSelector move = GetComponent<MoveSelector>();
         move.EnterState(movingPiece);
+        Debug.Log($"move - {move}, and movingPiece - {movingPiece}");
     }
 }

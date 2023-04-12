@@ -158,8 +158,10 @@ public class PiecesCreator : MonoBehaviour
     {
         if (gridPoint.x > 7 || gridPoint.y > 7 || gridPoint.x < 0 || gridPoint.y < 0)
         {
+            Debug.Log("PieceAtGrid = null");
             return null;
         }
+        Debug.Log("PieceAtGrid not null, it's correct " + _pieces[gridPoint.x, gridPoint.y]);
         return _pieces[gridPoint.x, gridPoint.y];
     }
 

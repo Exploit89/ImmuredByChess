@@ -39,6 +39,7 @@ public class MoveSelector : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
+                // somewhere here null reference error
                 if (!_moveLocations.Contains(gridPoint))
                 {
                     Debug.Log(_moveLocations);

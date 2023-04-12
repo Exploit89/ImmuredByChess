@@ -73,9 +73,7 @@ public class PiecesCreator : MonoBehaviour
     public void AddPiece(GameObject prefab, Player player, int column, int row)
     {
         GameObject pieceObject = _board.AddPiece(prefab, column, row);
-        Debug.Log("_board.AddPiece" + pieceObject);
         player.AddPiece(pieceObject);
-        Debug.Log("player.AddPiece" + pieceObject);
         _pieces[column, row] = pieceObject;
     }
 
@@ -90,8 +88,11 @@ public class PiecesCreator : MonoBehaviour
 
     public List<Vector2Int> MovesForPiece(GameObject pieceObject)
     {
+        Debug.Log("pieceObject in piecesCreator " + pieceObject);
         Piece piece = pieceObject.GetComponent<Piece>();
+        Debug.Log("piece in piecesCreator " + piece);
         Vector2Int gridPoint = GridForPiece(pieceObject);
+        Debug.Log("gridPoint in piecesCreator " + gridPoint);
         List<Vector2Int> locations = piece.MoveLocations(gridPoint);
 
         locations.RemoveAll(gp => gp.x < 0 || gp.x > 7 || gp.y < 0 || gp.y > 7);
@@ -161,7 +162,6 @@ public class PiecesCreator : MonoBehaviour
             Debug.Log("PieceAtGrid = null");
             return null;
         }
-        Debug.Log("PieceAtGrid not null, it's correct " + _pieces[gridPoint.x, gridPoint.y]);
         return _pieces[gridPoint.x, gridPoint.y];
     }
 
@@ -171,6 +171,9 @@ public class PiecesCreator : MonoBehaviour
         {
             for (int j = 0; j < 8; j++)
             {
+                Debug.Log($"{_pieces[i, j].name} + {i} + {j}");
+                Debug.Log(piece);
+
                 if (_pieces[i, j] == piece)
                 {
                     return new Vector2Int(i, j);

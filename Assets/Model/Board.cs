@@ -34,7 +34,6 @@ public class Board : MonoBehaviour
     {
         MeshRenderer renderers = piece.GetComponentInChildren<MeshRenderer>();
         renderers.material = _selectedMaterial;
-        Debug.Log("matreial name of selected piece " + renderers.material.name);
     }
 
     public void DeselectPiece(GameObject piece)

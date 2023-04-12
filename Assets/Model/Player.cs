@@ -28,7 +28,6 @@ public class Player
     public void AddPiece(GameObject pieceObject)
     {
         _pieces.Add(pieceObject);
-        Debug.Log("added piece to player" + pieceObject.name);
     }
 
     public void AddCapturedPiece(GameObject pieceToCapture)

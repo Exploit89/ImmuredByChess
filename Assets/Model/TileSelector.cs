@@ -32,10 +32,8 @@ public class TileSelector : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("LB mouse clicked");
                 GameObject selectedPiece = new GameObject();
                 selectedPiece = _piecesCreator.PieceAtGrid(gridPoint);
-                Debug.Log("selected piece is " + selectedPiece);
 
                 if (_piecesCreator.DoesPieceBelongToCurrentPlayer(selectedPiece))
                 {
@@ -58,12 +56,12 @@ public class TileSelector : MonoBehaviour
 
     private void ExitState(GameObject movingPiece)
     {
-        Debug.Log("exit state entered");
         enabled = false;
-        Debug.Log("enabled = false");
         _tileHighlight.SetActive(false);
         MoveSelector move = GetComponent<MoveSelector>();
+        Debug.Log("move get component" + move);
         move.EnterState(movingPiece);
+        Debug.Log(movingPiece);
         Debug.Log($"move - {move}, and movingPiece - {movingPiece}");
     }
 }

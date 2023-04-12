@@ -11,6 +11,7 @@ public class Pawn : Piece
         List<Vector2Int> locations = new List<Vector2Int>();
 
         int forwardDirection = piecesCreator.currentPlayer.Forward;
+        Debug.Log("Pawn forwardDirection " + forwardDirection);
         Vector2Int forwardOne = new Vector2Int(gridPoint.x, gridPoint.y + forwardDirection);
         if (piecesCreator.PieceAtGrid(forwardOne) == false)
         {

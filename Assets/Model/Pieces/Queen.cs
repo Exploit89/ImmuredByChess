@@ -7,7 +7,6 @@ public class Queen : Piece
     {
         GameObject piecesCreator = GameObject.FindGameObjectWithTag("PiecesCreator");
         PiecesCreator _piecesCreator = piecesCreator.GetComponent<PiecesCreator>();
-
         List<Vector2Int> locations = new List<Vector2Int>();
         List<Vector2Int> directions = new List<Vector2Int>(BishopDirections);
         directions.AddRange(RookDirections);
@@ -20,12 +19,9 @@ public class Queen : Piece
                 locations.Add(nextGridPoint);
 
                 if (_piecesCreator.PieceAtGrid(nextGridPoint))
-                {
                     break;
-                }
             }
         }
-
         return locations;
     }
 }

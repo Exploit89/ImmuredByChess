@@ -16,7 +16,6 @@ public class Knight : Piece
             new Vector2Int(gridPoint.x + 1, gridPoint.y - 2),
             new Vector2Int(gridPoint.x - 1, gridPoint.y - 2)
         };
-
         return locations;
     }
 }

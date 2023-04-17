@@ -29,13 +29,10 @@ public class PiecesCreator : MonoBehaviour
     {
         _pieces = new GameObject[8, 8];
         _movedPawns = new List<GameObject>();
-
         _player = new Player("_player", true);
         _enemy = new Player("_enemy", false);
-
         CurrentPlayer = _player;
         OtherPlayer = _enemy;
-
         InitialSetup();
     }
 
@@ -54,7 +51,6 @@ public class PiecesCreator : MonoBehaviour
         {
             AddPiece(_whitePawn, _player, i, 1);
         }
-
         AddPiece(_blackRook, _enemy, 0, 7);
         AddPiece(_blackKnight, _enemy, 1, 7);
         AddPiece(_blackBishop, _enemy, 2, 7);
@@ -80,10 +76,9 @@ public class PiecesCreator : MonoBehaviour
     public void SelectPieceAtGrid(Vector2Int gridPoint)
     {
         GameObject selectedPiece = _pieces[gridPoint.x, gridPoint.y];
+
         if (selectedPiece)
-        {
             _board.SelectPiece(selectedPiece);
-        }
     }
 
     public List<Vector2Int> MovesForPiece(GameObject pieceObject)
@@ -91,10 +86,8 @@ public class PiecesCreator : MonoBehaviour
         Piece piece = pieceObject.GetComponent<Piece>();
         Vector2Int gridPoint = GridForPiece(pieceObject);
         List<Vector2Int> locations = piece.MoveLocations(gridPoint);
-
         locations.RemoveAll(gp => gp.x < 0 || gp.x > 7 || gp.y < 0 || gp.y > 7);
         locations.RemoveAll(gp => FriendlyPieceAt(gp));
-
         return locations;
     }
 
@@ -103,10 +96,7 @@ public class PiecesCreator : MonoBehaviour
         Piece pieceComponent = piece.GetComponent<Piece>();
 
         if (pieceComponent.type == PieceType.Pawn && !HasPawnMoved(piece))
-        {
             _movedPawns.Add(piece);
-        }
-
         Vector2Int startGridPoint = GridForPiece(piece);
         _pieces[startGridPoint.x, startGridPoint.y] = null;
         _pieces[gridPoint.x, gridPoint.y] = piece;
@@ -129,7 +119,6 @@ public class PiecesCreator : MonoBehaviour
 
         if (pieceToCapture.GetComponent<Piece>().type == PieceType.King)
         {
-            Debug.Log(CurrentPlayer.Name + " wins!"); // delete this
             Destroy(_board.GetComponent<TileSelector>());
             Destroy(_board.GetComponent<MoveSelector>());
         }
@@ -156,9 +145,7 @@ public class PiecesCreator : MonoBehaviour
     public GameObject PieceAtGrid(Vector2Int gridPoint)
     {
         if (gridPoint.x > 7 || gridPoint.y > 7 || gridPoint.x < 0 || gridPoint.y < 0)
-        {
             return null;
-        }
         return _pieces[gridPoint.x, gridPoint.y];
     }
 
@@ -182,15 +169,9 @@ public class PiecesCreator : MonoBehaviour
         GameObject piece = PieceAtGrid(gridPoint);
 
         if (piece == null)
-        {
             return false;
-        }
 
-        if (OtherPlayer.ContainsPiece(piece))
-        {
-            return false;
-        }
-        return true;
+        return OtherPlayer.ContainsPiece(piece) ? false : true;
     }
 
     public void NextPlayer()

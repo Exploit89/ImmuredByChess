@@ -15,14 +15,7 @@ public class Player
         _pieces = new List<GameObject>();
         _capturedPieces = new List<GameObject>();
 
-        if (positiveZMovement == true)
-        {
-            Forward = 1;
-        }
-        else
-        {
-            Forward = -1;
-        }
+        Forward = positiveZMovement ? 1 : -1;
     }
 
     public void AddPiece(GameObject pieceObject)

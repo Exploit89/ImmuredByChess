@@ -51,12 +51,8 @@ public class Board : MonoBehaviour
         MeshRenderer renderers = piece.GetComponentInChildren<MeshRenderer>();
 
         if(piece.tag == "White")
-        {
             renderers.material = _whiteMaterial;
-        }
         else
-        {
             renderers.material = _blackMaterial;
-        }
     }
 }

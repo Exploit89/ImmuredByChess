@@ -11,7 +11,7 @@ public class Bishop : Piece
 
         foreach (Vector2Int direction in BishopDirections)
         {
-            for (int i = 1; i < 8; i++)
+            for (int i = 1; i < _maxMovementLenght; i++)
             {
                 Vector2Int nextGridPoint = new Vector2Int(gridPoint.x + i * direction.x, gridPoint.y + i * direction.y);
                 locations.Add(nextGridPoint);

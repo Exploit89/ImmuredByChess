@@ -27,7 +27,7 @@ public class PiecesCreator : MonoBehaviour
 
     void Start()
     {
-        _pieces = new GameObject[8, 8];
+        _pieces = new GameObject[_board.MaxSideLength, _board.MaxSideLength];
         _movedPawns = new List<GameObject>();
         _player = new Player("_player", true);
         _enemy = new Player("_enemy", false);
@@ -47,7 +47,7 @@ public class PiecesCreator : MonoBehaviour
         AddPiece(_whiteKnight, _player, 6, 0);
         AddPiece(_whiteRook, _player, 7, 0);
 
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < _board.MaxSideLength; i++)
         {
             AddPiece(_whitePawn, _player, i, 1);
         }
@@ -60,7 +60,7 @@ public class PiecesCreator : MonoBehaviour
         AddPiece(_blackKnight, _enemy, 6, 7);
         AddPiece(_blackRook, _enemy, 7, 7);
 
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < _board.MaxSideLength; i++)
         {
             AddPiece(_blackPawn, _enemy, i, 6);
         }
@@ -96,7 +96,12 @@ public class PiecesCreator : MonoBehaviour
         Piece pieceComponent = piece.GetComponent<Piece>();
 
         if (pieceComponent.Type == PieceType.Pawn && !HasPawnMoved(piece))
-            _movedPawns.Add(piece);
+        {
+            PawnMoved(piece);
+            HasPawnMoved(piece);
+        }
+            //_movedPawns.Add(piece);
+
         Vector2Int startGridPoint = GridForPiece(piece);
         _pieces[startGridPoint.x, startGridPoint.y] = null;
         _pieces[gridPoint.x, gridPoint.y] = piece;
@@ -151,9 +156,9 @@ public class PiecesCreator : MonoBehaviour
 
     public Vector2Int GridForPiece(GameObject piece)
     {
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < _board.MaxSideLength; i++)
         {
-            for (int j = 0; j < 8; j++)
+            for (int j = 0; j < _board.MaxSideLength; j++)
             {
                 if (_pieces[i, j] == piece)
                 {

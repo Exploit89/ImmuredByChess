@@ -88,17 +88,17 @@ public class MoveSelector : MonoBehaviour
             CancelMove();
         }
 
-        foreach (Vector2Int loc in _moveLocations)
+        foreach (Vector2Int location in _moveLocations)
         {
             GameObject highlight;
 
-            if (_piecesCreator.PieceAtGrid(loc))
+            if (_piecesCreator.PieceAtGrid(location))
             {
-                highlight = Instantiate(_attackLocationPrefab, _gridPoints.PointFromGrid(loc), Quaternion.identity, gameObject.transform);
+                highlight = Instantiate(_attackLocationPrefab, _gridPoints.PointFromGrid(location), Quaternion.identity, gameObject.transform);
             }
             else
             {
-                highlight = Instantiate(_moveLocationPrefab, _gridPoints.PointFromGrid(loc), Quaternion.identity, gameObject.transform);
+                highlight = Instantiate(_moveLocationPrefab, _gridPoints.PointFromGrid(location), Quaternion.identity, gameObject.transform);
             }
             _locationHighlights.Add(highlight);
         }

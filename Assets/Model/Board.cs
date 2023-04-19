@@ -7,6 +7,9 @@ public class Board : MonoBehaviour
     [SerializeField] private Material _selectedMaterial;
 
     private PointConverter _pointConverter;
+    private int _modelRotateAngleY = 90;
+
+    public int MaxSideLength { get; private set; } = 8;
 
     private void Awake()
     {
@@ -15,7 +18,7 @@ public class Board : MonoBehaviour
 
     public GameObject AddPiece(GameObject piece, int column, int row)
     {
-        Quaternion knightRotation = Quaternion.Euler(0, -90, 0);
+        Quaternion knightRotation = Quaternion.Euler(0, -_modelRotateAngleY, 0);
         Vector2Int gridPoint = _pointConverter.GridPoint(column, row);
 
         if (piece.name == "White_Knight")
@@ -25,7 +28,7 @@ public class Board : MonoBehaviour
         }
         else
         {
-            GameObject newPiece = Instantiate(piece, _pointConverter.PointFromGrid(gridPoint), Quaternion.Euler(0, 90, 0), gameObject.transform);
+            GameObject newPiece = Instantiate(piece, _pointConverter.PointFromGrid(gridPoint), Quaternion.Euler(0, _modelRotateAngleY, 0), gameObject.transform);
             return newPiece;
         }
     }

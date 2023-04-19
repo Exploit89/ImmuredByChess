@@ -5,6 +5,8 @@ public class Player
 {
     private List<GameObject> _pieces;
     private List<GameObject> _capturedPieces;
+    private int _level;
+    private int _expierence;
 
     public string Name { get; private set; }
     public int Forward { get; private set; }
@@ -12,10 +14,11 @@ public class Player
     public Player(string name, bool positiveZMovement)
     {
         Name = name;
+        Forward = positiveZMovement ? 1 : -1;
         _pieces = new List<GameObject>();
         _capturedPieces = new List<GameObject>();
-
-        Forward = positiveZMovement ? 1 : -1;
+        _level = 0;
+        _expierence = 0;
     }
 
     public void AddPiece(GameObject pieceObject)
@@ -31,5 +34,15 @@ public class Player
     public bool ContainsPiece(GameObject piece)
     {
         return _pieces.Contains(piece);
+    }
+
+    public void IncreaseLevel()
+    {
+        _level++;
+    }
+
+    public void IncreseExperience()
+    {
+        _expierence++;
     }
 }

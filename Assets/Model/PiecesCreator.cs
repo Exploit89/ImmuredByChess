@@ -97,20 +97,13 @@ public class PiecesCreator : MonoBehaviour
 
         if (pieceComponent.Type == PieceType.Pawn && !HasPawnMoved(piece))
         {
-            PawnMoved(piece);
-            HasPawnMoved(piece);
+            _movedPawns.Add(piece);
         }
-            //_movedPawns.Add(piece);
 
         Vector2Int startGridPoint = GridForPiece(piece);
         _pieces[startGridPoint.x, startGridPoint.y] = null;
         _pieces[gridPoint.x, gridPoint.y] = piece;
         _board.MovePiece(piece, gridPoint);
-    }
-
-    public void PawnMoved(GameObject pawn)
-    {
-        _movedPawns.Add(pawn);
     }
 
     public bool HasPawnMoved(GameObject pawn)

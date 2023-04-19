@@ -8,6 +8,7 @@ public class TileSelector : MonoBehaviour
     private GameObject _tileHighlight;
     private PointConverter _gridPoints;
     private Vector3 _gridOffset = new Vector3(0.5f, 0, 0.5f);
+    private GameObject _selectedPiece;
 
     void Start()
     {
@@ -16,6 +17,7 @@ public class TileSelector : MonoBehaviour
         Vector3 point = _gridPoints.PointFromGrid(gridPoint);
         _tileHighlight = Instantiate(_tileHighlightPrefab, point, Quaternion.identity, gameObject.transform);
         _tileHighlight.SetActive(false);
+        _selectedPiece = new GameObject();
     }
 
     void Update()
@@ -32,13 +34,12 @@ public class TileSelector : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                GameObject selectedPiece = new GameObject();
-                selectedPiece = _piecesCreator.PieceAtGrid(gridPoint);
+                _selectedPiece = _piecesCreator.PieceAtGrid(gridPoint);
 
-                if (_piecesCreator.DoesPieceBelongToCurrentPlayer(selectedPiece))
+                if (_piecesCreator.DoesPieceBelongToCurrentPlayer(_selectedPiece))
                 {
-                    _piecesCreator.SelectPiece(selectedPiece);
-                    ExitState(selectedPiece);
+                    _piecesCreator.SelectPiece(_selectedPiece);
+                    ExitState(_selectedPiece);
                 }
             }
         }

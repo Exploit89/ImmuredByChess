@@ -5,8 +5,8 @@ public class Queen : Piece
 {
     public override List<Vector2Int> MoveLocations(Vector2Int gridPoint)
     {
-        GameObject piecesCreator = GameObject.FindGameObjectWithTag("PiecesCreator");
-        PiecesCreator _piecesCreator = piecesCreator.GetComponent<PiecesCreator>();
+        GameObject gameplayRuler = GameObject.FindGameObjectWithTag("GameplayRuler");
+        GameplayRuler _gameplayRuler = gameplayRuler.GetComponent<GameplayRuler>();
         List<Vector2Int> locations = new List<Vector2Int>();
         List<Vector2Int> directions = new List<Vector2Int>(BishopDirections);
         directions.AddRange(RookDirections);
@@ -18,7 +18,7 @@ public class Queen : Piece
                 Vector2Int nextGridPoint = new Vector2Int(gridPoint.x + i * direction.x, gridPoint.y + i * direction.y);
                 locations.Add(nextGridPoint);
 
-                if (_piecesCreator.PieceAtGrid(nextGridPoint))
+                if (_gameplayRuler.PieceAtGrid(nextGridPoint))
                     break;
             }
         }

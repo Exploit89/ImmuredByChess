@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PiecesCreator
   - White
+  - GameplayRuler
   layers:
   - Default
   - TransparentFX

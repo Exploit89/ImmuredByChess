@@ -5,25 +5,25 @@ public class Pawn : Piece
 {
     public override List<Vector2Int> MoveLocations(Vector2Int gridPoint)
     {
-        GameObject piecesCreator = GameObject.FindGameObjectWithTag("PiecesCreator");
-        PiecesCreator _piecesCreator = piecesCreator.GetComponent<PiecesCreator>();
+        GameObject gameplayRuler = GameObject.FindGameObjectWithTag("GameplayRuler");
+        GameplayRuler _gameplayRuler = gameplayRuler.GetComponent<GameplayRuler>();
         List<Vector2Int> locations = new List<Vector2Int>();
-        int forwardDirection = _piecesCreator.CurrentPlayer.Forward;
+        int forwardDirection = _gameplayRuler.CurrentPlayer.Forward;
         Vector2Int forwardOne = new Vector2Int(gridPoint.x, gridPoint.y + forwardDirection);
 
-        if (_piecesCreator.PieceAtGrid(forwardOne) == false)
+        if (_gameplayRuler.PieceAtGrid(forwardOne) == false)
             locations.Add(forwardOne);
         Vector2Int forwardDouble = new Vector2Int(gridPoint.x, gridPoint.y + 2 * forwardDirection);
 
-        if (_piecesCreator.HasPawnMoved(gameObject) == false && _piecesCreator.PieceAtGrid(forwardDouble) == false)
+        if (_gameplayRuler.HasPawnMoved(gameObject) == false && _gameplayRuler.PieceAtGrid(forwardDouble) == false)
             locations.Add(forwardDouble);
         Vector2Int forwardRight = new Vector2Int(gridPoint.x + 1, gridPoint.y + forwardDirection);
 
-        if (_piecesCreator.PieceAtGrid(forwardRight))
+        if (_gameplayRuler.PieceAtGrid(forwardRight))
             locations.Add(forwardRight);
         Vector2Int forwardLeft = new Vector2Int(gridPoint.x - 1, gridPoint.y + forwardDirection);
 
-        if (_piecesCreator.PieceAtGrid(forwardLeft))
+        if (_gameplayRuler.PieceAtGrid(forwardLeft))
             locations.Add(forwardLeft);
         return locations;
     }

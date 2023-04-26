@@ -5,8 +5,8 @@ public class Queen : Piece
 {
     public override List<Vector2Int> MoveLocations(Vector2Int gridPoint)
     {
-        GameObject gameplayRuler = GameObject.FindGameObjectWithTag("GameplayRuler");
-        GameplayRuler _gameplayRuler = gameplayRuler.GetComponent<GameplayRuler>();
+        GameObject gameplayRuler = GameObject.FindGameObjectWithTag("PieceTurnMover");
+        PieceTurnMover _gameplayRuler = gameplayRuler.GetComponent<PieceTurnMover>();
         List<Vector2Int> locations = new List<Vector2Int>();
         List<Vector2Int> directions = new List<Vector2Int>(BishopDirections);
         directions.AddRange(RookDirections);

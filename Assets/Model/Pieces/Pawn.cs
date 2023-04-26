@@ -5,8 +5,8 @@ public class Pawn : Piece
 {
     public override List<Vector2Int> MoveLocations(Vector2Int gridPoint)
     {
-        GameObject gameplayRuler = GameObject.FindGameObjectWithTag("GameplayRuler");
-        GameplayRuler _gameplayRuler = gameplayRuler.GetComponent<GameplayRuler>();
+        GameObject gameplayRuler = GameObject.FindGameObjectWithTag("PieceTurnMover");
+        PieceTurnMover _gameplayRuler = gameplayRuler.GetComponent<PieceTurnMover>();
         List<Vector2Int> locations = new List<Vector2Int>();
         int forwardDirection = _gameplayRuler.CurrentPlayer.Forward;
         Vector2Int forwardOne = new Vector2Int(gridPoint.x, gridPoint.y + forwardDirection);

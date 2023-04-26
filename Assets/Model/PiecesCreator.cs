@@ -3,7 +3,7 @@ using UnityEngine;
 public class PiecesCreator : MonoBehaviour
 {
     [SerializeField] private Board _board;
-    [SerializeField] private GameplayRuler _gameplayRuler;
+    [SerializeField] private PieceTurnMover _gameplayRuler;
     [SerializeField] private GameObject _whiteKing;
     [SerializeField] private GameObject _whiteQueen;
     [SerializeField] private GameObject _whiteBishop;

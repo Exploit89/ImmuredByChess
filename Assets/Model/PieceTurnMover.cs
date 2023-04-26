@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameplayRuler : MonoBehaviour
+public class PieceTurnMover : MonoBehaviour
 {
     [SerializeField] private Board _board;
     [SerializeField] private PiecesCreator _piecesCreator;
@@ -21,16 +21,10 @@ public class GameplayRuler : MonoBehaviour
         CurrentPlayer = Player;
         OtherPlayer = Enemy;
     }
+
     private void Start()
     {
         _movedPawns = new List<GameObject>();
-    }
-    public void SelectPieceAtGrid(Vector2Int gridPoint)
-    {
-        GameObject selectedPiece = _piecesCreator.GetPiecesList()[gridPoint.x, gridPoint.y];
-
-        if (selectedPiece)
-            _board.SelectPiece(selectedPiece);
     }
 
     public List<Vector2Int> MovesForPiece(GameObject pieceObject)

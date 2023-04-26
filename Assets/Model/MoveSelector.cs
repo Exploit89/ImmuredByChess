@@ -6,7 +6,7 @@ public class MoveSelector : MonoBehaviour
     [SerializeField] private GameObject _moveLocationPrefab;
     [SerializeField] private GameObject _tileHighlightPrefab;
     [SerializeField] private GameObject _attackLocationPrefab;
-    [SerializeField] private GameplayRuler _gameplayRuler;
+    [SerializeField] private PieceTurnMover _gameplayRuler;
 
     private PointConverter _gridPoints;
     private GameObject _tileHighlight;

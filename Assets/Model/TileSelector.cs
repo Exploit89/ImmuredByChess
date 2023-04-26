@@ -3,7 +3,7 @@ using UnityEngine;
 public class TileSelector : MonoBehaviour
 {
     [SerializeField] private GameObject _tileHighlightPrefab;
-    [SerializeField] private GameplayRuler _gameplayRuler;
+    [SerializeField] private PieceTurnMover _gameplayRuler;
 
     private GameObject _tileHighlight;
     private PointConverter _gridPoints;

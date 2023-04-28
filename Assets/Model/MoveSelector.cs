@@ -6,7 +6,7 @@ public class MoveSelector : MonoBehaviour
     [SerializeField] private GameObject _moveLocationPrefab;
     [SerializeField] private GameObject _tileHighlightPrefab;
     [SerializeField] private GameObject _attackLocationPrefab;
-    [SerializeField] private PieceTurnMover _gameplayRuler;
+    [SerializeField] private PieceTurnMover _pieceTurnMover;
 
     private PointConverter _gridPoints;
     private GameObject _tileHighlight;
@@ -44,14 +44,14 @@ public class MoveSelector : MonoBehaviour
                     return;
                 }
 
-                if (_gameplayRuler.PieceAtGrid(gridPoint) == null)
+                if (_pieceTurnMover.PieceAtGrid(gridPoint) == null)
                 {
-                    _gameplayRuler.Move(_movingPiece, gridPoint);
+                    _pieceTurnMover.Move(_movingPiece, gridPoint);
                 }
                 else
                 {
-                    _gameplayRuler.CapturePieceAt(gridPoint);
-                    _gameplayRuler.Move(_movingPiece, gridPoint);
+                    _pieceTurnMover.CapturePieceAt(gridPoint);
+                    _pieceTurnMover.Move(_movingPiece, gridPoint);
                 }
                 ExitState();
             }
@@ -71,7 +71,7 @@ public class MoveSelector : MonoBehaviour
             Destroy(highlight);
         }
 
-        _gameplayRuler.DeselectPiece(_movingPiece);
+        _pieceTurnMover.DeselectPiece(_movingPiece);
         TileSelector selector = GetComponent<TileSelector>();
         selector.EnterState();
     }
@@ -80,7 +80,7 @@ public class MoveSelector : MonoBehaviour
     {
         _movingPiece = piece;
         enabled = true;
-        _moveLocations = _gameplayRuler.MovesForPiece(_movingPiece);
+        _moveLocations = _pieceTurnMover.MovesForPiece(_movingPiece);
         _locationHighlights = new List<GameObject>();
 
         if (_moveLocations.Count == 0)
@@ -92,7 +92,7 @@ public class MoveSelector : MonoBehaviour
         {
             GameObject highlight;
 
-            if (_gameplayRuler.PieceAtGrid(location))
+            if (_pieceTurnMover.PieceAtGrid(location))
             {
                 highlight = Instantiate(_attackLocationPrefab, _gridPoints.PointFromGrid(location), Quaternion.identity, gameObject.transform);
             }
@@ -109,9 +109,9 @@ public class MoveSelector : MonoBehaviour
         enabled = false;
         TileSelector selector = GetComponent<TileSelector>();
         _tileHighlight.SetActive(false);
-        _gameplayRuler.DeselectPiece(_movingPiece);
+        _pieceTurnMover.DeselectPiece(_movingPiece);
         _movingPiece = null;
-        _gameplayRuler.NextPlayer();
+        _pieceTurnMover.NextPlayer();
         selector.EnterState();
 
         foreach (GameObject highlight in _locationHighlights)

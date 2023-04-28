@@ -3,7 +3,7 @@ using UnityEngine;
 public class TileSelector : MonoBehaviour
 {
     [SerializeField] private GameObject _tileHighlightPrefab;
-    [SerializeField] private PieceTurnMover _gameplayRuler;
+    [SerializeField] private PieceTurnMover _pieceTurnMover;
 
     private GameObject _tileHighlight;
     private PointConverter _gridPoints;
@@ -34,11 +34,11 @@ public class TileSelector : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                _selectedPiece = _gameplayRuler.PieceAtGrid(gridPoint);
+                _selectedPiece = _pieceTurnMover.PieceAtGrid(gridPoint);
 
-                if (_gameplayRuler.DoesPieceBelongToCurrentPlayer(_selectedPiece))
+                if (_pieceTurnMover.DoesPieceBelongToCurrentPlayer(_selectedPiece))
                 {
-                    _gameplayRuler.SelectPiece(_selectedPiece);
+                    _pieceTurnMover.SelectPiece(_selectedPiece);
                     ExitState(_selectedPiece);
                 }
             }

@@ -24,11 +24,13 @@ public class Board : MonoBehaviour
         if (piece.name == "White_Knight")
         {
             GameObject newPiece = Instantiate(piece, _pointConverter.PointFromGrid(gridPoint), knightRotation, gameObject.transform);
+            newPiece.AddComponent<Unit>();
             return newPiece;
         }
         else
         {
             GameObject newPiece = Instantiate(piece, _pointConverter.PointFromGrid(gridPoint), Quaternion.Euler(0, _modelRotateAngleY, 0), gameObject.transform);
+            newPiece.AddComponent<Unit>();
             return newPiece;
         }
     }

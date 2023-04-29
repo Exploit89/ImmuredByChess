@@ -7,6 +7,7 @@ TagManager:
   - PiecesCreator
   - White
   - PieceTurnMover
+  - UserPlayer
   layers:
   - Default
   - TransparentFX

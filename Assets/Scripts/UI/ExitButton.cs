@@ -20,5 +20,6 @@ public class ExitButton : MonoBehaviour
     public void OnClick()
     {
         _menu.ClosePanel(_panel);
+        _menu.Exit();
     }
 }

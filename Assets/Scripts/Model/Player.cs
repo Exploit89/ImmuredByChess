@@ -45,4 +45,9 @@ public class Player
     {
         _expierence++;
     }
+
+    public void SetName(string name)
+    {
+        Name = name;
+    }
 }

@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 49596656}
   - component: {fileID: 49596655}
   m_Layer: 5
-  m_Name: Close
+  m_Name: CloseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -407,7 +407,7 @@ GameObject:
   - component: {fileID: 340734081}
   - component: {fileID: 340734080}
   m_Layer: 5
-  m_Name: Menu
+  m_Name: MenuPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -672,7 +672,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &680429954
 RectTransform:
   m_ObjectHideFlags: 0
@@ -707,6 +707,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputField: {fileID: 680429956}
   _pieceTurnMover: {fileID: 1360177518}
+  _menu: {fileID: 2056815112}
+  _menuButton: {fileID: 2071498768}
+  _closeButton: {fileID: 49596656}
+  _exitButton: {fileID: 929896806}
+  _panel: {fileID: 340734078}
 --- !u!114 &680429956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1003,7 +1008,7 @@ GameObject:
   - component: {fileID: 929896806}
   - component: {fileID: 929896809}
   m_Layer: 5
-  m_Name: Exit
+  m_Name: ExitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1453,7 +1458,7 @@ GameObject:
   - component: {fileID: 1394125360}
   - component: {fileID: 1394125363}
   m_Layer: 5
-  m_Name: Start
+  m_Name: StartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1575,9 +1580,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _menu: {fileID: 2056815112}
   _startButton: {fileID: 1394125360}
+  _exitButton: {fileID: 929896806}
   _closeButton: {fileID: 49596656}
   _menuButton: {fileID: 2071498768}
   _panel: {fileID: 340734078}
+  _inputName: {fileID: 680429956}
 --- !u!1 &1524226681
 GameObject:
   m_ObjectHideFlags: 0
@@ -1589,6 +1596,7 @@ GameObject:
   - component: {fileID: 1524226684}
   - component: {fileID: 1524226683}
   - component: {fileID: 1524226682}
+  - component: {fileID: 1524226685}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1655,12 +1663,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1524226681}
   m_LocalRotation: {x: 0.43400678, y: -0, z: -0, w: 0.90090966}
-  m_LocalPosition: {x: 3, y: 7.74, z: -4.53}
+  m_LocalPosition: {x: 3, y: 7.5, z: -4.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 51.444, y: 0, z: 0}
+--- !u!114 &1524226685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524226681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74b2b88a18cb5cb448f4a5d9738ec756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inputName: {fileID: 680429955}
 --- !u!1 &1634819707
 GameObject:
   m_ObjectHideFlags: 0
@@ -2415,11 +2436,11 @@ RectTransform:
   m_Father: {fileID: 2056815111}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -711, y: 514}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &2071498767
 MonoBehaviour:
   m_ObjectHideFlags: 0

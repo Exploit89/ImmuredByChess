@@ -35,11 +35,6 @@ public class Board : MonoBehaviour
         }
     }
 
-    public void RemovePiece(GameObject piece)
-    {
-        Destroy(piece);
-    }
-
     public void MovePiece(GameObject piece, Vector2Int gridPoint)
     {
         piece.transform.position = _pointConverter.PointFromGrid(gridPoint);

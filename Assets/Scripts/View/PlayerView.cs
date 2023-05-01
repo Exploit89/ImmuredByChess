@@ -1,27 +1,34 @@
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerView : MonoBehaviour
 {
     [SerializeField] InputName _inputName;
     [SerializeField] PieceTurnMover _pieceTurnMover;
+    [SerializeField] ExperienceCalculator _experienceCalculator;
 
     private string _name;
     private int _level;
-    private int _experience;
+    private int _currentExperience;
+    private int _nextLevelExperience;
 
-    void OnEnable()
+    private void OnEnable()
     {
         _inputName.NameEntered += ShowName;
         _inputName.NameEntered += ShowLevel;
+        _inputName.NameEntered += ShowExperience;
+        _pieceTurnMover.ExperienceIncreased += ShowExperience;
+        _pieceTurnMover.LevelIncreased += ShowLevel;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         _inputName.NameEntered -= ShowName;
         _inputName.NameEntered -= ShowLevel;
+        _inputName.NameEntered -= ShowExperience;
+        _pieceTurnMover.ExperienceIncreased -= ShowExperience;
+        _pieceTurnMover.LevelIncreased -= ShowLevel;
     }
 
     private void ShowName()
@@ -48,6 +55,13 @@ public class PlayerView : MonoBehaviour
 
     private void ShowExperience()
     {
-
+        _currentExperience = _pieceTurnMover.Player.Experience;
+        _nextLevelExperience = _experienceCalculator.GetNextLevelExperience(_pieceTurnMover.Player.Level);
+        TMP_Text[] texts = GetComponentsInChildren<TMP_Text>();
+        foreach (TMP_Text text in texts)
+        {
+            if (text.name == "PlayerExperience")
+                text.text = Convert.ToString(_currentExperience) + " / " + Convert.ToString(_nextLevelExperience);
+        }
     }
 }

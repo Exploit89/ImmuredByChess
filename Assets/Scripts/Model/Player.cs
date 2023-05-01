@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player
 {
     private List<GameObject> _pieces;
     private List<GameObject> _capturedPieces;
-    private int _level;
-    private int _expierence;
 
     public string Name { get; private set; }
     public int Forward { get; private set; }
     public int Level { get; private set; }
-    public int Expierence { get; private set; }
+    public int Experience { get; private set; }
 
     public Player(string name, bool positiveZMovement)
     {
@@ -19,8 +18,8 @@ public class Player
         Forward = positiveZMovement ? 1 : -1;
         _pieces = new List<GameObject>();
         _capturedPieces = new List<GameObject>();
-        _level = 0;
-        _expierence = 0;
+        Level = 1;
+        Experience = 0;
     }
 
     public void AddPiece(GameObject pieceObject)
@@ -40,12 +39,12 @@ public class Player
 
     public void IncreaseLevel()
     {
-        _level++;
+        Level++;
     }
 
-    public void IncreseExperience()
+    public void IncreaseExperience(int value)
     {
-        _expierence++;
+        Experience += value;
     }
 
     public void SetName(string name)

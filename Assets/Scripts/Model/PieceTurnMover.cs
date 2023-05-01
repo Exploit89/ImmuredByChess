@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PieceTurnMover : MonoBehaviour
 {
     [SerializeField] private Board _board;
     [SerializeField] private PiecesCreator _piecesCreator;
+    [SerializeField] private ExperienceCalculator _experienceCalculator;
 
     private List<GameObject> _movedPawns;
 
@@ -13,6 +15,9 @@ public class PieceTurnMover : MonoBehaviour
     public Player CurrentPlayer { get; private set; }
     public Player OtherPlayer { get; private set; }
 
+    public event UnityAction MatchEnded;
+    public event UnityAction ExperienceIncreased;
+    public event UnityAction LevelIncreased;
 
     private void Awake()
     {
@@ -32,8 +37,8 @@ public class PieceTurnMover : MonoBehaviour
         Piece piece = pieceObject.GetComponent<Piece>();
         Vector2Int gridPoint = GridForPiece(pieceObject);
         List<Vector2Int> locations = piece.MoveLocations(gridPoint);
-        locations.RemoveAll(gp => gp.x < 0 || gp.x > 7 || gp.y < 0 || gp.y > 7);
-        locations.RemoveAll(gp => FriendlyPieceAt(gp));
+        locations.RemoveAll(gridPointBoard => gridPointBoard.x < 0 || gridPointBoard.x > 7 || gridPointBoard.y < 0 || gridPointBoard.y > 7);
+        locations.RemoveAll(gridPointBoard => FriendlyPieceAt(gridPointBoard));
         return locations;
     }
 
@@ -65,9 +70,19 @@ public class PieceTurnMover : MonoBehaviour
         {
             Destroy(_board.GetComponent<TileSelector>());
             Destroy(_board.GetComponent<MoveSelector>());
+            MatchEnded?.Invoke();
         }
         CurrentPlayer.AddCapturedPiece(pieceToCapture);
         _piecesCreator.GetPiecesList()[gridPoint.x, gridPoint.y] = null;
+        CurrentPlayer.IncreaseExperience(_experienceCalculator.GetExperienceReward(pieceToCapture.GetComponent<Piece>().Type));
+        ExperienceIncreased?.Invoke();
+        // TODO тут подумать как сделать смену левела
+        if (_experienceCalculator.IsPlayerLevelReached(CurrentPlayer.Experience))
+        {
+            CurrentPlayer.IncreaseLevel();
+            LevelIncreased?.Invoke();
+        }
+
         Destroy(pieceToCapture);
     }
 

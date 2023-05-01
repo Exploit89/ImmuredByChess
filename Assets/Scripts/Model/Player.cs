@@ -10,6 +10,8 @@ public class Player
 
     public string Name { get; private set; }
     public int Forward { get; private set; }
+    public int Level { get; private set; }
+    public int Expierence { get; private set; }
 
     public Player(string name, bool positiveZMovement)
     {

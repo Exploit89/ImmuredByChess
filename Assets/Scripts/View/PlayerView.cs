@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,22 +9,45 @@ public class PlayerView : MonoBehaviour
     [SerializeField] PieceTurnMover _pieceTurnMover;
 
     private string _name;
+    private int _level;
+    private int _experience;
 
     void OnEnable()
     {
-        _inputName.NameEntered += SetName;
+        _inputName.NameEntered += ShowName;
+        _inputName.NameEntered += ShowLevel;
     }
 
     void OnDisable()
     {
-        _inputName.NameEntered -= SetName;
+        _inputName.NameEntered -= ShowName;
+        _inputName.NameEntered -= ShowLevel;
     }
 
-    public void SetName()
+    private void ShowName()
     {
         _name = _pieceTurnMover.Player.Name;
-        Debug.Log(_name);
-        TMP_Text playerName = GetComponentInChildren<TMP_Text>();
-        playerName.text = _name;
+        TMP_Text[] texts = GetComponentsInChildren<TMP_Text>();
+        foreach (TMP_Text text in texts)
+        {
+            if(text.name == "PlayerName")
+                text.text = _name;
+        }
+    }
+
+    private void ShowLevel()
+    {
+        _level = _pieceTurnMover.Player.Level;
+        TMP_Text[] texts = GetComponentsInChildren<TMP_Text>();
+        foreach (TMP_Text text in texts)
+        {
+            if (text.name == "PlayerLevel")
+                text.text = Convert.ToString(_level);
+        }
+    }
+
+    private void ShowExperience()
+    {
+
     }
 }

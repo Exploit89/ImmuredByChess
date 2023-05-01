@@ -41,6 +41,7 @@ public class MoveSelector : MonoBehaviour
             {
                 if (!_moveLocations.Contains(gridPoint))
                 {
+                    CancelState();
                     return;
                 }
 
@@ -112,6 +113,21 @@ public class MoveSelector : MonoBehaviour
         _pieceTurnMover.DeselectPiece(_movingPiece);
         _movingPiece = null;
         _pieceTurnMover.NextPlayer();
+        selector.EnterState();
+
+        foreach (GameObject highlight in _locationHighlights)
+        {
+            Destroy(highlight);
+        }
+    }
+
+    private void CancelState()
+    {
+        enabled = false;
+        TileSelector selector = GetComponent<TileSelector>();
+        _tileHighlight.SetActive(false);
+        _pieceTurnMover.DeselectPiece(_movingPiece);
+        _movingPiece = null;
         selector.EnterState();
 
         foreach (GameObject highlight in _locationHighlights)

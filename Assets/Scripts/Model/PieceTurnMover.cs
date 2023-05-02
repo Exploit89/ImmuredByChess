@@ -66,23 +66,23 @@ public class PieceTurnMover : MonoBehaviour
     {
         GameObject pieceToCapture = PieceAtGrid(gridPoint);
 
+        CurrentPlayer.AddCapturedPiece(pieceToCapture);
+        _piecesCreator.GetPiecesList()[gridPoint.x, gridPoint.y] = null;
+        CurrentPlayer.IncreaseExperience(_experienceCalculator.GetExperienceReward(pieceToCapture.GetComponent<Piece>().Type));
+        ExperienceIncreased?.Invoke();
+
+        if (_experienceCalculator.IsPlayerLevelReached(CurrentPlayer.Experience, CurrentPlayer.Level))
+        {
+            CurrentPlayer.IncreaseLevel();
+            LevelIncreased?.Invoke();
+        }
+
         if (pieceToCapture.GetComponent<Piece>().Type == PieceType.King)
         {
             Destroy(_board.GetComponent<TileSelector>());
             Destroy(_board.GetComponent<MoveSelector>());
             MatchEnded?.Invoke();
         }
-        CurrentPlayer.AddCapturedPiece(pieceToCapture);
-        _piecesCreator.GetPiecesList()[gridPoint.x, gridPoint.y] = null;
-        CurrentPlayer.IncreaseExperience(_experienceCalculator.GetExperienceReward(pieceToCapture.GetComponent<Piece>().Type));
-        ExperienceIncreased?.Invoke();
-        // TODO тут подумать как сделать смену левела
-        if (_experienceCalculator.IsPlayerLevelReached(CurrentPlayer.Experience))
-        {
-            CurrentPlayer.IncreaseLevel();
-            LevelIncreased?.Invoke();
-        }
-
         Destroy(pieceToCapture);
     }
 

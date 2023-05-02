@@ -26,7 +26,7 @@ public class ExperienceCalculator : MonoBehaviour
 
     public int GetNextLevelExperience(int level)
     {
-        return _levelExperience[level];
+        return _levelExperience[level + 1];
     }
 
     public int GetExperienceReward(PieceType pieceType)
@@ -41,12 +41,11 @@ public class ExperienceCalculator : MonoBehaviour
         return reward;
     }
 
-    // TODO тут подумать как сделать смену левела
-    public bool IsPlayerLevelReached(int experience)
+    public bool IsPlayerLevelReached(int experience, int level)
     {
         bool levelReached = false;
 
-        for (int i = 0; experience < _levelExperience[i]; i++)
+        for (int i = level; experience >= _levelExperience[i]; i++)
         { 
             levelReached = true;
         }

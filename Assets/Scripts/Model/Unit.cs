@@ -11,9 +11,12 @@ public class Unit : MonoBehaviour
     private float _health;
     private float _mana;
 
+    public Rank Rank { get; private set; }
+
     private void OnEnable()
     {
         _piece = GetComponent<Piece>();
         _name = _piece.Type.ToString();
+        Rank = Rank.Basic;
     }
 }

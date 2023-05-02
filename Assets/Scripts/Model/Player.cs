@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Player
 {
     private List<GameObject> _pieces;
     private List<GameObject> _capturedPieces;
+    private Wallet _wallet;
 
     public string Name { get; private set; }
     public int Forward { get; private set; }
@@ -20,6 +20,7 @@ public class Player
         _capturedPieces = new List<GameObject>();
         Level = 1;
         Experience = 0;
+        _wallet = new Wallet();
     }
 
     public void AddPiece(GameObject pieceObject)
@@ -50,5 +51,20 @@ public class Player
     public void SetName(string name)
     {
         Name = name;
+    }
+
+    public void AddMoney(int amount)
+    {
+        _wallet.IncreaseMoney(amount);
+    }
+
+    public void SpentMoney(int amount)
+    {
+        _wallet.DecreaseMoney(amount);
+    }
+
+    public int GetMoneyAmount()
+    {
+        return _wallet.MoneyAmount;
     }
 }

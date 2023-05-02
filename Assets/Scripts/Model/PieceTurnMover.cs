@@ -7,6 +7,7 @@ public class PieceTurnMover : MonoBehaviour
     [SerializeField] private Board _board;
     [SerializeField] private PiecesCreator _piecesCreator;
     [SerializeField] private ExperienceCalculator _experienceCalculator;
+    [SerializeField] private Rewarder _rewarder;
 
     private List<GameObject> _movedPawns;
 
@@ -69,6 +70,8 @@ public class PieceTurnMover : MonoBehaviour
         CurrentPlayer.AddCapturedPiece(pieceToCapture);
         _piecesCreator.GetPiecesList()[gridPoint.x, gridPoint.y] = null;
         CurrentPlayer.IncreaseExperience(_experienceCalculator.GetExperienceReward(pieceToCapture.GetComponent<Piece>().Type));
+        CurrentPlayer.AddMoney(_rewarder.GetMoneyReward(pieceToCapture.GetComponent<Piece>().Type, pieceToCapture.GetComponent<Unit>().Rank));
+        Debug.Log(CurrentPlayer.GetMoneyAmount());
         ExperienceIncreased?.Invoke();
 
         if (_experienceCalculator.IsPlayerLevelReached(CurrentPlayer.Experience, CurrentPlayer.Level))

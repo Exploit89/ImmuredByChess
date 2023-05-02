@@ -66,7 +66,6 @@ public class PieceTurnMover : MonoBehaviour
     public void CapturePieceAt(Vector2Int gridPoint)
     {
         GameObject pieceToCapture = PieceAtGrid(gridPoint);
-
         CurrentPlayer.AddCapturedPiece(pieceToCapture);
         _piecesCreator.GetPiecesList()[gridPoint.x, gridPoint.y] = null;
         CurrentPlayer.IncreaseExperience(_experienceCalculator.GetExperienceReward(pieceToCapture.GetComponent<Piece>().Type));

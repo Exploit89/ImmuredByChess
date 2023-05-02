@@ -33,9 +33,9 @@ public class ExperienceCalculator : MonoBehaviour
     {
         int reward = 0;
 
-        foreach(var piece in _pieceTypeExperienceReward.Keys)
+        foreach (var piece in _pieceTypeExperienceReward.Keys)
         {
-            if(piece == pieceType)
+            if (piece == pieceType)
                 reward = _pieceTypeExperienceReward[pieceType];
         }
         return reward;
@@ -46,7 +46,7 @@ public class ExperienceCalculator : MonoBehaviour
         bool levelReached = false;
 
         for (int i = level; experience >= _levelExperience[i]; i++)
-        { 
+        {
             levelReached = true;
         }
         return levelReached;

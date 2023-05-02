@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerView : MonoBehaviour
 {
-    [SerializeField] InputName _inputName;
-    [SerializeField] PieceTurnMover _pieceTurnMover;
-    [SerializeField] ExperienceCalculator _experienceCalculator;
+    [SerializeField] private InputName _inputName;
+    [SerializeField] private PieceTurnMover _pieceTurnMover;
+    [SerializeField] private ExperienceCalculator _experienceCalculator;
 
     private string _name;
     private int _level;

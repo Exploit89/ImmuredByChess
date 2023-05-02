@@ -11,7 +11,8 @@ public class InputName : MonoBehaviour
     [SerializeField] private Button _menuButton;
     [SerializeField] private Button _closeButton;
     [SerializeField] private Button _exitButton;
-    [SerializeField] private GameObject _panel;
+    [SerializeField] private GameObject _menuPanel;
+    [SerializeField] private GameObject _playerPanel;
 
     public event UnityAction NameEntered;
 
@@ -19,10 +20,11 @@ public class InputName : MonoBehaviour
     {
         _pieceTurnMover.Player.SetName(_inputField.text);
         _inputField.gameObject.SetActive(false);
-        _menu.ClosePanel(_panel);
+        _menu.ClosePanel(_menuPanel);
         _closeButton.gameObject.SetActive(true);
         _menuButton.gameObject.SetActive(true);
         _exitButton.gameObject.SetActive(true);
+        _playerPanel.SetActive(true);
         NameEntered?.Invoke();
     }
 }

@@ -1,7 +1,6 @@
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 
 [RequireComponent(typeof(Piece))]
 
@@ -14,6 +13,7 @@ public class Unit : MonoBehaviour
     private int _level;
     private float _health;
     private float _mana;
+    private List<Skill> _skills;
 
     public Rank UnitRank { get; private set; }
 
@@ -37,5 +37,20 @@ public class Unit : MonoBehaviour
                 UnitRank = newRank;
             }
         }
+    }
+
+    public void IncreaseLevel()
+    {
+        _level++;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        _health -= damage;
+    }
+
+    public void Heal(float heal)
+    {
+        _health += heal;
     }
 }

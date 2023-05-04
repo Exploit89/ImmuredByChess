@@ -4,9 +4,10 @@ using UnityEngine;
 public class ExperienceCalculator : MonoBehaviour
 {
     private List<int> _levelExperience = new List<int>();
-    private int _maxLevel = 100;
     private int _experienceStep = 100;
     private Dictionary<PieceType, int> _pieceTypeExperienceReward = new Dictionary<PieceType, int>();
+
+    public int MaxLevel { get; private set; } = 100;
 
     private void Awake()
     {
@@ -18,7 +19,7 @@ public class ExperienceCalculator : MonoBehaviour
         _pieceTypeExperienceReward.Add(PieceType.Rook, 50);
         _pieceTypeExperienceReward.Add(PieceType.Pawn, 10);
 
-        for (int i = 0; i < _maxLevel; i++)
+        for (int i = 0; i < MaxLevel; i++)
         {
             _levelExperience.Add(_experienceStep * i * i);
         }

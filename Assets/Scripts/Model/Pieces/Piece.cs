@@ -13,7 +13,7 @@ public enum PieceType
 
 public abstract class Piece : MonoBehaviour
 {
-    [SerializeField] protected PieceType _type;
+    [SerializeField] private protected PieceType _type;
 
     protected int _maxMovementLenght = 8;
     protected Vector2Int[] RookDirections = {new Vector2Int(0,1), new Vector2Int(1, 0),

@@ -10,12 +10,12 @@ public class Unit : MonoBehaviour
     private UnitRank _unitRank;
     private string _name;
     private string _description;
-    private int _level;
     private float _health;
     private float _mana;
     private List<Skill> _skills;
 
     public Rank UnitRank { get; private set; }
+    public int Level { get; private set; }
 
     private void OnEnable()
     {
@@ -41,7 +41,7 @@ public class Unit : MonoBehaviour
 
     public void IncreaseLevel()
     {
-        _level++;
+        Level++;
     }
 
     public void TakeDamage(float damage)

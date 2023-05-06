@@ -23,6 +23,7 @@ public class Unit : MonoBehaviour
         _unitRank = gameObject.AddComponent<UnitRank>();
         _name = _piece.Type.ToString();
         UnitRank = Rank.Basic;
+        //_skills.Add(new GameObject());
     }
 
     public void RiseRank(Rank currentRank)
@@ -52,5 +53,10 @@ public class Unit : MonoBehaviour
     public void Heal(float heal)
     {
         _health += heal;
+    }
+
+    public void Attack()
+    {
+        _skills[0].Activate();
     }
 }

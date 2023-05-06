@@ -53,6 +53,7 @@ public class MoveSelector : MonoBehaviour
                 {
                     _pieceTurnMover.CapturePieceAt(gridPoint);
                     _pieceTurnMover.Move(_movingPiece, gridPoint);
+                    _movingPiece.GetComponent<Unit>().Attack();
                 }
                 ExitState();
             }

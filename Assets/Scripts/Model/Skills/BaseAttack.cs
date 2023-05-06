@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseAttack : Skill
@@ -11,7 +10,6 @@ public class BaseAttack : Skill
     private int _baseMultiplier = 1;
     private SkillType _skillType;
     private ExperienceCalculator _experienceCalculator;
-    private Unit _unit;
 
     private void OnEnable()
     {
@@ -22,7 +20,6 @@ public class BaseAttack : Skill
         _skillType = SkillType.Attack;
         gameObject.AddComponent<ExperienceCalculator>();
         _experienceCalculator = GetComponent<ExperienceCalculator>();
-        _unit = GetComponentInParent<Unit>();
     }
 
     public override float MultiplieValue(float baseValue, int unitLevel)
@@ -34,13 +31,13 @@ public class BaseAttack : Skill
         else
             totalValue = baseValue * (_baseMultiplier + (unitLevel * _levelMultiplier));
 
-        Debug.Log("тотал дамаг = " + totalValue);
+        Debug.Log("тотал дамаг = " + totalValue); // отображение нанесения урона
         return totalValue;
     }
 
-    public override void Activate()
+    public override void Activate(Unit unit)
     {
-        MultiplieValue(_baseValue, _unit.Level);
+        MultiplieValue(_baseValue, unit.Level);
         // target?
     }
 }

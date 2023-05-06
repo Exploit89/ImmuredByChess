@@ -12,18 +12,25 @@ public class Unit : MonoBehaviour
     private string _description;
     private float _health;
     private float _mana;
-    private List<Skill> _skills;
+    private List<Skill> _unitSkills;
 
     public Rank UnitRank { get; private set; }
     public int Level { get; private set; }
 
     private void OnEnable()
     {
+        _unitSkills = new List<Skill>();
+
+        GameObject skillsObject = GameObject.FindGameObjectWithTag("Skills");
+        Debug.Log(skillsObject.name);
+        BaseAttack baseAttack = skillsObject.GetComponentInChildren<BaseAttack>();
+        Debug.Log(baseAttack);
+
         _piece = GetComponent<Piece>();
         _unitRank = gameObject.AddComponent<UnitRank>();
         _name = _piece.Type.ToString();
         UnitRank = Rank.Basic;
-        //_skills.Add(new GameObject());
+        _unitSkills.Add(baseAttack);
     }
 
     public void RiseRank(Rank currentRank)
@@ -57,6 +64,6 @@ public class Unit : MonoBehaviour
 
     public void Attack()
     {
-        _skills[0].Activate();
+        _unitSkills[0].Activate(gameObject.GetComponent<Unit>());
     }
 }

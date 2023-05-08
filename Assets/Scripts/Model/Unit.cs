@@ -20,12 +20,8 @@ public class Unit : MonoBehaviour
     private void OnEnable()
     {
         _unitSkills = new List<Skill>();
-
         GameObject skillsObject = GameObject.FindGameObjectWithTag("Skills");
-        Debug.Log(skillsObject.name);
         BaseAttack baseAttack = skillsObject.GetComponentInChildren<BaseAttack>();
-        Debug.Log(baseAttack);
-
         _piece = GetComponent<Piece>();
         _unitRank = gameObject.AddComponent<UnitRank>();
         _name = _piece.Type.ToString();

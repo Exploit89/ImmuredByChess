@@ -36,7 +36,7 @@ public class TileSelector : MonoBehaviour
             {
                 _selectedPiece = _pieceTurnMover.PieceAtGrid(gridPoint);
 
-                if (_pieceTurnMover.DoesPieceBelongToCurrentPlayer(_selectedPiece))
+                if (_pieceTurnMover.IsPieceBelongToCurrentPlayer(_selectedPiece))
                 {
                     _pieceTurnMover.SelectPiece(_selectedPiece);
                     ExitState(_selectedPiece);

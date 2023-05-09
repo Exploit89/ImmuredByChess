@@ -33,6 +33,14 @@ public class PieceTurnMover : MonoBehaviour
         _movedPawns = new List<GameObject>();
     }
 
+    private void GetReward(GameObject pieceToCapture)
+    {
+        PieceType pieceToCaptureType = pieceToCapture.GetComponent<Piece>().Type;
+        Rank pieceToCaptureRank = pieceToCapture.GetComponent<Unit>().UnitRank;
+        CurrentPlayer.IncreaseExperience(_experienceCalculator.GetExperienceReward(pieceToCaptureType));
+        CurrentPlayer.AddMoney(_rewarder.GetMoneyReward(pieceToCaptureType, pieceToCaptureRank));
+    }
+
     public bool IsTargetDead(Vector2Int gridPoint)
     {
         GameObject pieceToCapture = PieceAtGrid(gridPoint);
@@ -63,11 +71,8 @@ public class PieceTurnMover : MonoBehaviour
     {
         Piece pieceComponent = piece.GetComponent<Piece>();
 
-        if (pieceComponent.Type == PieceType.Pawn && !HasPawnMoved(piece))
-        {
+        if (pieceComponent.Type == PieceType.Pawn && !IsPawnMoved(piece))
             _movedPawns.Add(piece);
-        }
-
         Vector2Int startGridPoint = GridForPiece(piece);
         _piecesCreator.GetPiecesList()[startGridPoint.x, startGridPoint.y] = null;
         _piecesCreator.GetPiecesList()[gridPoint.x, gridPoint.y] = piece;
@@ -82,7 +87,7 @@ public class PieceTurnMover : MonoBehaviour
             Move(piece, gridPoint);
     }
 
-    public bool HasPawnMoved(GameObject pawn)
+    public bool IsPawnMoved(GameObject pawn)
     {
         return _movedPawns.Contains(pawn);
     }
@@ -90,12 +95,9 @@ public class PieceTurnMover : MonoBehaviour
     public void CapturePieceAt(Vector2Int gridPoint)
     {
         GameObject pieceToCapture = PieceAtGrid(gridPoint);
-        PieceType pieceToCaptureType = pieceToCapture.GetComponent<Piece>().Type;
-        Rank pieceToCaptureRank = pieceToCapture.GetComponent<Unit>().UnitRank;
         _piecesCreator.GetPiecesList()[gridPoint.x, gridPoint.y] = null;
         CurrentPlayer.AddCapturedPiece(pieceToCapture);
-        CurrentPlayer.IncreaseExperience(_experienceCalculator.GetExperienceReward(pieceToCaptureType));
-        CurrentPlayer.AddMoney(_rewarder.GetMoneyReward(pieceToCaptureType, pieceToCaptureRank));
+        GetReward(pieceToCapture);
         Debug.Log(CurrentPlayer.GetMoneyAmount()); // здесь поместить вызов view для отображения полученных монет
         ExperienceIncreased?.Invoke();
 
@@ -124,7 +126,7 @@ public class PieceTurnMover : MonoBehaviour
         _board.DeselectPiece(piece);
     }
 
-    public bool DoesPieceBelongToCurrentPlayer(GameObject piece)
+    public bool IsPieceBelongToCurrentPlayer(GameObject piece)
     {
         return CurrentPlayer.ContainsPiece(piece);
     }

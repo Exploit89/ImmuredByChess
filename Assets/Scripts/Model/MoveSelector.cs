@@ -87,22 +87,16 @@ public class MoveSelector : MonoBehaviour
         _locationHighlights = new List<GameObject>();
 
         if (_moveLocations.Count == 0)
-        {
             CancelMove();
-        }
 
         foreach (Vector2Int location in _moveLocations)
         {
             GameObject highlight;
 
             if (_pieceTurnMover.PieceAtGrid(location))
-            {
                 highlight = Instantiate(_attackLocationPrefab, _gridPoints.PointFromGrid(location), Quaternion.identity, gameObject.transform);
-            }
             else
-            {
                 highlight = Instantiate(_moveLocationPrefab, _gridPoints.PointFromGrid(location), Quaternion.identity, gameObject.transform);
-            }
             _locationHighlights.Add(highlight);
         }
     }

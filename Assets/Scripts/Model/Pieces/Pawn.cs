@@ -15,7 +15,7 @@ public class Pawn : Piece
             locations.Add(forwardOne);
         Vector2Int forwardDouble = new Vector2Int(gridPoint.x, gridPoint.y + 2 * forwardDirection);
 
-        if (_gameplayRuler.HasPawnMoved(gameObject) == false && _gameplayRuler.PieceAtGrid(forwardDouble) == false)
+        if (_gameplayRuler.IsPawnMoved(gameObject) == false && _gameplayRuler.PieceAtGrid(forwardDouble) == false)
             locations.Add(forwardDouble);
         Vector2Int forwardRight = new Vector2Int(gridPoint.x + 1, gridPoint.y + forwardDirection);
 

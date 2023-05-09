@@ -33,14 +33,20 @@ public class PieceTurnMover : MonoBehaviour
         _movedPawns = new List<GameObject>();
     }
 
-    // дописать метод и систему - урон/уничтожение
-    private void TryDestroyTarget(Vector2Int gridPoint)
+    public bool IsTargetDead(Vector2Int gridPoint)
     {
         GameObject pieceToCapture = PieceAtGrid(gridPoint);
-        PieceType pieceToCaptureType = pieceToCapture.GetComponent<Piece>().Type;
-        Rank pieceToCaptureRank = pieceToCapture.GetComponent<Unit>().UnitRank;
+        float targetHealth = pieceToCapture.GetComponent<Unit>().Health;
 
+        if (targetHealth <= 0)
+            return true;
+        return false;
+    }
 
+    public void TryDestroyTarget(Vector2Int gridPoint)
+    {
+        if (IsTargetDead(gridPoint))
+            CapturePieceAt(gridPoint);
     }
 
     public List<Vector2Int> MovesForPiece(GameObject pieceObject)
@@ -68,6 +74,14 @@ public class PieceTurnMover : MonoBehaviour
         _board.MovePiece(piece, gridPoint);
     }
 
+    public void TryMove(GameObject piece, Vector2Int gridPoint)
+    {
+        GameObject pieceToCapture = PieceAtGrid(gridPoint);
+
+        if (pieceToCapture == null)
+            Move(piece, gridPoint);
+    }
+
     public bool HasPawnMoved(GameObject pawn)
     {
         return _movedPawns.Contains(pawn);
@@ -82,7 +96,7 @@ public class PieceTurnMover : MonoBehaviour
         CurrentPlayer.AddCapturedPiece(pieceToCapture);
         CurrentPlayer.IncreaseExperience(_experienceCalculator.GetExperienceReward(pieceToCaptureType));
         CurrentPlayer.AddMoney(_rewarder.GetMoneyReward(pieceToCaptureType, pieceToCaptureRank));
-        Debug.Log(CurrentPlayer.GetMoneyAmount()); // здесь поместить вызов view для отображения
+        Debug.Log(CurrentPlayer.GetMoneyAmount()); // здесь поместить вызов view для отображения полученных монет
         ExperienceIncreased?.Invoke();
 
         if (_experienceCalculator.IsPlayerLevelReached(CurrentPlayer.Experience, CurrentPlayer.Level))
@@ -97,7 +111,7 @@ public class PieceTurnMover : MonoBehaviour
             Destroy(_board.GetComponent<MoveSelector>());
             MatchEnded?.Invoke();
         }
-        Destroy(pieceToCapture);
+        Destroy(pieceToCapture); // здесь поместить вызов view для отображения смерти
     }
 
     public void SelectPiece(GameObject piece)
@@ -143,7 +157,6 @@ public class PieceTurnMover : MonoBehaviour
 
         if (piece == null)
             return false;
-
         return OtherPlayer.ContainsPiece(piece) ? false : true;
     }
 

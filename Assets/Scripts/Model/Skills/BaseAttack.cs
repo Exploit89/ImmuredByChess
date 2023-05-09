@@ -11,6 +11,8 @@ public class BaseAttack : Skill
     private SkillType _skillType;
     private ExperienceCalculator _experienceCalculator;
 
+    public float ValueAmount { get; private set; }
+
     private void OnEnable()
     {
         _name = "Базовая атака";
@@ -37,7 +39,12 @@ public class BaseAttack : Skill
 
     public override void Activate(Unit unit)
     {
-        MultiplieValue(_baseValue, unit.Level);
-        // target?
+        float totalValue = MultiplieValue(_baseValue, unit.Level);
+        ValueAmount = totalValue;
+    }
+
+    public override float GetValueAmount()
+    {
+        return ValueAmount;
     }
 }

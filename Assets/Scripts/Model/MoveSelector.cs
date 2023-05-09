@@ -51,9 +51,10 @@ public class MoveSelector : MonoBehaviour
                 }
                 else
                 {
-                    _pieceTurnMover.CapturePieceAt(gridPoint);
-                    _pieceTurnMover.Move(_movingPiece, gridPoint);
-                    _movingPiece.GetComponent<Unit>().Attack();
+                    GameObject target = _pieceTurnMover.PieceAtGrid(gridPoint);
+                    _movingPiece.GetComponent<Unit>().Attack(target);
+                    _pieceTurnMover.TryDestroyTarget(gridPoint);
+                    _pieceTurnMover.TryMove(_movingPiece, gridPoint);
                 }
                 ExitState();
             }

@@ -10,12 +10,13 @@ public class Unit : MonoBehaviour
     private UnitRank _unitRank;
     private string _name;
     private string _description;
-    private float _health;
     private float _mana;
     private List<Skill> _unitSkills;
 
     public Rank UnitRank { get; private set; }
     public int Level { get; private set; }
+    public float Health { get;private set; }
+
 
     private void OnEnable()
     {
@@ -27,6 +28,7 @@ public class Unit : MonoBehaviour
         _name = _piece.Type.ToString();
         UnitRank = Rank.Basic;
         _unitSkills.Add(baseAttack);
+        Health = 20;
     }
 
     public void RiseRank(Rank currentRank)
@@ -50,16 +52,18 @@ public class Unit : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        _health -= damage;
+        Health -= damage;
     }
 
     public void Heal(float heal)
     {
-        _health += heal;
+        Health += heal;
     }
 
-    public void Attack()
+    public void Attack(GameObject pieceToCapture)
     {
         _unitSkills[0].Activate(gameObject.GetComponent<Unit>());
+        float damage = _unitSkills[0].GetValueAmount();
+        pieceToCapture.GetComponent<Unit>().TakeDamage(damage);
     }
 }

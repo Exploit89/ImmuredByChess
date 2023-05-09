@@ -134,13 +134,14 @@ GameObject:
   - component: {fileID: 16222088}
   - component: {fileID: 16222090}
   - component: {fileID: 16222089}
+  - component: {fileID: 16222091}
   m_Layer: 5
   m_Name: UnitPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &16222088
 RectTransform:
   m_ObjectHideFlags: 0
@@ -202,6 +203,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 16222087}
   m_CullTransparentMesh: 1
+--- !u!114 &16222091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16222087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48c4e14a1c4d0645a5e2a47ebb12045, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tileSelector: {fileID: 2021277651}
+  _moveSelector: {fileID: 2021277650}
+  _pieceTurnMover: {fileID: 1360177518}
+  _experienceCalculator: {fileID: 1857309602}
+  _unitPanel: {fileID: 16222087}
 --- !u!1 &49596653
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,8 +950,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1773,8 +1791,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1907,8 +1925,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3307,6 +3325,7 @@ MonoBehaviour:
   _tileHighlightPrefab: {fileID: 1333511979136996, guid: bfa4a697119c37b479f2a90319859b87, type: 3}
   _attackLocationPrefab: {fileID: 1341371675672656, guid: c3bc6969d78a14e4aa79fb611d46aadc, type: 3}
   _pieceTurnMover: {fileID: 1360177518}
+  _unitPanel: {fileID: 16222087}
 --- !u!114 &2021277651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3321,6 +3340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileHighlightPrefab: {fileID: 1333511979136996, guid: bfa4a697119c37b479f2a90319859b87, type: 3}
   _pieceTurnMover: {fileID: 1360177518}
+  _unitPanel: {fileID: 16222087}
 --- !u!114 &2021277652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3418,8 +3438,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

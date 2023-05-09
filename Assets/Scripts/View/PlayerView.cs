@@ -35,6 +35,7 @@ public class PlayerView : MonoBehaviour
     {
         _name = _pieceTurnMover.Player.Name;
         TMP_Text[] texts = GetComponentsInChildren<TMP_Text>();
+
         foreach (TMP_Text text in texts)
         {
             if(text.name == "PlayerName")
@@ -46,6 +47,7 @@ public class PlayerView : MonoBehaviour
     {
         _level = _pieceTurnMover.Player.Level;
         TMP_Text[] texts = GetComponentsInChildren<TMP_Text>();
+
         foreach (TMP_Text text in texts)
         {
             if (text.name == "PlayerLevel")
@@ -58,6 +60,7 @@ public class PlayerView : MonoBehaviour
         _currentExperience = _pieceTurnMover.Player.Experience;
         _nextLevelExperience = _experienceCalculator.GetNextLevelExperience(_pieceTurnMover.Player.Level);
         TMP_Text[] texts = GetComponentsInChildren<TMP_Text>();
+
         foreach (TMP_Text text in texts)
         {
             if (text.name == "PlayerExperience")

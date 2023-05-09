@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MoveSelector : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class MoveSelector : MonoBehaviour
     [SerializeField] private GameObject _tileHighlightPrefab;
     [SerializeField] private GameObject _attackLocationPrefab;
     [SerializeField] private PieceTurnMover _pieceTurnMover;
+    [SerializeField] private GameObject _unitPanel;
 
     private PointConverter _gridPoints;
     private GameObject _tileHighlight;
@@ -110,6 +112,7 @@ public class MoveSelector : MonoBehaviour
         _movingPiece = null;
         _pieceTurnMover.NextPlayer();
         selector.EnterState();
+        _unitPanel.SetActive(false);
 
         foreach (GameObject highlight in _locationHighlights)
         {
@@ -125,6 +128,7 @@ public class MoveSelector : MonoBehaviour
         _pieceTurnMover.DeselectPiece(_movingPiece);
         _movingPiece = null;
         selector.EnterState();
+        _unitPanel.SetActive(false);
 
         foreach (GameObject highlight in _locationHighlights)
         {

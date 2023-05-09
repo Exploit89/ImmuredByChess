@@ -15,6 +15,7 @@ public class PieceTurnMover : MonoBehaviour
     public Player Enemy { get; private set; }
     public Player CurrentPlayer { get; private set; }
     public Player OtherPlayer { get; private set; }
+    public GameObject CurrentPiece { get; private set; }
 
     public event UnityAction MatchEnded;
     public event UnityAction ExperienceIncreased;
@@ -33,12 +34,24 @@ public class PieceTurnMover : MonoBehaviour
         _movedPawns = new List<GameObject>();
     }
 
+    private Unit GetCurrentPiece()
+    {
+        TileSelector tileSelector = _board.GetComponent<TileSelector>();
+        GameObject selectedPiece = tileSelector.GetSelectedPiece();
+        Unit selectedUnit = selectedPiece.GetComponent<Unit>();
+        return selectedUnit;
+    }
+
     private void GetReward(GameObject pieceToCapture)
     {
         PieceType pieceToCaptureType = pieceToCapture.GetComponent<Piece>().Type;
         Rank pieceToCaptureRank = pieceToCapture.GetComponent<Unit>().UnitRank;
-        CurrentPlayer.IncreaseExperience(_experienceCalculator.GetExperienceReward(pieceToCaptureType));
+        int experienceReward = _experienceCalculator.GetExperienceReward(pieceToCaptureType);
+        TileSelector tileSelector = _board.GetComponent<TileSelector>();
+        GameObject selectedPiece = tileSelector.GetSelectedPiece();
+        CurrentPlayer.IncreaseExperience(experienceReward);
         CurrentPlayer.AddMoney(_rewarder.GetMoneyReward(pieceToCaptureType, pieceToCaptureRank));
+        selectedPiece.GetComponent<Unit>().IncreaseExperience(experienceReward);
     }
 
     public bool IsTargetDead(Vector2Int gridPoint)
@@ -105,6 +118,11 @@ public class PieceTurnMover : MonoBehaviour
         {
             CurrentPlayer.IncreaseLevel();
             LevelIncreased?.Invoke();
+        }
+
+        if(_experienceCalculator.IsUnitLevelReached(GetCurrentPiece().Experience, GetCurrentPiece().Level))
+        {
+            GetCurrentPiece().IncreaseLevel();
         }
 
         if (pieceToCapture.GetComponent<Piece>().Type == PieceType.King)

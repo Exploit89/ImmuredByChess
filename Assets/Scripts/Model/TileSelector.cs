@@ -1,14 +1,18 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TileSelector : MonoBehaviour
 {
     [SerializeField] private GameObject _tileHighlightPrefab;
     [SerializeField] private PieceTurnMover _pieceTurnMover;
+    [SerializeField] private GameObject _unitPanel;
 
     private GameObject _tileHighlight;
     private PointConverter _gridPoints;
     private Vector3 _gridOffset = new Vector3(0.5f, 0, 0.5f);
     private GameObject _selectedPiece;
+
+    public event UnityAction PieceSelected;
 
     void Start()
     {
@@ -39,6 +43,8 @@ public class TileSelector : MonoBehaviour
                 if (_pieceTurnMover.IsPieceBelongToCurrentPlayer(_selectedPiece))
                 {
                     _pieceTurnMover.SelectPiece(_selectedPiece);
+                    PieceSelected?.Invoke();
+                    _unitPanel.SetActive(true);
                     ExitState(_selectedPiece);
                 }
             }
@@ -49,16 +55,23 @@ public class TileSelector : MonoBehaviour
         }
     }
 
-    public void EnterState()
-    {
-        enabled = true;
-    }
-
     private void ExitState(GameObject movingPiece)
     {
         enabled = false;
         _tileHighlight.SetActive(false);
         MoveSelector move = GetComponent<MoveSelector>();
         move.EnterState(movingPiece);
+    }
+
+    public void EnterState()
+    {
+        enabled = true;
+    }
+
+    public GameObject GetSelectedPiece()
+    {
+        GameObject selectedPiece = new GameObject();
+        selectedPiece = _selectedPiece;
+        return selectedPiece;
     }
 }

@@ -8,15 +8,15 @@ public class Unit : MonoBehaviour
 {
     private Piece _piece;
     private UnitRank _unitRank;
-    private string _name;
-    private string _description;
     private float _mana;
     private List<Skill> _unitSkills;
 
+    public string Name { get; private set; }
+    public string Description { get; private set; }
     public Rank UnitRank { get; private set; }
-    public int Level { get; private set; }
-    public float Health { get;private set; }
-
+    public int Level { get; private set; } = 1;
+    public float Health { get; private set; } = 20f;
+    public int Experience { get; private set; } = 0;
 
     private void OnEnable()
     {
@@ -25,10 +25,9 @@ public class Unit : MonoBehaviour
         BaseAttack baseAttack = skillsObject.GetComponentInChildren<BaseAttack>();
         _piece = GetComponent<Piece>();
         _unitRank = gameObject.AddComponent<UnitRank>();
-        _name = _piece.Type.ToString();
+        Name = _piece.Type.ToString();
         UnitRank = Rank.Basic;
         _unitSkills.Add(baseAttack);
-        Health = 20;
     }
 
     public void RiseRank(Rank currentRank)
@@ -48,6 +47,11 @@ public class Unit : MonoBehaviour
     public void IncreaseLevel()
     {
         Level++;
+    }
+
+    public void IncreaseExperience(int value)
+    {
+        Experience+= value;
     }
 
     public void TakeDamage(float damage)

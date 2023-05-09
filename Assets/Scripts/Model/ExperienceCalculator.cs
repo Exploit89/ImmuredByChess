@@ -52,4 +52,15 @@ public class ExperienceCalculator : MonoBehaviour
         }
         return levelReached;
     }
+
+    public bool IsUnitLevelReached(int experience, int level)
+    {
+        bool levelReached = false;
+
+        for (int i = level; experience >= _levelExperience[i]; i++)
+        {
+            levelReached = true;
+        }
+        return levelReached;
+    }
 }

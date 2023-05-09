@@ -15,6 +15,10 @@ public class UnitView : MonoBehaviour
     private int _level;
     private int _currentExperience;
     private int _nextLevelExperience;
+    private float _currentHealth;
+    private float _maxHealth;
+    private float _currentMana;
+    private float _maxMana;
     private Unit _currentUnit;
 
     private void Start()
@@ -23,6 +27,8 @@ public class UnitView : MonoBehaviour
         ShowExperience();
         ShowLevel();
         ShowDescription();
+        ShowHealth();
+        ShowMana();
     }
 
     private void OnEnable()
@@ -31,6 +37,8 @@ public class UnitView : MonoBehaviour
         _tileSelector.PieceSelected += ShowExperience;
         _tileSelector.PieceSelected += ShowLevel;
         _tileSelector.PieceSelected += ShowDescription;
+        _tileSelector.PieceSelected += ShowHealth;
+        _tileSelector.PieceSelected += ShowMana;
     }
 
     private void OnDestroy()
@@ -39,6 +47,8 @@ public class UnitView : MonoBehaviour
         _tileSelector.PieceSelected -= ShowExperience;
         _tileSelector.PieceSelected -= ShowLevel;
         _tileSelector.PieceSelected -= ShowDescription;
+        _tileSelector.PieceSelected -= ShowHealth;
+        _tileSelector.PieceSelected -= ShowMana;
     }
 
     private void ShowName()
@@ -91,6 +101,34 @@ public class UnitView : MonoBehaviour
         {
             if (text.name == "UnitDescription")
                 text.text = Convert.ToString(_description);
+        }
+    }
+
+    private void ShowHealth()
+    {
+        _currentUnit = GetUnit();
+        _currentHealth = _currentUnit.Health;
+        _maxHealth = _currentUnit.MaxHealth;
+        TMP_Text[] texts = GetComponentsInChildren<TMP_Text>();
+
+        foreach (TMP_Text text in texts)
+        {
+            if (text.name == "UnitHealth")
+                text.text = "Health = " + Convert.ToString(_currentHealth) + " / " + Convert.ToString(_maxHealth);
+        }
+    }
+
+    private void ShowMana()
+    {
+        _currentUnit = GetUnit();
+        _currentMana = _currentUnit.Mana;
+        _maxMana = _currentUnit.MaxMana;
+        TMP_Text[] texts = GetComponentsInChildren<TMP_Text>();
+
+        foreach (TMP_Text text in texts)
+        {
+            if (text.name == "UnitMana")
+                text.text = "Mana = " + Convert.ToString(_currentMana) + " / " + Convert.ToString(_maxMana);
         }
     }
 

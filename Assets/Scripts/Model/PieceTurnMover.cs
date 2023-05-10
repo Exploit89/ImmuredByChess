@@ -54,7 +54,7 @@ public class PieceTurnMover : MonoBehaviour
         GameObject selectedPiece = tileSelector.GetSelectedPiece();
         CurrentPlayer.IncreaseExperience(experienceReward);
         CurrentPlayer.AddMoney(_rewarder.GetMoneyReward(pieceToCaptureType, pieceToCaptureRank));
-        selectedPiece.GetComponent<Unit>().IncreaseExperience(experienceReward);
+        Player.AddExperienceToPiece(selectedPiece, experienceReward);
     }
 
     public bool IsTargetDead(Vector2Int gridPoint)
@@ -98,10 +98,7 @@ public class PieceTurnMover : MonoBehaviour
     public void TryMove(GameObject piece, Vector2Int gridPoint)
     {
         if (IsSetupRestarted)
-        {
-            //IsSetupRestarted = false;
             return;
-        }
         GameObject pieceToCapture = PieceAtGrid(gridPoint);
 
         if (pieceToCapture == null)

@@ -105,24 +105,36 @@ public class MoveSelector : MonoBehaviour
 
     private void ExitState()
     {
-        if(_pieceTurnMover.IsSetupRestarted)
-        {
-            _pieceTurnMover.TurnOffSetupRestarted();
-            return;
-        }
         enabled = false;
         TileSelector selector = GetComponent<TileSelector>();
         _tileHighlight.SetActive(false);
-        _pieceTurnMover.DeselectPiece(_movingPiece);
-        _movingPiece = null;
-        _pieceTurnMover.NextPlayer();
+
         selector.EnterState();
         _unitPanel.SetActive(false);
-
         foreach (GameObject highlight in _locationHighlights)
         {
             Destroy(highlight);
         }
+
+        if (_pieceTurnMover.IsSetupRestarted)
+        {
+            _pieceTurnMover.TurnOffSetupRestarted();
+            return;
+        }
+        //enabled = false;
+        //TileSelector selector = GetComponent<TileSelector>();
+        //_tileHighlight.SetActive(false);
+        _pieceTurnMover.DeselectPiece(_movingPiece);
+        _movingPiece = null;
+        //_movingPiece = null;
+        _pieceTurnMover.NextPlayer();
+        //selector.EnterState();
+        //_unitPanel.SetActive(false);
+
+        //foreach (GameObject highlight in _locationHighlights)
+        //{
+        //    Destroy(highlight);
+        //}
     }
 
     public void CancelState()

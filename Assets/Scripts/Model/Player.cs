@@ -74,4 +74,15 @@ public class Player
         pieces = _pieces;
         return pieces;
     }
+
+    public void AddExperienceToPiece(GameObject piece, int value)
+    {
+        int pieceIndex = _pieces.IndexOf(piece);
+        _pieces[pieceIndex].GetComponent<Unit>().IncreaseExperience(value);
+
+        foreach (var item in _pieces)
+        {
+            Debug.Log(item.GetComponent<Unit>().name + " = " + item.GetComponent<Unit>().Experience);
+        }
+    }
 }

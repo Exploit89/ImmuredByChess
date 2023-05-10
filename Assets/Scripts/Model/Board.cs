@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Board : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Board : MonoBehaviour
 
     private PointConverter _pointConverter;
     private int _modelRotateAngleY = 90;
+    private List<GameObject> _piecesOnBoard = new List<GameObject>();
 
     public int MaxSideLength { get; private set; } = 8;
 
@@ -21,16 +23,18 @@ public class Board : MonoBehaviour
         Quaternion knightRotation = Quaternion.Euler(0, -_modelRotateAngleY, 0);
         Vector2Int gridPoint = _pointConverter.GridPoint(column, row);
 
-        if (piece.name == "White_Knight")
+        if (piece.name == "White_Knight" || piece.name == "White_Knight(Clone)")
         {
             GameObject newPiece = Instantiate(piece, _pointConverter.PointFromGrid(gridPoint), knightRotation, gameObject.transform);
             newPiece.AddComponent<Unit>();
+            _piecesOnBoard.Add(newPiece);
             return newPiece;
         }
         else
         {
             GameObject newPiece = Instantiate(piece, _pointConverter.PointFromGrid(gridPoint), Quaternion.Euler(0, _modelRotateAngleY, 0), gameObject.transform);
             newPiece.AddComponent<Unit>();
+            _piecesOnBoard.Add(newPiece);
             return newPiece;
         }
     }
@@ -54,5 +58,14 @@ public class Board : MonoBehaviour
             renderers.material = _whiteMaterial;
         else
             renderers.material = _blackMaterial;
+    }
+
+    public void ClearBoard()
+    {
+        foreach(var piece in _piecesOnBoard)
+        {
+            Destroy(piece);
+        }
+        _piecesOnBoard.Clear();
     }
 }

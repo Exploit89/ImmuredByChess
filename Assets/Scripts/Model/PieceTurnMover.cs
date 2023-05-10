@@ -8,9 +8,12 @@ public class PieceTurnMover : MonoBehaviour
     [SerializeField] private PiecesCreator _piecesCreator;
     [SerializeField] private ExperienceCalculator _experienceCalculator;
     [SerializeField] private Rewarder _rewarder;
+    [SerializeField] private MoveSelector _moveSelector;
 
     private List<GameObject> _movedPawns;
+    private bool _isKingDestroyed = false;
 
+    public bool IsSetupRestarted { get; private set; } = false;
     public Player Player { get; private set; }
     public Player Enemy { get; private set; }
     public Player CurrentPlayer { get; private set; }
@@ -94,6 +97,11 @@ public class PieceTurnMover : MonoBehaviour
 
     public void TryMove(GameObject piece, Vector2Int gridPoint)
     {
+        if (IsSetupRestarted)
+        {
+            //IsSetupRestarted = false;
+            return;
+        }
         GameObject pieceToCapture = PieceAtGrid(gridPoint);
 
         if (pieceToCapture == null)
@@ -127,11 +135,28 @@ public class PieceTurnMover : MonoBehaviour
 
         if (pieceToCapture.GetComponent<Piece>().Type == PieceType.King)
         {
-            Destroy(_board.GetComponent<TileSelector>());
-            Destroy(_board.GetComponent<MoveSelector>());
             MatchEnded?.Invoke();
+            _isKingDestroyed = IsKingDestroyed(pieceToCapture);
         }
         Destroy(pieceToCapture); // здесь поместить вызов view дл€ отображени€ смерти
+
+        if (_isKingDestroyed)
+        {
+            _moveSelector.CancelState();
+            _board.ClearBoard();
+            _piecesCreator.NewStageInitialSetup();
+            IsSetupRestarted = true;
+            _isKingDestroyed = false;
+        }
+    }
+
+    private bool IsKingDestroyed(GameObject pieceToCapture)
+    {
+        bool destroyed = false;
+
+        if (pieceToCapture.GetComponent<Piece>().Type == PieceType.King)
+            destroyed = true;
+        return destroyed;
     }
 
     public void SelectPiece(GameObject piece)
@@ -185,5 +210,10 @@ public class PieceTurnMover : MonoBehaviour
         Player tempPlayer = CurrentPlayer; 
         CurrentPlayer = OtherPlayer; 
         OtherPlayer = tempPlayer; 
+    }
+
+    public void TurnOffSetupRestarted()
+    {
+        IsSetupRestarted = false;
     }
 }

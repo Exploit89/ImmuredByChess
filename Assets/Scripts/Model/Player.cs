@@ -67,4 +67,11 @@ public class Player
     {
         return _wallet.MoneyAmount;
     }
+
+    public List<GameObject> GetPieces()
+    {
+        List<GameObject> pieces = new List<GameObject>();
+        pieces = _pieces;
+        return pieces;
+    }
 }

@@ -105,6 +105,11 @@ public class MoveSelector : MonoBehaviour
 
     private void ExitState()
     {
+        if(_pieceTurnMover.IsSetupRestarted)
+        {
+            _pieceTurnMover.TurnOffSetupRestarted();
+            return;
+        }
         enabled = false;
         TileSelector selector = GetComponent<TileSelector>();
         _tileHighlight.SetActive(false);
@@ -120,12 +125,13 @@ public class MoveSelector : MonoBehaviour
         }
     }
 
-    private void CancelState()
+    public void CancelState()
     {
         enabled = false;
         TileSelector selector = GetComponent<TileSelector>();
         _tileHighlight.SetActive(false);
         _pieceTurnMover.DeselectPiece(_movingPiece);
+        Debug.Log("moving piece = " + _movingPiece.name);
         _movingPiece = null;
         selector.EnterState();
         _unitPanel.SetActive(false);

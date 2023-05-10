@@ -20,6 +20,7 @@ public class PlayerView : MonoBehaviour
         _inputName.NameEntered += ShowExperience;
         _pieceTurnMover.ExperienceIncreased += ShowExperience;
         _pieceTurnMover.LevelIncreased += ShowLevel;
+        _pieceTurnMover.LevelIncreased += ShowExperience;
     }
 
     private void OnDisable()
@@ -29,6 +30,7 @@ public class PlayerView : MonoBehaviour
         _inputName.NameEntered -= ShowExperience;
         _pieceTurnMover.ExperienceIncreased -= ShowExperience;
         _pieceTurnMover.LevelIncreased -= ShowLevel;
+        _pieceTurnMover.LevelIncreased -= ShowExperience;
     }
 
     private void ShowName()

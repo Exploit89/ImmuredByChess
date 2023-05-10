@@ -18,6 +18,7 @@ public class PiecesCreator : MonoBehaviour
     [SerializeField] private GameObject _blackPawn;
 
     private GameObject[,] _pieces;
+    private int _sideCount = 7;
 
     void Start()
     {
@@ -67,5 +68,38 @@ public class PiecesCreator : MonoBehaviour
         GameObject[,] pieces = new GameObject[,] { };
         pieces = _pieces;
         return pieces;
+    }
+
+    public void NewStageInitialSetup()
+    {
+        for (int i = 0; i <= _sideCount; i++)
+        {
+            AddExistPiece(_pieceTurnMover.Player.GetPieces()[i], i, 0);
+        }
+
+        for (int i = 0; _board.MaxSideLength + i < _pieceTurnMover.Player.GetPieces().Count; i++)
+        {
+            AddExistPiece(_pieceTurnMover.Player.GetPieces()[_board.MaxSideLength + i], i, 1);
+        }
+
+        AddPiece(_blackRook, _pieceTurnMover.Enemy, 0, 7);
+        AddPiece(_blackKnight, _pieceTurnMover.Enemy, 1, 7);
+        AddPiece(_blackBishop, _pieceTurnMover.Enemy, 2, 7);
+        AddPiece(_blackQueen, _pieceTurnMover.Enemy, 3, 7);
+        AddPiece(_blackKing, _pieceTurnMover.Enemy, 4, 7);
+        AddPiece(_blackBishop, _pieceTurnMover.Enemy, 5, 7);
+        AddPiece(_blackKnight, _pieceTurnMover.Enemy, 6, 7);
+        AddPiece(_blackRook, _pieceTurnMover.Enemy, 7, 7);
+
+        for (int i = 0; i < _board.MaxSideLength; i++)
+        {
+            AddPiece(_blackPawn, _pieceTurnMover.Enemy, i, 6);
+        }
+    }
+
+    public void AddExistPiece(GameObject piece, int column, int row)
+    {
+        GameObject pieceObject = _board.AddPiece(piece, column, row);
+        _pieces[column, row] = pieceObject;
     }
 }

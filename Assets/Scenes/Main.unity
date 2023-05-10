@@ -2430,6 +2430,7 @@ MonoBehaviour:
   _piecesCreator: {fileID: 1985090683}
   _experienceCalculator: {fileID: 1857309602}
   _rewarder: {fileID: 1431514554}
+  _moveSelector: {fileID: 2021277650}
 --- !u!4 &1360177519
 Transform:
   m_ObjectHideFlags: 0

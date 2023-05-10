@@ -70,8 +70,7 @@ public class TileSelector : MonoBehaviour
 
     public GameObject GetSelectedPiece()
     {
-        GameObject selectedPiece = new GameObject();
-        selectedPiece = _selectedPiece;
+        GameObject selectedPiece = _selectedPiece;
         return selectedPiece;
     }
 }

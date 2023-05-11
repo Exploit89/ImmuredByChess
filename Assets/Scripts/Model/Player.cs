@@ -68,11 +68,10 @@ public class Player
         return _wallet.MoneyAmount;
     }
 
-    public List<GameObject> GetPieces()
+    public GameObject GetPiece(int index)
     {
-        List<GameObject> pieces = new List<GameObject>();
-        pieces = _pieces;
-        return pieces;
+        GameObject piece = _pieces[index];
+        return piece;
     }
 
     public void AddExperienceToPiece(GameObject piece, int value)

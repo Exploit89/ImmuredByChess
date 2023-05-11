@@ -18,22 +18,28 @@ public class Board : MonoBehaviour
         _pointConverter = new PointConverter();
     }
 
-    public GameObject AddPiece(GameObject piece, int column, int row)
+    public GameObject AddPiece(GameObject piece, int column, int row, Transform parent)
     {
         Quaternion knightRotation = Quaternion.Euler(0, -_modelRotateAngleY, 0);
         Vector2Int gridPoint = _pointConverter.GridPoint(column, row);
 
         if (piece.name == "White_Knight" || piece.name == "White_Knight(Clone)")
         {
-            GameObject newPiece = Instantiate(piece, _pointConverter.PointFromGrid(gridPoint), knightRotation, gameObject.transform);
-            newPiece.AddComponent<Unit>();
+            GameObject newPiece = Instantiate(piece, _pointConverter.PointFromGrid(gridPoint), knightRotation, parent);
+
+            if (newPiece.TryGetComponent(out Unit unit) == false)
+                newPiece.AddComponent<Unit>();
+            newPiece.name = piece.name;
             _piecesOnBoard.Add(newPiece);
             return newPiece;
         }
         else
         {
-            GameObject newPiece = Instantiate(piece, _pointConverter.PointFromGrid(gridPoint), Quaternion.Euler(0, _modelRotateAngleY, 0), gameObject.transform);
-            newPiece.AddComponent<Unit>();
+            GameObject newPiece = Instantiate(piece, _pointConverter.PointFromGrid(gridPoint), Quaternion.Euler(0, _modelRotateAngleY, 0), parent);
+
+            if(newPiece.TryGetComponent(out Unit unit) == false)
+                newPiece.AddComponent<Unit>();
+            newPiece.name = piece.name;
             _piecesOnBoard.Add(newPiece);
             return newPiece;
         }
@@ -64,8 +70,8 @@ public class Board : MonoBehaviour
     {
         foreach(var piece in _piecesOnBoard)
         {
-            Destroy(piece);
+            piece.SetActive(false);
         }
-        _piecesOnBoard.Clear();
+        //_piecesOnBoard.Clear();
     }
 }

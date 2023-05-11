@@ -135,7 +135,8 @@ public class PieceTurnMover : MonoBehaviour
             MatchEnded?.Invoke();
             _isKingDestroyed = IsKingDestroyed(pieceToCapture);
         }
-        Destroy(pieceToCapture); // здесь поместить вызов view дл€ отображени€ смерти
+        //Destroy(pieceToCapture); // здесь поместить вызов view дл€ отображени€ смерти
+        pieceToCapture.SetActive(false);
 
         if (_isKingDestroyed)
         {

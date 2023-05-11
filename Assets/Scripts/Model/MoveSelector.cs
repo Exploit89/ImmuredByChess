@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class MoveSelector : MonoBehaviour
 {
@@ -105,36 +104,25 @@ public class MoveSelector : MonoBehaviour
 
     private void ExitState()
     {
-        enabled = false;
-        TileSelector selector = GetComponent<TileSelector>();
-        _tileHighlight.SetActive(false);
-
-        selector.EnterState();
-        _unitPanel.SetActive(false);
-        foreach (GameObject highlight in _locationHighlights)
-        {
-            Destroy(highlight);
-        }
-
         if (_pieceTurnMover.IsSetupRestarted)
         {
             _pieceTurnMover.TurnOffSetupRestarted();
             return;
         }
-        //enabled = false;
-        //TileSelector selector = GetComponent<TileSelector>();
-        //_tileHighlight.SetActive(false);
+        enabled = false;
+        TileSelector selector = GetComponent<TileSelector>();
+        _tileHighlight.SetActive(false);
         _pieceTurnMover.DeselectPiece(_movingPiece);
         _movingPiece = null;
-        //_movingPiece = null;
+        _movingPiece = null;
         _pieceTurnMover.NextPlayer();
-        //selector.EnterState();
-        //_unitPanel.SetActive(false);
+        selector.EnterState();
+        _unitPanel.SetActive(false);
 
-        //foreach (GameObject highlight in _locationHighlights)
-        //{
-        //    Destroy(highlight);
-        //}
+        foreach (GameObject highlight in _locationHighlights)
+        {
+            Destroy(highlight);
+        }
     }
 
     public void CancelState()
@@ -143,7 +131,6 @@ public class MoveSelector : MonoBehaviour
         TileSelector selector = GetComponent<TileSelector>();
         _tileHighlight.SetActive(false);
         _pieceTurnMover.DeselectPiece(_movingPiece);
-        Debug.Log("moving piece = " + _movingPiece.name);
         _movingPiece = null;
         selector.EnterState();
         _unitPanel.SetActive(false);

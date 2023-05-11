@@ -9,6 +9,7 @@ TagManager:
   - PieceTurnMover
   - UserPlayer
   - Skills
+  - PlayerPieces
   layers:
   - Default
   - TransparentFX

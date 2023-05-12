@@ -114,7 +114,6 @@ public class MoveSelector : MonoBehaviour
         _tileHighlight.SetActive(false);
         _pieceTurnMover.DeselectPiece(_movingPiece);
         _movingPiece = null;
-        _movingPiece = null;
         _pieceTurnMover.NextPlayer();
         selector.EnterState();
         _unitPanel.SetActive(false);

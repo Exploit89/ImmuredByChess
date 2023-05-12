@@ -110,6 +110,11 @@ public class PieceTurnMover : MonoBehaviour
         return _movedPawns.Contains(pawn);
     }
 
+    public void ClearMovedPawns()
+    {
+        _movedPawns.Clear();
+    }
+
     public void CapturePieceAt(Vector2Int gridPoint)
     {
         GameObject pieceToCapture = PieceAtGrid(gridPoint);
@@ -135,8 +140,7 @@ public class PieceTurnMover : MonoBehaviour
             MatchEnded?.Invoke();
             _isKingDestroyed = IsKingDestroyed(pieceToCapture);
         }
-        //Destroy(pieceToCapture); // здесь поместить вызов view дл€ отображени€ смерти
-        pieceToCapture.SetActive(false);
+        pieceToCapture.SetActive(false); // здесь поместить вызов view дл€ отображени€ смерти
 
         if (_isKingDestroyed)
         {

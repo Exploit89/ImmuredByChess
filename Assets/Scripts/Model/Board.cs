@@ -72,6 +72,5 @@ public class Board : MonoBehaviour
         {
             piece.SetActive(false);
         }
-        //_piecesOnBoard.Clear();
     }
 }

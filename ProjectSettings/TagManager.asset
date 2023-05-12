@@ -10,6 +10,7 @@ TagManager:
   - UserPlayer
   - Skills
   - PlayerPieces
+  - EnemyPieces
   layers:
   - Default
   - TransparentFX

@@ -78,10 +78,5 @@ public class Player
     {
         int pieceIndex = _pieces.IndexOf(piece);
         _pieces[pieceIndex].GetComponent<Unit>().IncreaseExperience(value);
-
-        foreach (var item in _pieces)
-        {
-            Debug.Log(item.GetComponent<Unit>().name + " = " + item.GetComponent<Unit>().Experience);
-        }
     }
 }

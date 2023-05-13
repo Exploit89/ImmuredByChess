@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PiecesCreator : MonoBehaviour
@@ -33,25 +32,18 @@ public class PiecesCreator : MonoBehaviour
     private void InitialEnemySetup()
     {
         GameObject parentEnemy = GameObject.FindGameObjectWithTag("EnemyPieces");
-        Transform[] enemyPieces = parentEnemy.GetComponentsInChildren<Transform>(true);
+        Transform[] piecesEnemyTransform = parentEnemy.GetComponentsInChildren<Transform>(true);
 
-        for (int i = 1; i < enemyPieces.Length; i++)
+        for (int i = 0; i <= _sideCount; i++)
         {
-            Destroy(enemyPieces[i].gameObject);
+            GameObject piece = piecesEnemyTransform[i + 1].gameObject;
+            MovePieceToStartPosition(piece, i, 7);
         }
 
-        AddPiece(_blackRook, _pieceTurnMover.Enemy, 0, 7, parentEnemy.transform);
-        AddPiece(_blackKnight, _pieceTurnMover.Enemy, 1, 7, parentEnemy.transform);
-        AddPiece(_blackBishop, _pieceTurnMover.Enemy, 2, 7, parentEnemy.transform);
-        AddPiece(_blackQueen, _pieceTurnMover.Enemy, 3, 7, parentEnemy.transform);
-        AddPiece(_blackKing, _pieceTurnMover.Enemy, 4, 7, parentEnemy.transform);
-        AddPiece(_blackBishop, _pieceTurnMover.Enemy, 5, 7, parentEnemy.transform);
-        AddPiece(_blackKnight, _pieceTurnMover.Enemy, 6, 7, parentEnemy.transform);
-        AddPiece(_blackRook, _pieceTurnMover.Enemy, 7, 7, parentEnemy.transform);
-
-        for (int i = 0; i < _board.MaxSideLength; i++)
+        for (int i = 0; _board.MaxSideLength + i < _maxPiecesCount; i++)
         {
-            AddPiece(_blackPawn, _pieceTurnMover.Enemy, i, 6, parentEnemy.transform);
+            GameObject piece = piecesEnemyTransform[_board.MaxSideLength + i + 1].gameObject;
+            MovePieceToStartPosition(piece, i, 6);
         }
     }
 
@@ -115,8 +107,6 @@ public class PiecesCreator : MonoBehaviour
         _pieceTurnMover.ClearMovedPawns();
         GameObject parentPlayer = GameObject.FindGameObjectWithTag("PlayerPieces");
         Transform[] piecesTransform = parentPlayer.GetComponentsInChildren<Transform>(true);
-        GameObject parentEnemy = GameObject.FindGameObjectWithTag("EnemyPieces");
-        Transform[] piecesEnemyTransform = parentEnemy.GetComponentsInChildren<Transform>(true);
 
         for (int i = 0; i <= _sideCount; i++)
         {
@@ -129,18 +119,7 @@ public class PiecesCreator : MonoBehaviour
             GameObject piece = piecesTransform[_board.MaxSideLength + i + 1].gameObject;
             MovePieceToStartPosition(piece, i, 1);
         }
-
-        for (int i = 0; i <= _sideCount; i++)
-        {
-            GameObject piece = piecesEnemyTransform[i + 1].gameObject;
-            MovePieceToStartPosition(piece, i, 7);
-        }
-
-        for (int i = 0; _board.MaxSideLength + i < _maxPiecesCount; i++)
-        {
-            GameObject piece = piecesEnemyTransform[_board.MaxSideLength + i + 1].gameObject;
-            MovePieceToStartPosition(piece, i, 6);
-        }
+        InitialEnemySetup();
     }
 
     public void MovePieceToStartPosition(GameObject piece, int column, int row)

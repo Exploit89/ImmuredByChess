@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Piece))]
 
@@ -21,13 +22,18 @@ public class Unit : MonoBehaviour
     public float MaxMana { get; private set; } = 100f;
     public int Experience { get; private set; } = 0;
 
+    public event UnityAction<float, float> HealthChanged;
+
+    void Start()
+    {
+        _unitRank = gameObject.AddComponent<UnitRank>();
+    }
     private void OnEnable()
     {
         _unitSkills = new List<Skill>();
         GameObject skillsObject = GameObject.FindGameObjectWithTag("Skills");
         BaseAttack baseAttack = skillsObject.GetComponentInChildren<BaseAttack>();
         _piece = GetComponent<Piece>();
-        _unitRank = gameObject.AddComponent<UnitRank>();
         Name = _piece.Type.ToString();
         UnitRank = Rank.Basic;
         _unitSkills.Add(baseAttack);
@@ -61,6 +67,7 @@ public class Unit : MonoBehaviour
     public void TakeDamage(float damage)
     {
         Health -= damage;
+        HealthChanged?.Invoke(Health, MaxHealth);
     }
 
     public void Heal(float heal)

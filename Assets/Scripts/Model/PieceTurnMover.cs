@@ -23,6 +23,7 @@ public class PieceTurnMover : MonoBehaviour
     public event UnityAction MatchEnded;
     public event UnityAction ExperienceIncreased;
     public event UnityAction LevelIncreased;
+    public event UnityAction GameLevelCompleted;
 
     private void Awake()
     {
@@ -147,6 +148,7 @@ public class PieceTurnMover : MonoBehaviour
         {
             _moveSelector.CancelState();
             _board.ClearBoard();
+            GameLevelCompleted?.Invoke();
             _piecesCreator.NewStageInitialSetup();
             IsSetupRestarted = true;
             _isKingDestroyed = false;

@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PiecesCreator : MonoBehaviour
 {
     [SerializeField] private Board _board;
     [SerializeField] private PieceTurnMover _pieceTurnMover;
+    [SerializeField] private HitPointBarCreator _hitPointBarCreator;
     [SerializeField] private GameObject _whiteKing;
     [SerializeField] private GameObject _whiteQueen;
     [SerializeField] private GameObject _whiteBishop;
@@ -22,11 +24,15 @@ public class PiecesCreator : MonoBehaviour
     private int _sideCount = 7;
     private int _maxPiecesCount = 16;
 
+    public event UnityAction PieceMoved;
+
     private void Start()
     {
         _pieces = new GameObject[_board.MaxSideLength, _board.MaxSideLength];
         _pointConverter = new PointConverter();
         InitialSetup();
+        _hitPointBarCreator.CreateHitPointBars();
+        PieceMoved?.Invoke();
     }
 
     private void InitialEnemySetup()
@@ -120,6 +126,7 @@ public class PiecesCreator : MonoBehaviour
             MovePieceToStartPosition(piece, i, 1);
         }
         InitialEnemySetup();
+        PieceMoved?.Invoke();
     }
 
     public void MovePieceToStartPosition(GameObject piece, int column, int row)

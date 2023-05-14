@@ -16,7 +16,7 @@ public class Unit : MonoBehaviour
     public string Description { get; private set; }
     public Rank UnitRank { get; private set; }
     public int Level { get; private set; } = 1;
-    public float Health { get; private set; } = 10f;
+    public float Health { get; private set; } = 20f;
     public float MaxHealth { get; private set; } = 20f;
     public float Mana { get; private set; } = 100f;
     public float MaxMana { get; private set; } = 100f;
@@ -38,6 +38,9 @@ public class Unit : MonoBehaviour
         UnitRank = Rank.Basic;
         _unitSkills.Add(baseAttack);
         Description = "description";
+        Health = MaxHealth;
+        Mana = MaxMana;
+        HealthChanged?.Invoke(Health, MaxHealth);
     }
 
     public void RiseRank(Rank currentRank)

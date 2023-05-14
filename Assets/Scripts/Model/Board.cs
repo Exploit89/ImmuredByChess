@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Board : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Board : MonoBehaviour
     private List<GameObject> _piecesOnBoard = new List<GameObject>();
 
     public int MaxSideLength { get; private set; } = 8;
+    public event UnityAction PieceMoved;
 
     private void Awake()
     {
@@ -48,6 +50,7 @@ public class Board : MonoBehaviour
     public void MovePiece(GameObject piece, Vector2Int gridPoint)
     {
         piece.transform.position = _pointConverter.PointFromGrid(gridPoint);
+        PieceMoved?.Invoke();
     }
 
     public void SelectPiece(GameObject piece)

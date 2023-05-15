@@ -9,7 +9,6 @@ public class Unit : MonoBehaviour
 {
     private Piece _piece;
     private UnitRank _unitRank;
-    private float _mana;
     private List<Skill> _unitSkills;
 
     public string Name { get; private set; }
@@ -83,5 +82,25 @@ public class Unit : MonoBehaviour
         _unitSkills[0].Activate(gameObject.GetComponent<Unit>());
         float damage = _unitSkills[0].GetValueAmount();
         pieceToCapture.GetComponent<Unit>().TakeDamage(damage);
+    }
+
+    public void LoadUnitSetup(Rank unitRank, int unitLevel, int maxHealth, int maxMana)
+    {
+        UnitRank = unitRank;
+        Level = unitLevel;
+        MaxHealth = maxHealth;
+        Health = MaxHealth;
+        MaxMana = maxMana;
+        Mana = MaxMana;
+        _unitSkills.Clear();
+        GameObject skillsObject = GameObject.FindGameObjectWithTag("Skills");
+        Transform[] transforms = skillsObject.GetComponentsInChildren<Transform>();
+
+        //
+        for (int i = 0; i < transforms.Length; i++)
+        {
+            _unitSkills.Add(transforms[i + 1].gameObject.GetComponent<Skill>());
+        }
+        // how to do special adding skills???
     }
 }

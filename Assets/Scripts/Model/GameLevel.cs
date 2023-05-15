@@ -36,17 +36,25 @@ public class GameLevel : MonoBehaviour
         _currentLevel++;
     }
 
-    public void GetUnitLevel()
+    public int GetUnitLevel()
     {
-
+        int unitLevel = 0;
+        return unitLevel;
     }
 
-    public void GetUnitRank()
+    public Rank GetUnitRank()
     {
-
+        Rank unitLevel = Rank.Basic;
+        return unitLevel;
     }
 
-    public void GetUnitSkill()
+    public Skill GetUnitSkill()
+    {
+        Skill unitSkill = new BaseAttack(); //
+        return unitSkill;
+    }
+
+    public void CreateEnemySetup()
     {
 
     }

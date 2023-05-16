@@ -3678,6 +3678,7 @@ MonoBehaviour:
   _board: {fileID: 2021277652}
   _pieceTurnMover: {fileID: 1360177518}
   _hitPointBarCreator: {fileID: 1276012546}
+  _gameLevel: {fileID: 1915031116}
   _whiteKing: {fileID: 7636793414232480023, guid: f3805185fe30e7345a4379f5ab849a52, type: 3}
   _whiteQueen: {fileID: 5890449670619033272, guid: 1bf0b4d6a87e3ec44853e02519c5c6ba, type: 3}
   _whiteBishop: {fileID: 3962873614953330162, guid: e11fbc3e35c2af64183cfb48805115f9, type: 3}

@@ -9,6 +9,13 @@ public enum SkillType
     Dot
 }
 
+public enum SkillGrade
+{
+    Basic,
+    Middle,
+    Expert
+}
+
 public abstract class Skill : MonoBehaviour
 {
     public abstract float MultiplieValue(float baseValue, int unitLevel);

@@ -6,6 +6,7 @@ public class PiecesCreator : MonoBehaviour
     [SerializeField] private Board _board;
     [SerializeField] private PieceTurnMover _pieceTurnMover;
     [SerializeField] private HitPointBarCreator _hitPointBarCreator;
+    [SerializeField] private GameLevel _gameLevel;
     [SerializeField] private GameObject _whiteKing;
     [SerializeField] private GameObject _whiteQueen;
     [SerializeField] private GameObject _whiteBishop;
@@ -43,12 +44,18 @@ public class PiecesCreator : MonoBehaviour
         for (int i = 0; i <= _sideCount; i++)
         {
             GameObject piece = piecesEnemyTransform[i + 1].gameObject;
+            PieceType pieceType = piece.GetComponent<Piece>().Type;
+            GameLevelSetup gameLevelSetup = _gameLevel.CreateEnemySetup(pieceType);
+            piece.GetComponent<Unit>().LoadUnitSetup(gameLevelSetup);
             MovePieceToStartPosition(piece, i, 7);
         }
 
         for (int i = 0; _board.MaxSideLength + i < _maxPiecesCount; i++)
         {
             GameObject piece = piecesEnemyTransform[_board.MaxSideLength + i + 1].gameObject;
+            PieceType pieceType = piece.GetComponent<Piece>().Type;
+            GameLevelSetup gameLevelSetup = _gameLevel.CreateEnemySetup(pieceType);
+            piece.GetComponent<Unit>().LoadUnitSetup(gameLevelSetup);
             MovePieceToStartPosition(piece, i, 6);
         }
     }

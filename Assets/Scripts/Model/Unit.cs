@@ -61,6 +61,11 @@ public class Unit : MonoBehaviour
         Level++;
     }
 
+    public void IncreaseLevel(int level)
+    {
+        Level += level;
+    }
+
     public void IncreaseExperience(int value)
     {
         Experience+= value;
@@ -84,23 +89,19 @@ public class Unit : MonoBehaviour
         pieceToCapture.GetComponent<Unit>().TakeDamage(damage);
     }
 
-    public void LoadUnitSetup(Rank unitRank, int unitLevel, int maxHealth, int maxMana)
+    public void LoadUnitSetup(GameLevelSetup setup)
     {
-        UnitRank = unitRank;
-        Level = unitLevel;
-        MaxHealth = maxHealth;
+        UnitRank = setup.UnitRank;
+        Level = setup.Level;
+        MaxHealth = setup.MaxHealth;
+        MaxHealth = setup.MaxMana;
         Health = MaxHealth;
-        MaxMana = maxMana;
         Mana = MaxMana;
         _unitSkills.Clear();
-        GameObject skillsObject = GameObject.FindGameObjectWithTag("Skills");
-        Transform[] transforms = skillsObject.GetComponentsInChildren<Transform>();
 
-        //
-        for (int i = 0; i < transforms.Length; i++)
+        foreach (Skill skill in setup.GetSkills())
         {
-            _unitSkills.Add(transforms[i + 1].gameObject.GetComponent<Skill>());
+            _unitSkills.Add(skill);
         }
-        // how to do special adding skills???
     }
 }

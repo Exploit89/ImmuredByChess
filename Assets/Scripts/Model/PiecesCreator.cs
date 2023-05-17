@@ -97,6 +97,7 @@ public class PiecesCreator : MonoBehaviour
     {
         GameObject pieceObject = _board.AddPiece(prefab, column, row, parent);
         player.AddPiece(pieceObject);
+        pieceObject.GetComponent<Unit>().AddBaseSkill();
         _pieces[column, row] = pieceObject;
     }
 

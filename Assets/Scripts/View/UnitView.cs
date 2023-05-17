@@ -1,6 +1,8 @@
 using System;
 using TMPro;
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class UnitView : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class UnitView : MonoBehaviour
     [SerializeField] private PieceTurnMover _pieceTurnMover;
     [SerializeField] private ExperienceCalculator _experienceCalculator;
     [SerializeField] private GameObject _unitPanel;
+    [SerializeField] private List<Toggle> _toggles;
 
     private string _name;
     private string _description;
@@ -29,6 +32,7 @@ public class UnitView : MonoBehaviour
         ShowDescription();
         ShowHealth();
         ShowMana();
+        ShowSkills();
     }
 
     private void OnEnable()
@@ -39,6 +43,7 @@ public class UnitView : MonoBehaviour
         _tileSelector.PieceSelected += ShowDescription;
         _tileSelector.PieceSelected += ShowHealth;
         _tileSelector.PieceSelected += ShowMana;
+        _tileSelector.PieceSelected += ShowSkills;
     }
 
     private void OnDestroy()
@@ -49,6 +54,7 @@ public class UnitView : MonoBehaviour
         _tileSelector.PieceSelected -= ShowDescription;
         _tileSelector.PieceSelected -= ShowHealth;
         _tileSelector.PieceSelected -= ShowMana;
+        _tileSelector.PieceSelected -= ShowSkills;
     }
 
     private void ShowName()
@@ -130,6 +136,17 @@ public class UnitView : MonoBehaviour
             if (text.name == "UnitMana")
                 text.text = "Mana = " + Convert.ToString(_currentMana) + " / " + Convert.ToString(_maxMana);
         }
+    }
+
+    private void ShowSkills()
+    {
+        _currentUnit = GetUnit();
+
+        for (int i = 0; i < _currentUnit.GetUnitSkills().Count; i++)
+        {
+            _toggles[i].GetComponent<SkillToggle>().SetName(_currentUnit.GetUnitSkills()[i].name);
+        }
+        _tileSelector.PieceSelected -= ShowSkills;
     }
 
     private Unit GetUnit()

@@ -6,7 +6,8 @@ public class Skills : MonoBehaviour
 
     private void Awake()
     {
-        Instantiate(_baseAttack, gameObject.transform);
+        Skill skill = Instantiate(_baseAttack, gameObject.transform);
+        skill.name = _baseAttack.name;
         Instantiate(_baseAttack, gameObject.transform);
         Instantiate(_baseAttack, gameObject.transform);
         Instantiate(_baseAttack, gameObject.transform);

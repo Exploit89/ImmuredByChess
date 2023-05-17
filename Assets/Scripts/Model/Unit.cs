@@ -84,9 +84,39 @@ public class Unit : MonoBehaviour
 
     public void Attack(GameObject pieceToCapture)
     {
-        _unitSkills[0].Activate(gameObject.GetComponent<Unit>());
-        float damage = _unitSkills[0].GetValueAmount();
+        float damage = 0;
+
+        foreach (var skill in _unitSkills)
+        {
+            if(skill.name == "BaseAttack")
+            {
+                skill.Activate(gameObject.GetComponent<Unit>());
+                damage = skill.GetValueAmount();
+            }
+        }
         pieceToCapture.GetComponent<Unit>().TakeDamage(damage);
+    }
+
+    public void Support(GameObject pieceToCapture)
+    {
+        GameObject currentPiece = gameObject.GetComponentInParent<Transform>().GetComponentInParent<Transform>().gameObject;
+        GameObject gameplayRuler = GameObject.FindGameObjectWithTag("PieceTurnMover");
+        PieceTurnMover pieceTurnMover = gameplayRuler.GetComponent<PieceTurnMover>();
+        bool isPlayerCurrent = pieceTurnMover.CurrentPlayer.ContainsPiece(currentPiece);
+        float heal = 0;
+
+        if (isPlayerCurrent)
+        {
+            foreach (var skill in _unitSkills)
+            {
+                if (skill.name == "Heal")
+                {
+                    skill.Activate(gameObject.GetComponent<Unit>());
+                    heal = skill.GetValueAmount();
+                }
+            }
+            pieceToCapture.GetComponent<Unit>().Heal(heal);
+        }
     }
 
     public void LoadUnitSetup(GameLevelSetup setup)

@@ -141,6 +141,9 @@ public class UnitView : MonoBehaviour
     private void ShowSkills()
     {
         _currentUnit = GetUnit();
+        _toggles[1].GetComponent<Toggle>().isOn = false;
+        _toggles[2].GetComponent<Toggle>().isOn = false;
+        _toggles[0].GetComponent<Toggle>().isOn = true;
 
         for (int i = 0; i < _currentUnit.GetUnitSkills().Count; i++)
         {

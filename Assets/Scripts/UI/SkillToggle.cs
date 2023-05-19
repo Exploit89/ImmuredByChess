@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -6,8 +5,6 @@ using UnityEngine.UI;
 public class SkillToggle : MonoBehaviour
 {
     [SerializeField] private Toggle _skillToggle;
-
-    //private List<Toggle> _toggles = new List<Toggle>(); 
 
     public string SkillName { get; private set; }
 
@@ -30,16 +27,6 @@ public class SkillToggle : MonoBehaviour
             string skillName = _skillToggle.GetComponentInChildren<Text>().text;
             Debug.Log($"{skillName} chosen");
             SkillChanged?.Invoke();
-
-            //GameObject parentPlayer = GameObject.FindGameObjectWithTag("PlayerPieces");
-            //Transform[] piecesTransform = parentPlayer.GetComponentsInChildren<Transform>(true);
-
-            //for (int i = 0; i <= _sideCount; i++)
-            //{
-            //    GameObject piece = piecesTransform[i + 1].gameObject;
-            //    MovePieceToStartPosition(piece, i, 0);
-            //}
-
         }
     }
 

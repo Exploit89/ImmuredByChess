@@ -9,7 +9,7 @@ public class Unit : MonoBehaviour
 {
     private Piece _piece;
     private UnitRank _unitRank;
-    private List<Skill> _unitSkills;
+    private List<Skill> _unitSkills = new List<Skill>();
 
     public string Name { get; private set; }
     public string Description { get; private set; }
@@ -29,13 +29,11 @@ public class Unit : MonoBehaviour
     }
     private void OnEnable()
     {
-        _unitSkills = new List<Skill>();
         GameObject skillsObject = GameObject.FindGameObjectWithTag("Skills");
         BaseAttack baseAttack = skillsObject.GetComponentInChildren<BaseAttack>();
         _piece = GetComponent<Piece>();
         Name = _piece.Type.ToString();
         UnitRank = Rank.Basic;
-        //_unitSkills.Add(baseAttack);
         Description = "description";
         Health = MaxHealth;
         Mana = MaxMana;
@@ -129,7 +127,7 @@ public class Unit : MonoBehaviour
         Mana = MaxMana;
         _unitSkills.Clear();
 
-        foreach (Skill skill in setup.GetSkills())
+        foreach (var skill in setup.GetSkills())
         {
             _unitSkills.Add(skill);
         }

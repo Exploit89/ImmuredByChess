@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameLevel : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class GameLevel : MonoBehaviour
 
     private int _currentLevel = 1;
     private int _maxLevel = 100;
+
+    public event UnityAction LevelIncreased;
 
     private void Awake()
     {
@@ -20,6 +23,7 @@ public class GameLevel : MonoBehaviour
     private void IncreaseLevel()
     {
         _currentLevel++;
+        LevelIncreased?.Invoke();
     }
 
     public GameLevelSetup CreateEnemySetup(PieceType pieceType)
@@ -29,5 +33,10 @@ public class GameLevel : MonoBehaviour
 
         GameLevelSetup gameLevelSetup = new GameLevelSetup(_currentLevel, pieceType);
         return gameLevelSetup;
+    }
+
+    public int GetCurrentLevel()
+    {
+        return _currentLevel;
     }
 }

@@ -1,18 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject _PrepareScreenPanel;
+    [SerializeField] private Button _battleButton;
+
+    private void OnEnable()
     {
-        
+        _battleButton.onClick.AddListener(OnClick);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        _battleButton.onClick.RemoveListener(OnClick);
+    }
+
+    public void OnClick()
+    {
+        _PrepareScreenPanel.gameObject.SetActive(false);
     }
 }

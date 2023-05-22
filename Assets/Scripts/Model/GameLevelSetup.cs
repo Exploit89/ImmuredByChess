@@ -15,16 +15,6 @@ public class GameLevelSetup
     private void GetBasicSkills(List<Skill> skills, Transform[] transforms)
     {
         skills.Add(transforms[1].gameObject.GetComponent<Skill>());
-
-        //for (int i = 0; i < transforms.Length; i++)
-        //{
-        //    Debug.Log("transforms now are - " + transforms[i]);
-        //}
-
-        //foreach (var item in skills)
-        //{
-        //    Debug.Log("skills now are - " + item.name);
-        //}
     }
 
     private void GetExpertSKills(List<Skill> skills, Transform[] transforms)
@@ -128,7 +118,6 @@ public class GameLevelSetup
                 Debug.Log("can't find any UnitRank"); 
                 break;
         }
-        //Debug.Log("Switch get skills - " + UnitRank);
         return skills;
     }
 
@@ -163,7 +152,6 @@ public class GameLevelSetup
                 break;
             default:
                 modifier = 1;
-                //Debug.Log("can't find any UnitRank");
                 break;
         }
 
@@ -175,7 +163,6 @@ public class GameLevelSetup
         Piece = pieceType;
         Level = gameLevel;
         UnitRank = GetUnitRank();
-        //Debug.Log("GameLevelSetup created - " + UnitRank);
         MaxHealth = _baseHealth * gameLevel * GetHealthManaModifier();
         MaxMana = _baseMana * gameLevel * GetHealthManaModifier();
     }

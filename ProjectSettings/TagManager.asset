@@ -13,6 +13,7 @@ TagManager:
   - EnemyPieces
   - HitPointBarPanel
   - Board
+  - PreparePanel
   layers:
   - Default
   - TransparentFX

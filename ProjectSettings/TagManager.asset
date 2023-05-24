@@ -22,7 +22,7 @@ TagManager:
   - Water
   - UI
   - HPBar
-  - 
+  - UIBackground
   - 
   - 
   - Board
@@ -48,6 +48,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: UIBackground
+    uniqueID: 2933012111
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

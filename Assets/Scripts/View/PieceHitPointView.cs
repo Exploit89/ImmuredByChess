@@ -10,12 +10,12 @@ public class PieceHitPointView : MonoBehaviour
     private GameObject _piece;
     private Unit _unit;
 
-    void OnEnable()
+    private void OnEnable()
     {
         _slider.value = 1;
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
         _unit.HealthChanged -= OnValueChanged;
         _board.PieceMoved -= MoveHealthBar;
@@ -48,6 +48,6 @@ public class PieceHitPointView : MonoBehaviour
     public void MoveHealthBar()
     {
         gameObject.transform.position = _piece.transform.position;
-        gameObject.transform.Translate(0, 1, 0);
+        gameObject.transform.Translate(0, 1, -1);
     }
 }

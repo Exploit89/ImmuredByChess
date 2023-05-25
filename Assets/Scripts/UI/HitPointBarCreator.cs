@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HitPointBarCreator : MonoBehaviour
@@ -7,10 +8,17 @@ public class HitPointBarCreator : MonoBehaviour
 
     private int _maxPiecesOnBoard = 32;
     private int _maxPiecesBySide = 16;
+    private List<GameObject> _hitPointBars;
+
+    void Awake()
+    {
+        _hitPointBars = new List<GameObject>();
+    }
 
     private void AddHitPontBar(GameObject piece)
     {
         GameObject unitHitPointBar = Instantiate(_unitHitPointBarPrefab, gameObject.transform);
+        _hitPointBars.Add(unitHitPointBar);
         unitHitPointBar.name = piece.name;
         unitHitPointBar.GetComponent<PieceHitPointView>().SetPiece(piece);
         unitHitPointBar.GetComponent<PieceHitPointView>().AddListener();
@@ -33,6 +41,14 @@ public class HitPointBarCreator : MonoBehaviour
             {
                 AddHitPontBar(enemyPiecesTransform[i + 1 - _maxPiecesBySide].gameObject);
             }
+        }
+    }
+
+    public void RotateHitPointBars(Vector3 vector, float delta)
+    {
+        foreach (var bar in _hitPointBars)
+        {
+            bar.transform.RotateAround(bar.transform.position, vector, delta);
         }
     }
 }

@@ -19,11 +19,13 @@ public class PieceTurnMover : MonoBehaviour
     public Player CurrentPlayer { get; private set; }
     public Player OtherPlayer { get; private set; }
     public GameObject CurrentPiece { get; private set; }
+    public int TurnCount { get; private set; } = 1;
 
     public event UnityAction MatchEnded;
     public event UnityAction ExperienceIncreased;
     public event UnityAction LevelIncreased;
     public event UnityAction GameLevelCompleted;
+    public event UnityAction TurnChanged;
 
     private void Awake()
     {
@@ -146,6 +148,7 @@ public class PieceTurnMover : MonoBehaviour
 
         if (_isKingDestroyed)
         {
+            TurnCount = 1;
             _moveSelector.CancelState();
             _board.ClearBoard();
             GameLevelCompleted?.Invoke();
@@ -214,7 +217,9 @@ public class PieceTurnMover : MonoBehaviour
     {
         Player tempPlayer = CurrentPlayer; 
         CurrentPlayer = OtherPlayer; 
-        OtherPlayer = tempPlayer; 
+        OtherPlayer = tempPlayer;
+        TurnCount++;
+        TurnChanged?.Invoke();
     }
 
     public void TurnOffSetupRestarted()

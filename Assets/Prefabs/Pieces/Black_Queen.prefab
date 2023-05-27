@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5890449670620295864}
   - component: {fileID: 5890449670621294712}
   - component: {fileID: -4145065027696361904}
+  - component: {fileID: -5202258717456743775}
   m_Layer: 0
   m_Name: Black_Queen
   m_TagString: Untagged
@@ -95,3 +96,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 1
+--- !u!65 &-5202258717456743775
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5890449670619033272}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.1, z: 0.1}
+  m_Center: {x: 0, y: 0.6, z: 0}

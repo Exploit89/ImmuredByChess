@@ -51,6 +51,8 @@ public class BonusCreator : MonoBehaviour
         Vector3 vector3 = _pointConverter.PointFromGrid(vector2);
         vector3 += new Vector3(0, 0.5f, 0);
         _healBonus.transform.position = vector3;
+        _healBonus.GetComponent<HealBonus>().CreateEffect();
+        _healBonus.GetComponent<HealBonus>().SetEffectPosition(vector3);
         _healBonus.SetActive(true);
     }
 

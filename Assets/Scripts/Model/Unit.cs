@@ -77,6 +77,8 @@ public class Unit : MonoBehaviour
 
     public void Heal(float heal)
     {
+        if(heal+Health >= MaxHealth)
+            Health = MaxHealth;
         Health += heal;
     }
 

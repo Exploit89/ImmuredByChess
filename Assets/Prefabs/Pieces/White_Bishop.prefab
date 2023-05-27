@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3962873614956259826}
   - component: {fileID: 3962873614955260722}
   - component: {fileID: 533610273149733205}
+  - component: {fileID: -9124015844381957080}
   m_Layer: 0
   m_Name: White_Bishop
   m_TagString: White
@@ -95,3 +96,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 2
+--- !u!65 &-9124015844381957080
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3962873614953330162}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.1, z: 0.1}
+  m_Center: {x: 0, y: 0.6, z: 0}

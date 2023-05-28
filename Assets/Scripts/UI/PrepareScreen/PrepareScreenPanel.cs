@@ -11,11 +11,13 @@ public class PrepareScreenPanel : MonoBehaviour
     private void OnEnable()
     {
         _pieceTurnMover.GameLevelCompleted += OpenPanel;
+        _pieceTurnMover.GameLevelLost += OpenPanel;
     }
 
     private void OnDisable()
     {
         _pieceTurnMover.GameLevelCompleted -= OpenPanel;
+        _pieceTurnMover.GameLevelLost -= OpenPanel;
     }
 
     private void OpenPanel()

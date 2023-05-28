@@ -1,14 +1,20 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class HealBonus : Bonus
+public class WallBonus : Bonus
 {
     [SerializeField] private UnityEvent BonusTaken;
 
     public override void TakeBonus(Unit unit)
     {
-        float heal = 0.5f;
-        unit.Heal(heal * unit.MaxHealth);
+        GameObject gameplayRuler = GameObject.FindGameObjectWithTag("PieceTurnMover");
+        PieceTurnMover pieceTurnMover = gameplayRuler.GetComponent<PieceTurnMover>();
+        pieceTurnMover.CurrentPlayer.AddItem(gameObject);
+
+        foreach (var item in pieceTurnMover.CurrentPlayer.GetItems())
+        {
+            Debug.Log(item.name);
+        }
     }
 
     private void OnTriggerEnter(Collider collider)

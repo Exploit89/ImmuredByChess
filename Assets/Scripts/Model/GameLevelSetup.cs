@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class GameLevelSetup
 {
-    private int _baseHealth = 10;
-    private int _baseMana = 10;
+    private int _baseHealth = 20;
+    private int _baseMana = 20;
 
     public PieceType Piece { get; private set; }
     public Rank UnitRank { get; private set; }

@@ -5,6 +5,7 @@ public class Player
 {
     private List<GameObject> _pieces;
     private List<GameObject> _capturedPieces;
+    private List<GameObject> _items;
     private Wallet _wallet;
 
     public string Name { get; private set; }
@@ -18,6 +19,7 @@ public class Player
         Forward = positiveZMovement ? 1 : -1;
         _pieces = new List<GameObject>();
         _capturedPieces = new List<GameObject>();
+        _items = new List<GameObject>();
         Level = 1;
         Experience = 0;
         _wallet = new Wallet();
@@ -78,5 +80,16 @@ public class Player
     {
         int pieceIndex = _pieces.IndexOf(piece);
         _pieces[pieceIndex].GetComponent<Unit>().IncreaseExperience(value);
+    }
+
+    public void AddItem(GameObject item)
+    {
+        _items.Add(item);
+    }
+
+    public List<GameObject> GetItems()
+    {
+        List<GameObject> items = _items;
+        return items;
     }
 }

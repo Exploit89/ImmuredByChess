@@ -22,6 +22,6 @@ public class GameLevelView : MonoBehaviour
     private void ShowLevel()
     {
         TMP_Text text = GetComponentInChildren<TMP_Text>();
-        text.text = Convert.ToString("Уровень " + _gameLevel.GetCurrentLevel());
+        text.text = Convert.ToString("Этап " + _gameLevel.GetCurrentLevel());
     }
 }

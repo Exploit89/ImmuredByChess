@@ -7,13 +7,16 @@ public class BonusCreator : MonoBehaviour
     [SerializeField] private PieceTurnMover _pieceTurnMover;
     [SerializeField] private Board _board;
     [SerializeField] private GameObject _healBonusPrefab;
+    [SerializeField] private GameObject _wallBonusPrefab;
 
     private PointConverter _pointConverter;
     private GameObject[,] _pieces;
     private List<Vector2Int> _cleanTiles;
     private List<Vector2Int> _occupiedTiles;
+    private List<GameObject> _bonuses;
     private System.Random _random;
     private GameObject _healBonus;
+    private GameObject _wallBonus;
     private int _turnCount;
     private int _turnCountToNextBonus = 5;
 
@@ -23,6 +26,7 @@ public class BonusCreator : MonoBehaviour
         _pieces = new GameObject[,] { };
         _cleanTiles = new List<Vector2Int>();
         _occupiedTiles = new List<Vector2Int>();
+        _bonuses = new List<GameObject>();
         _pointConverter = new PointConverter();
     }
 
@@ -30,6 +34,12 @@ public class BonusCreator : MonoBehaviour
     {
         _healBonus = Instantiate(_healBonusPrefab);
         _healBonus.SetActive(false);
+        _healBonus.GetComponent<Effect>().CreateEffect();
+        _wallBonus = Instantiate(_wallBonusPrefab);
+        _wallBonus.SetActive(false);
+        _wallBonus.GetComponent<Effect>().CreateEffect();
+        _bonuses.Add(_healBonus);
+        _bonuses.Add(_wallBonus);
     }
 
     private void OnEnable()
@@ -50,10 +60,7 @@ public class BonusCreator : MonoBehaviour
         Vector2Int vector2 = _pointConverter.GridPoint(_cleanTiles[random].x, _cleanTiles[random].y);
         Vector3 vector3 = _pointConverter.PointFromGrid(vector2);
         vector3 += new Vector3(0, 0.5f, 0);
-        _healBonus.transform.position = vector3;
-        _healBonus.GetComponent<HealBonus>().CreateEffect();
-        _healBonus.GetComponent<HealBonus>().SetEffectPosition(vector3);
-        _healBonus.SetActive(true);
+        ShowBonus(vector3);
     }
 
     private void GetCleanTiles()
@@ -97,5 +104,19 @@ public class BonusCreator : MonoBehaviour
     private void ClearTiles()
     {
         _cleanTiles.Clear();
+    }
+
+    private void ShowBonus(Vector3 vector3)
+    {
+        int bonusIndex = _random.Next(0, _bonuses.Count);
+        _bonuses[bonusIndex].transform.position = vector3;
+        //_bonuses[bonusIndex].GetComponent<Effect>().CreateEffect();
+        _bonuses[bonusIndex].GetComponent<Effect>().SetEffectPosition(vector3);
+        _bonuses[bonusIndex].SetActive(true);
+
+        //_healBonus.transform.position = vector3;
+        //_healBonus.GetComponent<HealBonus>().CreateEffect();
+        //_healBonus.GetComponent<HealBonus>().SetEffectPosition(vector3);
+        //_healBonus.SetActive(true);
     }
 }

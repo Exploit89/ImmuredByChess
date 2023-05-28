@@ -79,7 +79,8 @@ public class Unit : MonoBehaviour
     {
         if(heal+Health >= MaxHealth)
             Health = MaxHealth;
-        Health += heal;
+        else Health += heal;
+        HealthChanged?.Invoke(Health, MaxHealth);
     }
 
     public void Attack(GameObject pieceToCapture)

@@ -20,5 +20,6 @@ public class Effect : MonoBehaviour
     public void ActivateEffect()
     {
         _bonusEffect.SetActive(true);
+        _bonusEffect.GetComponentInChildren<ParticleSystem>().Play();
     }
 }

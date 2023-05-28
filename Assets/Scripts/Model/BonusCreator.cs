@@ -110,13 +110,7 @@ public class BonusCreator : MonoBehaviour
     {
         int bonusIndex = _random.Next(0, _bonuses.Count);
         _bonuses[bonusIndex].transform.position = vector3;
-        //_bonuses[bonusIndex].GetComponent<Effect>().CreateEffect();
         _bonuses[bonusIndex].GetComponent<Effect>().SetEffectPosition(vector3);
         _bonuses[bonusIndex].SetActive(true);
-
-        //_healBonus.transform.position = vector3;
-        //_healBonus.GetComponent<HealBonus>().CreateEffect();
-        //_healBonus.GetComponent<HealBonus>().SetEffectPosition(vector3);
-        //_healBonus.SetActive(true);
     }
 }

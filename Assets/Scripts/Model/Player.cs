@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player
 {
@@ -12,6 +13,8 @@ public class Player
     public int Forward { get; private set; }
     public int Level { get; private set; }
     public int Experience { get; private set; }
+
+    public event UnityAction ItemsChanged;
 
     public Player(string name, bool positiveZMovement)
     {
@@ -85,6 +88,13 @@ public class Player
     public void AddItem(GameObject item)
     {
         _items.Add(item);
+        Debug.Log(item.name);
+        foreach (var piece in _items)
+        {
+            Debug.Log(piece.name);
+        }
+
+        ItemsChanged?.Invoke();
     }
 
     public List<GameObject> GetItems()

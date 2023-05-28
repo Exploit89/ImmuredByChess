@@ -7,6 +7,7 @@ public class PrepareScreenPanel : MonoBehaviour
     [SerializeField] private GameObject _inventory;
     [SerializeField] private GameObject _talentsTree;
     [SerializeField] private GameObject _shop;
+    [SerializeField] private GameObject _abilitiesPanel;
 
     private void OnEnable()
     {
@@ -26,6 +27,7 @@ public class PrepareScreenPanel : MonoBehaviour
         _inventory.SetActive(false);
         _talentsTree.SetActive(false);
         _shop.SetActive(false);
+        _abilitiesPanel.SetActive(false);
     }
 
     public void CloseAllPanels()
@@ -33,5 +35,6 @@ public class PrepareScreenPanel : MonoBehaviour
         _inventory.SetActive(false);
         _talentsTree.SetActive(false);
         _shop.SetActive(false);
+        _abilitiesPanel.SetActive(true);
     }
 }

@@ -14,6 +14,7 @@ public class InputName : MonoBehaviour
     [SerializeField] private GameObject _menuPanel;
     [SerializeField] private GameObject _playerPanel;
     [SerializeField] private GameObject _gameLevel;
+    [SerializeField] private GameObject _abilitiesPanel;
 
     public event UnityAction NameEntered;
 
@@ -27,6 +28,7 @@ public class InputName : MonoBehaviour
         _exitButton.gameObject.SetActive(true);
         _playerPanel.SetActive(true);
         _gameLevel.SetActive(true);
+        _abilitiesPanel.SetActive(true);
         NameEntered?.Invoke();
     }
 }

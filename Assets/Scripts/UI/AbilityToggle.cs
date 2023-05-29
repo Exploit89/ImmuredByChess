@@ -32,14 +32,11 @@ public class AbilityToggle : MonoBehaviour
 
     private void ShowAbilities()
     {
-        _abilities.Clear();
-        _abilities = _pieceTurnMover.Player.GetItems();
-        Debug.Log(_abilities.Count);
+        List<GameObject> abilities = _pieceTurnMover.Player.GetItems();
 
-        for (int i = 0; i < _abilities.Count; i++)
+        for (int i = 0; i < abilities.Count; i++)
         {
-            Debug.Log(_abilities[i].name);
-            _toggles[i].GetComponentInChildren<Text>().text = _abilities[i].name;
+            _toggles[i].GetComponentInChildren<Text>().text = abilities[i].name;
         }
     }
 }

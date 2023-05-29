@@ -21,11 +21,5 @@ public class WallBonus : Bonus
         GameObject gameplayRuler = GameObject.FindGameObjectWithTag("PieceTurnMover");
         PieceTurnMover pieceTurnMover = gameplayRuler.GetComponent<PieceTurnMover>();
         pieceTurnMover.OtherPlayer.AddItem(gameObject);
-
-        foreach (var item in pieceTurnMover.OtherPlayer.GetItems())
-        {
-            Debug.Log(pieceTurnMover.OtherPlayer.Name);
-            Debug.Log(item.name);
-        }
     }
 }

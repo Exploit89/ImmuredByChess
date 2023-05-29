@@ -88,12 +88,11 @@ public class Player
     public void AddItem(GameObject item)
     {
         _items.Add(item);
-        Debug.Log(item.name);
+        Debug.Log("item added " + item.name);
         foreach (var piece in _items)
         {
-            Debug.Log(piece.name);
+            Debug.Log("piece in items " + piece.name);
         }
-
         ItemsChanged?.Invoke();
     }
 

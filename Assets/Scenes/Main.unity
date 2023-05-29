@@ -9346,9 +9346,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010c72d42524d2f49ad6f67cbcff0466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveLocationPrefab: {fileID: 1555274435638532, guid: 13ed10d09f7a30e40a07fc94835c3739, type: 3}
-  _tileHighlightPrefab: {fileID: 1333511979136996, guid: bfa4a697119c37b479f2a90319859b87, type: 3}
-  _attackLocationPrefab: {fileID: 1341371675672656, guid: c3bc6969d78a14e4aa79fb611d46aadc, type: 3}
+  _moveLocationPrefab: {fileID: 4932088507883938021, guid: 0e5709a7ddb77924090c112cf73bb98a, type: 3}
+  _tileHighlightPrefab: {fileID: 3377181292992421420, guid: 48c5715f9603c3842a353516a8baefbb, type: 3}
+  _attackLocationPrefab: {fileID: 3744133877081091469, guid: a4d50506568114942a43262b2459bf9f, type: 3}
   _pieceTurnMover: {fileID: 1360177518}
   _unitPanel: {fileID: 16222087}
 --- !u!114 &2021277651
@@ -9363,7 +9363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7366f846e810c9246b49c32bb73fae28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tileHighlightPrefab: {fileID: 1333511979136996, guid: bfa4a697119c37b479f2a90319859b87, type: 3}
+  _tileHighlightPrefab: {fileID: 3377181292992421420, guid: 48c5715f9603c3842a353516a8baefbb, type: 3}
   _pieceTurnMover: {fileID: 1360177518}
   _unitPanel: {fileID: 16222087}
 --- !u!114 &2021277652

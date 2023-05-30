@@ -5,6 +5,7 @@ public class BattleButton : MonoBehaviour
 {
     [SerializeField] private GameObject _PrepareScreenPanel;
     [SerializeField] private Button _battleButton;
+    [SerializeField] private GameObject _abilitiesPanel;
 
     private void OnEnable()
     {
@@ -19,5 +20,6 @@ public class BattleButton : MonoBehaviour
     public void OnClick()
     {
         _PrepareScreenPanel.gameObject.SetActive(false);
+        _abilitiesPanel.SetActive(true);
     }
 }

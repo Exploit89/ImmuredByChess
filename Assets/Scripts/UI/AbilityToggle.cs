@@ -6,7 +6,6 @@ public class AbilityToggle : MonoBehaviour
 {
     [SerializeField] PieceTurnMover _pieceTurnMover;
 
-    private List<GameObject> _abilities = new List<GameObject>();
     private List<Toggle> _toggles = new List<Toggle>();
 
     private void Start()
@@ -16,7 +15,6 @@ public class AbilityToggle : MonoBehaviour
         for (int i = 0; i < toggles.Length; i++)
         {
             _toggles.Add(toggles[i]);
-            Debug.Log(toggles[i]);
         }
     }
 

@@ -35,6 +35,5 @@ public class PrepareScreenPanel : MonoBehaviour
         _inventory.SetActive(false);
         _talentsTree.SetActive(false);
         _shop.SetActive(false);
-        _abilitiesPanel.SetActive(true);
     }
 }

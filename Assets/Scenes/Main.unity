@@ -3532,6 +3532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _PrepareScreenPanel: {fileID: 1822973758}
   _battleButton: {fileID: 677437147}
+  _abilitiesPanel: {fileID: 1237083909}
 --- !u!1 &678109484
 GameObject:
   m_ObjectHideFlags: 0

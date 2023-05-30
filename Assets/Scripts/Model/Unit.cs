@@ -85,17 +85,20 @@ public class Unit : MonoBehaviour
 
     public void Attack(GameObject pieceToCapture)
     {
-        float damage = 0;
-
-        foreach (var skill in _unitSkills)
+        if(pieceToCapture.TryGetComponent(out Unit unit))
         {
-            if(skill.name == "BaseAttack")
+            float damage = 0;
+
+            foreach (var skill in _unitSkills)
             {
-                skill.Activate(gameObject.GetComponent<Unit>());
-                damage = skill.GetValueAmount();
+                if (skill.name == "BaseAttack")
+                {
+                    skill.Activate(gameObject.GetComponent<Unit>());
+                    damage = skill.GetValueAmount();
+                }
             }
+            pieceToCapture.GetComponent<Unit>().TakeDamage(damage);
         }
-        pieceToCapture.GetComponent<Unit>().TakeDamage(damage);
     }
 
     public void Support(GameObject pieceToCapture)

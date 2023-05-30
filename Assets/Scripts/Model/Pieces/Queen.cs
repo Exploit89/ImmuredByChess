@@ -18,7 +18,7 @@ public class Queen : Piece
                 Vector2Int nextGridPoint = new Vector2Int(gridPoint.x + i * direction.x, gridPoint.y + i * direction.y);
                 locations.Add(nextGridPoint);
 
-                if (_gameplayRuler.PieceAtGrid(nextGridPoint))
+                if (_gameplayRuler.PieceAtGrid(nextGridPoint) || _gameplayRuler.IsAbilityAt(nextGridPoint))
                     break;
             }
         }

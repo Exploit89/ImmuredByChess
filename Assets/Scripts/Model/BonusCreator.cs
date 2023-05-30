@@ -137,4 +137,14 @@ public class BonusCreator : MonoBehaviour
     {
         _occupiedTiles.Clear();
     }
+
+    public bool IsTileClearFromAbility(Vector2Int gridPoint)
+    {
+        return _occupiedByBonus.Contains(gridPoint) ? false : true;
+    }
+
+    public bool IsAbilityAt(Vector2Int gridPoint)
+    {
+        return _occupiedByBonus.Contains(gridPoint) ? true : false;
+    }
 }

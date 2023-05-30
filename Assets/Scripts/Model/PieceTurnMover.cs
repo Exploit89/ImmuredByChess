@@ -9,6 +9,7 @@ public class PieceTurnMover : MonoBehaviour
     [SerializeField] private ExperienceCalculator _experienceCalculator;
     [SerializeField] private Rewarder _rewarder;
     [SerializeField] private MoveSelector _moveSelector;
+    [SerializeField] private BonusCreator _bonusCreator;
 
     private List<GameObject> _movedPawns;
     private bool _isKingDestroyed = false;
@@ -85,7 +86,8 @@ public class PieceTurnMover : MonoBehaviour
         Vector2Int gridPoint = GridForPiece(pieceObject);
         List<Vector2Int> locations = piece.MoveLocations(gridPoint);
         locations.RemoveAll(gridPointBoard => gridPointBoard.x < 0 || gridPointBoard.x > 7 || gridPointBoard.y < 0 || gridPointBoard.y > 7);
-        locations.RemoveAll(gridPointBoard => FriendlyPieceAt(gridPointBoard));
+        locations.RemoveAll(gridPointBoard => IsFriendlyPieceAt(gridPointBoard));
+        locations.RemoveAll(gridPointBoard => _bonusCreator.IsAbilityAt(gridPointBoard));
         return locations;
     }
 
@@ -208,13 +210,18 @@ public class PieceTurnMover : MonoBehaviour
         return new Vector2Int(-1, -1);
     }
 
-    public bool FriendlyPieceAt(Vector2Int gridPoint)
+    public bool IsFriendlyPieceAt(Vector2Int gridPoint)
     {
         GameObject piece = PieceAtGrid(gridPoint);
 
         if (piece == null)
             return false;
         return OtherPlayer.ContainsPiece(piece) ? false : true;
+    }
+
+    public bool IsAbilityAt(Vector2Int gridPoint)
+    {
+        return _bonusCreator.IsAbilityAt(gridPoint);
     }
 
     public void NextPlayer() 

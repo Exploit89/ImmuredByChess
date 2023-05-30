@@ -8,6 +8,7 @@ public class MoveSelector : MonoBehaviour
     [SerializeField] private GameObject _attackLocationPrefab;
     [SerializeField] private PieceTurnMover _pieceTurnMover;
     [SerializeField] private GameObject _unitPanel;
+    [SerializeField] private BonusCreator _bonusCreator;
 
     private PointConverter _gridPoints;
     private GameObject _tileHighlight;
@@ -46,16 +47,21 @@ public class MoveSelector : MonoBehaviour
                     return;
                 }
 
-                if (_pieceTurnMover.PieceAtGrid(gridPoint) == null)
+                if (_pieceTurnMover.PieceAtGrid(gridPoint) == null && _bonusCreator.IsTileClearFromAbility(gridPoint))
                 {
                     _pieceTurnMover.Move(_movingPiece, gridPoint);
                 }
-                else
+                else if(_pieceTurnMover.PieceAtGrid(gridPoint) != null)
                 {
                     GameObject target = _pieceTurnMover.PieceAtGrid(gridPoint);
                     _movingPiece.GetComponent<Unit>().Attack(target);
                     _pieceTurnMover.TryDestroyTarget(gridPoint);
                     _pieceTurnMover.TryMove(_movingPiece, gridPoint);
+                }
+                else
+                {
+                    CancelState();
+                    return;
                 }
                 ExitState();
             }

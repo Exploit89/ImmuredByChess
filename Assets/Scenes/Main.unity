@@ -6753,6 +6753,7 @@ MonoBehaviour:
   _experienceCalculator: {fileID: 1857309602}
   _rewarder: {fileID: 1431514554}
   _moveSelector: {fileID: 2021277650}
+  _bonusCreator: {fileID: 1602872982}
 --- !u!4 &1360177519
 Transform:
   m_ObjectHideFlags: 0
@@ -9403,6 +9404,7 @@ MonoBehaviour:
   _attackLocationPrefab: {fileID: 3744133877081091469, guid: a4d50506568114942a43262b2459bf9f, type: 3}
   _pieceTurnMover: {fileID: 1360177518}
   _unitPanel: {fileID: 16222087}
+  _bonusCreator: {fileID: 1602872982}
 --- !u!114 &2021277651
 MonoBehaviour:
   m_ObjectHideFlags: 0

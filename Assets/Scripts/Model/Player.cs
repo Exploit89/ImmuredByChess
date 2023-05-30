@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEditor.Progress;
 
 public class Player
 {
@@ -100,5 +101,11 @@ public class Player
     {
         List<GameObject> items = _items;
         return items;
+    }
+
+    public void RemoveItem(int number)
+    {
+        _items.Remove(_items[number]);
+        ItemsChanged?.Invoke();
     }
 }

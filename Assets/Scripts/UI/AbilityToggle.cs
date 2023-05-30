@@ -14,6 +14,7 @@ public class AbilityToggle : MonoBehaviour
 
         for (int i = 0; i < toggles.Length; i++)
         {
+            toggles[i].GetComponent<PrepareAbility>().SetAbilityNumber(i);
             _toggles.Add(toggles[i]);
         }
     }
@@ -36,5 +37,11 @@ public class AbilityToggle : MonoBehaviour
         {
             _toggles[i].GetComponentInChildren<Text>().text = abilities[i].name;
         }
+    }
+
+    public List<Toggle> GetToggles()
+    {
+        List<Toggle> toggles = _toggles;
+        return toggles;
     }
 }

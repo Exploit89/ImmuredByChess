@@ -63,33 +63,6 @@ public class BonusCreator : MonoBehaviour
         ShowBonus(vector3);
     }
 
-    private void GetCleanTiles()
-    {
-        _pieces = _piecesCreator.GetPiecesList();
-
-        for (int i = 0; i < _board.MaxSideLength; i++)
-        {
-            for (int j = 0; j < _board.MaxSideLength; j++)
-            {
-                if (_pieces[i,j] != null)
-                {
-                    _occupiedTiles.Add(_pointConverter.GridPoint(i, j));
-                }
-            }
-        }
-
-        for (int i = 0; i < _board.MaxSideLength; i++)
-        {
-            for (int j = 0; j < _board.MaxSideLength; j++)
-            {
-                Vector2Int vector = _pointConverter.GridPoint(i, j);
-
-                if(!_occupiedTiles.Contains(vector))
-                    _cleanTiles.Add(vector);
-            }
-        }
-    }
-
     private void CountToNextBonus()
     {
         _turnCount++;
@@ -112,5 +85,39 @@ public class BonusCreator : MonoBehaviour
         _bonuses[bonusIndex].transform.position = vector3;
         _bonuses[bonusIndex].GetComponent<Effect>().SetEffectPosition(vector3);
         _bonuses[bonusIndex].SetActive(true);
+    }
+
+    private void GetCleanTiles()
+    {
+        _pieces = _piecesCreator.GetPiecesList();
+
+        for (int i = 0; i < _board.MaxSideLength; i++)
+        {
+            for (int j = 0; j < _board.MaxSideLength; j++)
+            {
+                if (_pieces[i, j] != null)
+                {
+                    _occupiedTiles.Add(_pointConverter.GridPoint(i, j));
+                }
+            }
+        }
+
+        for (int i = 0; i < _board.MaxSideLength; i++)
+        {
+            for (int j = 0; j < _board.MaxSideLength; j++)
+            {
+                Vector2Int vector = _pointConverter.GridPoint(i, j);
+
+                if (!_occupiedTiles.Contains(vector))
+                    _cleanTiles.Add(vector);
+            }
+        }
+    }
+
+    public List<Vector2Int> GetCleanTilesList()
+    {
+        GetCleanTiles();
+        List<Vector2Int> cleanTiles = _cleanTiles;
+        return cleanTiles;
     }
 }

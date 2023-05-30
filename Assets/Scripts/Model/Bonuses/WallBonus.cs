@@ -11,7 +11,9 @@ public class WallBonus : Bonus
         {
             TakeBonus(unit);
             BonusTaken?.Invoke();
-            GetComponent<Effect>().ActivateEffect();
+
+            if(TryGetComponent(out Effect effect))
+                GetComponent<Effect>().ActivateEffect();
             gameObject.SetActive(false);
         }
     }

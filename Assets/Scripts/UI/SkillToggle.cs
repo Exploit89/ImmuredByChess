@@ -25,7 +25,6 @@ public class SkillToggle : MonoBehaviour
         if(_skillToggle.isOn)
         {
             string skillName = _skillToggle.GetComponentInChildren<Text>().text;
-            Debug.Log($"{skillName} chosen");
             SkillChanged?.Invoke();
         }
     }

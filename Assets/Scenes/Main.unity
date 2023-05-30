@@ -1029,6 +1029,7 @@ GameObject:
   m_Component:
   - component: {fileID: 182335460}
   - component: {fileID: 182335461}
+  - component: {fileID: 182335462}
   m_Layer: 5
   m_Name: Toggle (2)
   m_TagString: Untagged
@@ -1105,6 +1106,22 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &182335462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182335459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce390c82ce23df1478d1b57a3407ff60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _toggle: {fileID: 182335461}
+  _pieceTurnMover: {fileID: 1360177518}
+  _abilityToggle: {fileID: 838028479}
+  _bonusCreator: {fileID: 1602872982}
 --- !u!1 &223717044
 GameObject:
   m_ObjectHideFlags: 0
@@ -4833,6 +4850,7 @@ GameObject:
   m_Component:
   - component: {fileID: 952601645}
   - component: {fileID: 952601646}
+  - component: {fileID: 952601647}
   m_Layer: 5
   m_Name: Toggle
   m_TagString: Untagged
@@ -4909,6 +4927,22 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &952601647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952601644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce390c82ce23df1478d1b57a3407ff60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _toggle: {fileID: 952601646}
+  _pieceTurnMover: {fileID: 1360177518}
+  _abilityToggle: {fileID: 838028479}
+  _bonusCreator: {fileID: 1602872982}
 --- !u!1 &1062357567
 GameObject:
   m_ObjectHideFlags: 0
@@ -7659,6 +7693,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1761364037}
   - component: {fileID: 1761364038}
+  - component: {fileID: 1761364039}
   m_Layer: 5
   m_Name: Toggle (1)
   m_TagString: Untagged
@@ -7735,6 +7770,22 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &1761364039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761364036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce390c82ce23df1478d1b57a3407ff60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _toggle: {fileID: 1761364038}
+  _pieceTurnMover: {fileID: 1360177518}
+  _abilityToggle: {fileID: 838028479}
+  _bonusCreator: {fileID: 1602872982}
 --- !u!1 &1792227894
 GameObject:
   m_ObjectHideFlags: 0

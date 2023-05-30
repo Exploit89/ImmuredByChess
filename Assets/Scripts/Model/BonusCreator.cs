@@ -13,6 +13,7 @@ public class BonusCreator : MonoBehaviour
     private GameObject[,] _pieces;
     private List<Vector2Int> _cleanTiles;
     private List<Vector2Int> _occupiedTiles;
+    private List<Vector2Int> _occupiedByBonus;
     private List<GameObject> _bonuses;
     private System.Random _random;
     private GameObject _healBonus;
@@ -26,6 +27,7 @@ public class BonusCreator : MonoBehaviour
         _pieces = new GameObject[,] { };
         _cleanTiles = new List<Vector2Int>();
         _occupiedTiles = new List<Vector2Int>();
+        _occupiedByBonus = new List<Vector2Int>();
         _bonuses = new List<GameObject>();
         _pointConverter = new PointConverter();
     }
@@ -102,6 +104,11 @@ public class BonusCreator : MonoBehaviour
             }
         }
 
+        foreach (var item in _occupiedByBonus)
+        {
+            _occupiedTiles.Add(item);
+        }
+
         for (int i = 0; i < _board.MaxSideLength; i++)
         {
             for (int j = 0; j < _board.MaxSideLength; j++)
@@ -119,5 +126,15 @@ public class BonusCreator : MonoBehaviour
         GetCleanTiles();
         List<Vector2Int> cleanTiles = _cleanTiles;
         return cleanTiles;
+    }
+
+    public void AddOccupiedTile(Vector2Int gridPoint)
+    {
+        _occupiedByBonus.Add(gridPoint);
+    }
+
+    public void DestroyBonuses()
+    {
+        _occupiedTiles.Clear();
     }
 }

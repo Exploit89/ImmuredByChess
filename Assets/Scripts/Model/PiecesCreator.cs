@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEditor.Progress;
 
 public class PiecesCreator : MonoBehaviour
 {

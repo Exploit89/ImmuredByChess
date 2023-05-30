@@ -50,6 +50,7 @@ public class PrepareAbility : MonoBehaviour
                     Debug.Log("стена установлена");
                     _toggle.GetComponentInChildren<Text>().text = $"Способность {_abilityNumber + 1}";
                     _toggle.isOn = false;
+                    _bonusCreator.AddOccupiedTile(gridPoint);
                 }
             }
         }

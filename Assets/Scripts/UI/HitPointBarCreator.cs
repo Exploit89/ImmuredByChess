@@ -34,13 +34,9 @@ public class HitPointBarCreator : MonoBehaviour
         for (int i = 0; i < _maxPiecesOnBoard; i++)
         {
             if (i < _maxPiecesBySide)
-            {
                 AddHitPontBar(playerPiecesTransform[i + 1].gameObject);
-            }
             else
-            {
                 AddHitPontBar(enemyPiecesTransform[i + 1 - _maxPiecesBySide].gameObject);
-            }
         }
     }
 

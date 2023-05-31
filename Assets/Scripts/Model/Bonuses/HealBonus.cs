@@ -5,10 +5,11 @@ public class HealBonus : Bonus
 {
     [SerializeField] private UnityEvent BonusTaken;
 
+    private float _healMultiplier = 0.5f;
+
     public override void TakeBonus(Unit unit)
     {
-        float heal = 0.5f;
-        unit.Heal(heal * unit.MaxHealth);
+        unit.Heal(_healMultiplier * unit.MaxHealth);
     }
 
     private void OnTriggerEnter(Collider collider)

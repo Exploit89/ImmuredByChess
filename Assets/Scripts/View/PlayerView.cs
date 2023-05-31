@@ -40,7 +40,7 @@ public class PlayerView : MonoBehaviour
 
         foreach (TMP_Text text in texts)
         {
-            if(text.name == "PlayerName")
+            if (text.name == "PlayerName")
                 text.text = _name;
         }
     }

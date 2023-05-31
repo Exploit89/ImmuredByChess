@@ -9,8 +9,8 @@ public class TileSelector : MonoBehaviour
 
     private GameObject _tileHighlight;
     private PointConverter _gridPoints;
-    private Vector3 _gridOffset = new Vector3(0.5f, 0, 0.5f);
     private GameObject _selectedPiece;
+    private Vector3 _gridOffset = new Vector3(0.5f, 0, 0.5f);
 
     public event UnityAction PieceSelected;
 

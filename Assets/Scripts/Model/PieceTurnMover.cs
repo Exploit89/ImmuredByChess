@@ -64,6 +64,15 @@ public class PieceTurnMover : MonoBehaviour
             Player.AddExperienceToPiece(selectedPiece, experienceReward);
     }
 
+    private bool IsKingDestroyed(GameObject pieceToCapture)
+    {
+        bool destroyed = false;
+
+        if (pieceToCapture.GetComponent<Piece>().Type == PieceType.King)
+            destroyed = true;
+        return destroyed;
+    }
+
     public bool IsTargetDead(Vector2Int gridPoint)
     {
         GameObject pieceToCapture = PieceAtGrid(gridPoint);
@@ -128,7 +137,7 @@ public class PieceTurnMover : MonoBehaviour
         GameObject pieceToCapture = PieceAtGrid(gridPoint);
         _piecesCreator.GetPiecesList()[gridPoint.x, gridPoint.y] = null;
         CurrentPlayer.AddCapturedPiece(pieceToCapture);
-        GetReward(pieceToCapture); // здесь поместить вызов view для отображения полученных монет
+        GetReward(pieceToCapture); // TODO здесь поместить вызов view для отображения полученных монет
         ExperienceIncreased?.Invoke();
 
         if (_experienceCalculator.IsPlayerLevelReached(CurrentPlayer.Experience, CurrentPlayer.Level))
@@ -137,7 +146,7 @@ public class PieceTurnMover : MonoBehaviour
             LevelIncreased?.Invoke();
         }
 
-        if(_experienceCalculator.IsUnitLevelReached(GetCurrentPiece().Experience, GetCurrentPiece().Level))
+        if (_experienceCalculator.IsUnitLevelReached(GetCurrentPiece().Experience, GetCurrentPiece().Level))
         {
             GetCurrentPiece().IncreaseLevel();
         }
@@ -147,7 +156,7 @@ public class PieceTurnMover : MonoBehaviour
             MatchEnded?.Invoke();
             _isKingDestroyed = IsKingDestroyed(pieceToCapture);
         }
-        pieceToCapture.SetActive(false); // здесь поместить вызов view для отображения смерти
+        pieceToCapture.SetActive(false); // TODO здесь поместить вызов view для отображения смерти
 
         if (_isKingDestroyed)
         {
@@ -155,22 +164,13 @@ public class PieceTurnMover : MonoBehaviour
             _moveSelector.CancelState();
             _board.ClearBoard();
 
-            if(CurrentPlayer == Player)
+            if (CurrentPlayer == Player)
                 GameLevelCompleted?.Invoke();
             else GameLevelLost?.Invoke();
             _piecesCreator.NewStageInitialSetup();
             IsSetupRestarted = true;
             _isKingDestroyed = false;
         }
-    }
-
-    private bool IsKingDestroyed(GameObject pieceToCapture)
-    {
-        bool destroyed = false;
-
-        if (pieceToCapture.GetComponent<Piece>().Type == PieceType.King)
-            destroyed = true;
-        return destroyed;
     }
 
     public void SelectPiece(GameObject piece)
@@ -224,10 +224,10 @@ public class PieceTurnMover : MonoBehaviour
         return _bonusCreator.IsAbilityAt(gridPoint);
     }
 
-    public void NextPlayer() 
+    public void NextPlayer()
     {
-        Player tempPlayer = CurrentPlayer; 
-        CurrentPlayer = OtherPlayer; 
+        Player tempPlayer = CurrentPlayer;
+        CurrentPlayer = OtherPlayer;
         OtherPlayer = tempPlayer;
         TurnCount++;
         TurnChanged?.Invoke();

@@ -51,7 +51,7 @@ public class MoveSelector : MonoBehaviour
                 {
                     _pieceTurnMover.Move(_movingPiece, gridPoint);
                 }
-                else if(_pieceTurnMover.PieceAtGrid(gridPoint) != null)
+                else if (_pieceTurnMover.PieceAtGrid(gridPoint) != null)
                 {
                     GameObject target = _pieceTurnMover.PieceAtGrid(gridPoint);
                     _movingPiece.GetComponent<Unit>().Attack(target);

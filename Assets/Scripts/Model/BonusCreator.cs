@@ -11,13 +11,13 @@ public class BonusCreator : MonoBehaviour
 
     private PointConverter _pointConverter;
     private GameObject[,] _pieces;
+    private GameObject _wallBonus;
+    private GameObject _healBonus;
+    private List<GameObject> _bonuses;
     private List<Vector2Int> _cleanTiles;
     private List<Vector2Int> _occupiedTiles;
     private List<Vector2Int> _occupiedByBonus;
-    private List<GameObject> _bonuses;
     private System.Random _random;
-    private GameObject _healBonus;
-    private GameObject _wallBonus;
     private int _turnCount;
     private int _turnCountToNextBonus = 5;
 
@@ -95,6 +95,7 @@ public class BonusCreator : MonoBehaviour
 
     private void GetCleanTiles()
     {
+        _occupiedTiles.Clear();
         _pieces = _piecesCreator.GetPiecesList();
 
         for (int i = 0; i < _board.MaxSideLength; i++)
@@ -112,6 +113,8 @@ public class BonusCreator : MonoBehaviour
         {
             _occupiedTiles.Add(item);
         }
+        _occupiedByBonus.Clear();
+
 
         for (int i = 0; i < _board.MaxSideLength; i++)
         {
@@ -142,6 +145,12 @@ public class BonusCreator : MonoBehaviour
         _occupiedTiles.Clear();
         _occupiedByBonus.Clear();
         _turnCount = 0;
+        GameObject[] abilities = GameObject.FindGameObjectsWithTag("BoardAbility");
+
+        foreach (var ability in abilities)
+        {
+            Destroy(ability);
+        }
 
         foreach (var item in _bonuses)
         {

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEditor.Progress;
 
 public class Player
 {
@@ -24,9 +23,9 @@ public class Player
         _pieces = new List<GameObject>();
         _capturedPieces = new List<GameObject>();
         _items = new List<GameObject>();
+        _wallet = new Wallet();
         Level = 1;
         Experience = 0;
-        _wallet = new Wallet();
     }
 
     public void AddPiece(GameObject pieceObject)
@@ -89,11 +88,6 @@ public class Player
     public void AddItem(GameObject item)
     {
         _items.Add(item);
-        Debug.Log("item added " + item.name);
-        foreach (var piece in _items)
-        {
-            Debug.Log("piece in items " + piece.name);
-        }
         ItemsChanged?.Invoke();
     }
 

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Heal : Skill
@@ -34,8 +32,6 @@ public class Heal : Skill
             return baseValue;
         else
             totalValue = baseValue * (_baseMultiplier + (unitLevel * _levelMultiplier));
-
-        Debug.Log("тотал хил = " + totalValue); // отображение нанесения урона
         return totalValue;
     }
 

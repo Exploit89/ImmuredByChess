@@ -4,8 +4,8 @@ using UnityEngine;
 public class ExperienceCalculator : MonoBehaviour
 {
     private List<int> _levelExperience = new List<int>();
-    private int _experienceStep = 100;
     private Dictionary<PieceType, int> _pieceTypeExperienceReward = new Dictionary<PieceType, int>();
+    private int _experienceStep = 100;
 
     public int MaxLevel { get; private set; } = 100;
 

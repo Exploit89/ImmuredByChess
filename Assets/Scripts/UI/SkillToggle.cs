@@ -22,7 +22,7 @@ public class SkillToggle : MonoBehaviour
 
     public void OnClick(bool isOn)
     {
-        if(_skillToggle.isOn)
+        if (_skillToggle.isOn)
         {
             string skillName = _skillToggle.GetComponentInChildren<Text>().text;
             SkillChanged?.Invoke();

@@ -9,8 +9,8 @@ public class Board : MonoBehaviour
     [SerializeField] private Material _selectedMaterial;
 
     private PointConverter _pointConverter;
-    private int _modelRotateAngleY = 90;
     private List<GameObject> _piecesOnBoard = new List<GameObject>();
+    private int _modelRotateAngleY = 90;
 
     public int MaxSideLength { get; private set; } = 8;
     public event UnityAction PieceMoved;
@@ -39,7 +39,7 @@ public class Board : MonoBehaviour
         {
             GameObject newPiece = Instantiate(piece, _pointConverter.PointFromGrid(gridPoint), Quaternion.Euler(0, _modelRotateAngleY, 0), parent);
 
-            if(newPiece.TryGetComponent(out Unit unit) == false)
+            if (newPiece.TryGetComponent(out Unit unit) == false)
                 newPiece.AddComponent<Unit>();
             newPiece.name = piece.name;
             _piecesOnBoard.Add(newPiece);
@@ -63,7 +63,7 @@ public class Board : MonoBehaviour
     {
         MeshRenderer renderers = piece.GetComponentInChildren<MeshRenderer>();
 
-        if(piece.tag == "White")
+        if (piece.tag == "White")
             renderers.material = _whiteMaterial;
         else
             renderers.material = _blackMaterial;
@@ -71,7 +71,7 @@ public class Board : MonoBehaviour
 
     public void ClearBoard()
     {
-        foreach(var piece in _piecesOnBoard)
+        foreach (var piece in _piecesOnBoard)
         {
             piece.SetActive(false);
         }

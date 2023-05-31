@@ -115,7 +115,7 @@ public class GameLevelSetup
                 GetGrandmasterSKills(skills, transforms);
                 break;
             default:
-                Debug.Log("can't find any UnitRank"); 
+                Debug.Log("can't find any UnitRank");
                 break;
         }
         return skills;
@@ -125,11 +125,11 @@ public class GameLevelSetup
     {
         Rank rank = new Rank();
 
-        if(Level <= 10)
+        if (Level <= 10)
             rank = Rank.Basic;
-        else if(Level <= 30 && Level > 10)
+        else if (Level <= 30 && Level > 10)
             rank = Rank.Advanced;
-        else if(Level <= 50 && Level > 30)
+        else if (Level <= 50 && Level > 30)
             rank = Rank.Expert;
         else if (Level <= 70 && Level > 50)
             rank = Rank.Master;

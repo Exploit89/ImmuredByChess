@@ -66,7 +66,7 @@ public class Unit : MonoBehaviour
 
     public void IncreaseExperience(int value)
     {
-        Experience+= value;
+        Experience += value;
     }
 
     public void TakeDamage(float damage)
@@ -77,7 +77,7 @@ public class Unit : MonoBehaviour
 
     public void Heal(float heal)
     {
-        if(heal+Health >= MaxHealth)
+        if (heal + Health >= MaxHealth)
             Health = MaxHealth;
         else Health += heal;
         HealthChanged?.Invoke(Health, MaxHealth);
@@ -85,7 +85,7 @@ public class Unit : MonoBehaviour
 
     public void Attack(GameObject pieceToCapture)
     {
-        if(pieceToCapture.TryGetComponent(out Unit unit))
+        if (pieceToCapture.TryGetComponent(out Unit unit))
         {
             float damage = 0;
 

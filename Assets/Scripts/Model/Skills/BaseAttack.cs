@@ -28,12 +28,10 @@ public class BaseAttack : Skill
     {
         float totalValue = 0;
 
-        if(unitLevel == 1)
+        if (unitLevel == 1)
             return baseValue;
         else
             totalValue = baseValue * (_baseMultiplier + (unitLevel * _levelMultiplier));
-
-        Debug.Log("тотал дамаг = " + totalValue); // отображение нанесения урона
         return totalValue;
     }
 

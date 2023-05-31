@@ -11,9 +11,9 @@ public class PrepareAbility : MonoBehaviour
 
     private int _abilityNumber;
     private GameObject _ability;
+    private PointConverter _gridPoints;
     private Vector3 _gridOffset = new Vector3(0.5f, 0, 0.5f);
     private Vector3 _bonusOffset = new Vector3(0, 0.5f, 0);
-    private PointConverter _gridPoints;
 
     private void Start()
     {
@@ -51,7 +51,6 @@ public class PrepareAbility : MonoBehaviour
             {
                 if (_bonusCreator.GetCleanTilesList().Contains(gridPoint))
                 {
-                    Debug.Log("стена установлена");
                     _toggle.GetComponentInChildren<Text>().text = $"Способность {_abilityNumber + 1}";
                     _toggle.isOn = false;
                     _bonusCreator.AddOccupiedTile(gridPoint);
@@ -60,7 +59,7 @@ public class PrepareAbility : MonoBehaviour
         }
         else
         {
-            if(_ability == null)
+            if (_ability == null)
             {
                 return;
             }
@@ -71,16 +70,14 @@ public class PrepareAbility : MonoBehaviour
     {
         if (_toggle.isOn)
         {
-            string skillName = _abilityToggle.GetComponentInChildren<Text>().text;
-            Debug.Log($"Ability {skillName} chosen");
-
             List<GameObject> abilities = _pieceTurnMover.Player.GetItems();
             List<Toggle> toggles = _abilityToggle.GetToggles();
 
-            if(abilities.Count > _abilityNumber)
+            if (abilities.Count > _abilityNumber)
             {
                 toggles[_abilityNumber].GetComponentInChildren<Text>().text = abilities[_abilityNumber].name;
                 _ability = Instantiate(abilities[_abilityNumber]);
+                _ability.tag = "BoardAbility";
                 Destroy(_ability.GetComponent<Effect>());
                 Destroy(_ability.GetComponent<Bonus>());
                 _ability.SetActive(isOn);

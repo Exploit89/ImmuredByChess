@@ -13,6 +13,7 @@ TagManager:
   - EnemyPieces
   - HitPointBarPanel
   - Board
+  - BoardAbility
   - PreparePanel
   layers:
   - Default
@@ -23,7 +24,7 @@ TagManager:
   - UI
   - HPBar
   - UIBackground
-  - 
+  - BoardAbility
   - 
   - Board
   - Aura

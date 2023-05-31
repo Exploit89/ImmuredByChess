@@ -47,11 +47,15 @@ public class BonusCreator : MonoBehaviour
     private void OnEnable()
     {
         _pieceTurnMover.TurnChanged += CountToNextBonus;
+        _pieceTurnMover.GameLevelCompleted += ClearAllOccupiedTiles;
+        _pieceTurnMover.GameLevelLost += ClearAllOccupiedTiles;
     }
 
     private void OnDisable()
     {
         _pieceTurnMover.TurnChanged -= CountToNextBonus;
+        _pieceTurnMover.GameLevelCompleted -= ClearAllOccupiedTiles;
+        _pieceTurnMover.GameLevelLost -= ClearAllOccupiedTiles;
     }
 
     private void CreateBonus()
@@ -133,9 +137,16 @@ public class BonusCreator : MonoBehaviour
         _occupiedByBonus.Add(gridPoint);
     }
 
-    public void DestroyBonuses()
+    public void ClearAllOccupiedTiles()
     {
         _occupiedTiles.Clear();
+        _occupiedByBonus.Clear();
+        _turnCount = 0;
+
+        foreach (var item in _bonuses)
+        {
+            item.SetActive(false);
+        }
     }
 
     public bool IsTileClearFromAbility(Vector2Int gridPoint)

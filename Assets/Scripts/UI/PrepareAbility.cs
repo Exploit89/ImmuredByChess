@@ -23,11 +23,15 @@ public class PrepareAbility : MonoBehaviour
     private void OnEnable()
     {
         _toggle.onValueChanged.AddListener(OnClick);
+        _pieceTurnMover.GameLevelCompleted += DestroyAbility;
+        _pieceTurnMover.GameLevelLost += DestroyAbility;
     }
 
     private void OnDisable()
     {
         _toggle.onValueChanged.RemoveListener(OnClick);
+        _pieceTurnMover.GameLevelCompleted -= DestroyAbility;
+        _pieceTurnMover.GameLevelLost -= DestroyAbility;
     }
 
     private void Update()
@@ -87,6 +91,12 @@ public class PrepareAbility : MonoBehaviour
                 _toggle.isOn = false;
             }
         }
+    }
+
+    private void DestroyAbility()
+    {
+        Destroy(_ability);
+        _ability = null;
     }
 
     public void SetAbilityNumber(int number)

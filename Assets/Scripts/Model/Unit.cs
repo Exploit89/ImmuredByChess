@@ -59,11 +59,6 @@ public class Unit : MonoBehaviour
         Level++;
     }
 
-    public void IncreaseLevel(int level)
-    {
-        Level += level;
-    }
-
     public void IncreaseExperience(int value)
     {
         Experience += value;

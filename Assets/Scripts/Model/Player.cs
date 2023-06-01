@@ -73,12 +73,6 @@ public class Player
         return _wallet.MoneyAmount;
     }
 
-    public GameObject GetPiece(int index)
-    {
-        GameObject piece = _pieces[index];
-        return piece;
-    }
-
     public void AddExperienceToPiece(GameObject piece, int value)
     {
         int pieceIndex = _pieces.IndexOf(piece);

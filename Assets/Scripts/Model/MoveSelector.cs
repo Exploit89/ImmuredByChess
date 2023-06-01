@@ -110,7 +110,6 @@ public class MoveSelector : MonoBehaviour
 
     private void ExitState()
     {
-        Debug.Log("ExitState");
         if (_pieceTurnMover.IsSetupRestarted)
         {
             _pieceTurnMover.TurnOffSetupRestarted();

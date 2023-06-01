@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 849949787076994612}
   - component: {fileID: 215050490041584753}
   - component: {fileID: -1632292426499013462}
+  - component: {fileID: 6032821314346548847}
   m_Layer: 0
   m_Name: White_Knight
   m_TagString: White
@@ -109,3 +110,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0.6, z: 0}
+--- !u!114 &6032821314346548847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849949787075000564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e8d691c9236814e912ae1c465d63f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

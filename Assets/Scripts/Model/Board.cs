@@ -22,10 +22,11 @@ public class Board : MonoBehaviour
 
     public GameObject AddPiece(GameObject piece, int column, int row, Transform parent)
     {
+        Quaternion baseRotation = Quaternion.Euler(0, _modelRotateAngleY, 0);
         Quaternion knightRotation = Quaternion.Euler(0, -_modelRotateAngleY, 0);
         Vector2Int gridPoint = _pointConverter.GridPoint(column, row);
 
-        if (piece.name == "White_Knight" || piece.name == "White_Knight(Clone)")
+        if (piece.TryGetComponent(out WhiteKnightForRotation whiteKnight))
         {
             GameObject newPiece = Instantiate(piece, _pointConverter.PointFromGrid(gridPoint), knightRotation, parent);
 
@@ -37,7 +38,7 @@ public class Board : MonoBehaviour
         }
         else
         {
-            GameObject newPiece = Instantiate(piece, _pointConverter.PointFromGrid(gridPoint), Quaternion.Euler(0, _modelRotateAngleY, 0), parent);
+            GameObject newPiece = Instantiate(piece, _pointConverter.PointFromGrid(gridPoint), baseRotation, parent);
 
             if (newPiece.TryGetComponent(out Unit unit) == false)
                 newPiece.AddComponent<Unit>();

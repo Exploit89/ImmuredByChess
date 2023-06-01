@@ -3,8 +3,15 @@ using UnityEngine;
 
 public class GameLevelSetup
 {
+    private List<Skill> skillList;
     private int _baseHealth = 20;
     private int _baseMana = 20;
+    private int _advancedLevel = 10;
+    private int _expertLevel = 30;
+    private int _healthManaModifier = 0;
+    private int _baseHealthManaModifier = 1;
+    private int _advancedHealthManaModifier = 2;
+    private int _expertHealthManaModifier = 3;
 
     public PieceType Piece { get; private set; }
     public Rank UnitRank { get; private set; }
@@ -12,154 +19,83 @@ public class GameLevelSetup
     public int MaxHealth { get; private set; }
     public int MaxMana { get; private set; }
 
-    private void GetBasicSkills(List<Skill> skills, Transform[] transforms)
+    private void GetBasicSkills(List<Skill> skills)
     {
-        skills.Add(transforms[1].gameObject.GetComponent<Skill>());
+        skills.Add(skills[0]);
     }
 
-    private void GetExpertSKills(List<Skill> skills, Transform[] transforms)
+    private void GetExpertSkills(List<Skill> skills)
     {
-        switch (Piece)
-        {
-            case PieceType.King:
-                skills.Add(transforms[1].gameObject.GetComponent<Skill>());
-                skills.Add(transforms[2].gameObject.GetComponent<Skill>());
-                break;
-            case PieceType.Queen:
-                skills.Add(transforms[1].gameObject.GetComponent<Skill>());
-                skills.Add(transforms[3].gameObject.GetComponent<Skill>());
-                break;
-            case PieceType.Bishop:
-                skills.Add(transforms[1].gameObject.GetComponent<Skill>());
-                skills.Add(transforms[4].gameObject.GetComponent<Skill>());
-                break;
-            case PieceType.Knight:
-                skills.Add(transforms[1].gameObject.GetComponent<Skill>());
-                skills.Add(transforms[5].gameObject.GetComponent<Skill>());
-                break;
-            case PieceType.Rook:
-                skills.Add(transforms[1].gameObject.GetComponent<Skill>());
-                skills.Add(transforms[6].gameObject.GetComponent<Skill>());
-                break;
-            case PieceType.Pawn:
-                skills.Add(transforms[1].gameObject.GetComponent<Skill>());
-                skills.Add(transforms[7].gameObject.GetComponent<Skill>());
-                break;
-            default:
-                Debug.Log("can't find any PieceType");
-                break;
-        }
-    }
-
-    private void GetGrandmasterSKills(List<Skill> skills, Transform[] transforms)
-    {
-        switch (Piece)
-        {
-            case PieceType.King:
-                skills.Add(transforms[1].gameObject.GetComponent<Skill>());
-                skills.Add(transforms[2].gameObject.GetComponent<Skill>());
-                skills.Add(transforms[8].gameObject.GetComponent<Skill>());
-                break;
-            case PieceType.Queen:
-                skills.Add(transforms[1].gameObject.GetComponent<Skill>());
-                skills.Add(transforms[3].gameObject.GetComponent<Skill>());
-                skills.Add(transforms[9].gameObject.GetComponent<Skill>());
-                break;
-            case PieceType.Bishop:
-                skills.Add(transforms[1].gameObject.GetComponent<Skill>());
-                skills.Add(transforms[4].gameObject.GetComponent<Skill>());
-                skills.Add(transforms[10].gameObject.GetComponent<Skill>());
-                break;
-            case PieceType.Knight:
-                skills.Add(transforms[1].gameObject.GetComponent<Skill>());
-                skills.Add(transforms[5].gameObject.GetComponent<Skill>());
-                skills.Add(transforms[11].gameObject.GetComponent<Skill>());
-                break;
-            case PieceType.Rook:
-                skills.Add(transforms[1].gameObject.GetComponent<Skill>());
-                skills.Add(transforms[6].gameObject.GetComponent<Skill>());
-                skills.Add(transforms[12].gameObject.GetComponent<Skill>());
-                break;
-            case PieceType.Pawn:
-                skills.Add(transforms[1].gameObject.GetComponent<Skill>());
-                skills.Add(transforms[7].gameObject.GetComponent<Skill>());
-                skills.Add(transforms[13].gameObject.GetComponent<Skill>());
-                break;
-            default:
-                Debug.Log("can't find any PieceType");
-                break;
-        }
+        GetAvaliableSkill(skills, Piece);
     }
 
     public List<Skill> GetSkills()
     {
-        List<Skill> skills = new List<Skill>();
-        GameObject skillsObject = GameObject.FindGameObjectWithTag("Skills");
-        Transform[] transforms = skillsObject.GetComponentsInChildren<Transform>();
-
         switch (UnitRank)
         {
             case Rank.Basic:
-                GetBasicSkills(skills, transforms);
+                GetBasicSkills(skillList);
                 break;
             case Rank.Advanced:
-                GetBasicSkills(skills, transforms);
+                GetBasicSkills(skillList);
                 break;
             case Rank.Expert:
-                GetExpertSKills(skills, transforms);
-                break;
-            case Rank.Master:
-                GetExpertSKills(skills, transforms);
-                break;
-            case Rank.Grandmaster:
-                GetGrandmasterSKills(skills, transforms);
+                GetExpertSkills(skillList);
                 break;
             default:
                 Debug.Log("can't find any UnitRank");
                 break;
         }
-        return skills;
+        return skillList;
     }
 
     private Rank GetUnitRank()
     {
         Rank rank = new Rank();
 
-        if (Level <= 10)
+        if (Level <= _advancedLevel)
             rank = Rank.Basic;
-        else if (Level <= 30 && Level > 10)
+        else if (Level <= _expertLevel && Level > _advancedLevel)
             rank = Rank.Advanced;
-        else if (Level <= 50 && Level > 30)
+        else if (Level > _expertLevel)
             rank = Rank.Expert;
-        else if (Level <= 70 && Level > 50)
-            rank = Rank.Master;
-        else if (Level > 70)
-            rank = Rank.Grandmaster;
         return rank;
     }
 
     private int GetHealthManaModifier()
     {
-        int modifier = 0;
+        _healthManaModifier = 0;
 
         switch (UnitRank)
         {
             case Rank.Advanced:
-                modifier = 2;
+                _healthManaModifier = _advancedHealthManaModifier;
                 break;
             case Rank.Master:
-                modifier = 3;
+                _healthManaModifier = _expertHealthManaModifier;
                 break;
             default:
-                modifier = 1;
+                _healthManaModifier = _baseHealthManaModifier;
                 break;
         }
-
-        return modifier;
+        return _healthManaModifier;
     }
 
-    public GameLevelSetup(int gameLevel, PieceType pieceType)
+    private void GetAvaliableSkill(List<Skill> skills, PieceType pieceType)
     {
+        for (int i = 1; i < skills.Count; i++)
+        {
+            if (skills[i].GetComponent<Skill>().PieceSkillClass.ToString() == pieceType.ToString())
+            {
+                skills.Add(skills[i].GetComponent<Skill>());
+            }
+        }
+    }
+
+    public GameLevelSetup(int gameLevel, PieceType pieceType, List<Skill> skills)
+    {
+        skillList = new List<Skill>();
+        skillList = skills;
         Piece = pieceType;
         Level = gameLevel;
         UnitRank = GetUnitRank();

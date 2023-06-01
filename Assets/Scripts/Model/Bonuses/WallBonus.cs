@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(Effect))]
+
 public class WallBonus : Bonus
 {
     [SerializeField] private UnityEvent BonusTaken;
@@ -11,9 +13,7 @@ public class WallBonus : Bonus
         {
             TakeBonus(unit);
             BonusTaken?.Invoke();
-
-            if (TryGetComponent(out Effect effect))
-                GetComponent<Effect>().ActivateEffect();
+            GetComponent<Effect>().ActivateEffect();
             gameObject.SetActive(false);
         }
     }

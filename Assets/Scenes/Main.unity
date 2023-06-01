@@ -8258,6 +8258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pieceTurnMover: {fileID: 1360177518}
+  _skills: {fileID: 2086465690}
 --- !u!4 &1915031117
 Transform:
   m_ObjectHideFlags: 0
@@ -9322,6 +9323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseAttack: {fileID: 5698083531745482202, guid: 35b1c1e979aa1d1418db411c582d959e, type: 3}
+  _heal: {fileID: 4218818051113789942, guid: a163b53ceba616f4c93aba71428caede, type: 3}
 --- !u!1001 &2109438243
 PrefabInstance:
   m_ObjectHideFlags: 0

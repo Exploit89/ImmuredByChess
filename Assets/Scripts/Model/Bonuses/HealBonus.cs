@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(Effect))]
+
 public class HealBonus : Bonus
 {
     [SerializeField] private UnityEvent BonusTaken;

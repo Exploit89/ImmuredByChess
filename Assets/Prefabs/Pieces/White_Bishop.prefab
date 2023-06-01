@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 2
+  _pieceTurnMover: {fileID: 0}
 --- !u!65 &-9124015844381957080
 BoxCollider:
   m_ObjectHideFlags: 0

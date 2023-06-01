@@ -4,6 +4,7 @@ using UnityEngine.Events;
 public class GameLevel : MonoBehaviour
 {
     [SerializeField] private PieceTurnMover _pieceTurnMover;
+    [SerializeField] private Skills _skills;
 
     private int _currentLevel = 1;
     private int _maxLevel = 100;
@@ -31,7 +32,7 @@ public class GameLevel : MonoBehaviour
         if (_currentLevel > _maxLevel)
             _currentLevel = _maxLevel;
 
-        GameLevelSetup gameLevelSetup = new GameLevelSetup(_currentLevel, pieceType);
+        GameLevelSetup gameLevelSetup = new GameLevelSetup(_currentLevel, pieceType, _skills.GetSkills());
         return gameLevelSetup;
     }
 

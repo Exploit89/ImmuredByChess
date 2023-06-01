@@ -35,15 +35,13 @@ public class CameraMover : MonoBehaviour
 
     public IEnumerator ChangePosition()
     {
-        var waitingTime = new WaitForSeconds(0.001f);
-
         while (transform.position != _destination || transform.rotation != _destinationRotation)
         {
             transform.position = Vector3.MoveTowards(_startPosition, _destination, Time.deltaTime * _speed);
             transform.rotation = Quaternion.RotateTowards(_startRotation, _destinationRotation, Time.deltaTime * _speed);
             _startPosition = transform.position;
             _startRotation = transform.rotation;
-            yield return waitingTime;
+            yield return null;
         }
     }
 
@@ -54,7 +52,5 @@ public class CameraMover : MonoBehaviour
 
         if (transform.position != _destination)
             _currentCoroutine = StartCoroutine(ChangePosition());
-        else
-            StopCoroutine(_currentCoroutine);
     }
 }

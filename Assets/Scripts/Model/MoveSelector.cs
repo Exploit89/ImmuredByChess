@@ -132,7 +132,6 @@ public class MoveSelector : MonoBehaviour
 
     public void CancelState()
     {
-        Debug.Log("CancelState");
         enabled = false;
         TileSelector selector = GetComponent<TileSelector>();
         _tileHighlight.SetActive(false);

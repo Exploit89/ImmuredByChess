@@ -149,7 +149,6 @@ public class PieceTurnMover : MonoBehaviour
         if (_experienceCalculator.IsUnitLevelReached(GetCurrentPiece().Experience, GetCurrentPiece().Level))
         {
             GetCurrentPiece().IncreaseLevel();
-            Debug.Log("level icreased " + GetCurrentPiece().Level);
         }
 
         if (pieceToCapture.GetComponent<Piece>().Type == PieceType.King)

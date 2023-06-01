@@ -9,6 +9,7 @@ public class BaseAttack : Skill
     private float _levelMultiplier = 0.1f;
     private int _baseMultiplier = 1;
     private SkillType _skillType;
+    private SkillClass _skillClass;
     private ExperienceCalculator _experienceCalculator;
 
     public float ValueAmount { get; private set; }

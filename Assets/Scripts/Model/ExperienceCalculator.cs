@@ -6,18 +6,24 @@ public class ExperienceCalculator : MonoBehaviour
     private List<int> _levelExperience = new List<int>();
     private Dictionary<PieceType, int> _pieceTypeExperienceReward = new Dictionary<PieceType, int>();
     private int _experienceStep = 100;
+    private int _kingReward = 200;
+    private int _queenReward = 100;
+    private int _bishopReward = 30;
+    private int _knightReward = 30;
+    private int _rookReward = 50;
+    private int _pawnReward = 10;
 
     public int MaxLevel { get; private set; } = 100;
 
     private void Awake()
     {
         _pieceTypeExperienceReward.Clear();
-        _pieceTypeExperienceReward.Add(PieceType.King, 200);
-        _pieceTypeExperienceReward.Add(PieceType.Queen, 100);
-        _pieceTypeExperienceReward.Add(PieceType.Bishop, 30);
-        _pieceTypeExperienceReward.Add(PieceType.Knight, 30);
-        _pieceTypeExperienceReward.Add(PieceType.Rook, 50);
-        _pieceTypeExperienceReward.Add(PieceType.Pawn, 10);
+        _pieceTypeExperienceReward.Add(PieceType.King, _kingReward);
+        _pieceTypeExperienceReward.Add(PieceType.Queen, _queenReward);
+        _pieceTypeExperienceReward.Add(PieceType.Bishop, _bishopReward);
+        _pieceTypeExperienceReward.Add(PieceType.Knight, _knightReward);
+        _pieceTypeExperienceReward.Add(PieceType.Rook, _rookReward);
+        _pieceTypeExperienceReward.Add(PieceType.Pawn, _pawnReward);
 
         for (int i = 0; i < MaxLevel; i++)
         {

@@ -80,7 +80,6 @@ public class MoveSelector : MonoBehaviour
         {
             Destroy(highlight);
         }
-
         _pieceTurnMover.DeselectPiece(_movingPiece);
         TileSelector selector = GetComponent<TileSelector>();
         selector.EnterState();

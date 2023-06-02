@@ -36,10 +36,10 @@ public class BonusCreator : MonoBehaviour
     {
         _healBonus = Instantiate(_healBonusPrefab, gameObject.transform);
         _healBonus.SetActive(false);
-        _healBonus.GetComponent<Effect>().CreateEffect();
+        _healBonus.GetComponent<Effect>().Create();
         _wallBonus = Instantiate(_wallBonusPrefab, gameObject.transform);
         _wallBonus.SetActive(false);
-        _wallBonus.GetComponent<Effect>().CreateEffect();
+        _wallBonus.GetComponent<Effect>().Create();
         _bonuses.Add(_healBonus);
         _bonuses.Add(_wallBonus);
     }
@@ -89,7 +89,7 @@ public class BonusCreator : MonoBehaviour
     {
         int bonusIndex = _random.Next(0, _bonuses.Count);
         _bonuses[bonusIndex].transform.position = vector3;
-        _bonuses[bonusIndex].GetComponent<Effect>().SetEffectPosition(vector3);
+        _bonuses[bonusIndex].GetComponent<Effect>().SetPosition(vector3);
         _bonuses[bonusIndex].SetActive(true);
     }
 

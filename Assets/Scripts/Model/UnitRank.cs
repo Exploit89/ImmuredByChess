@@ -15,7 +15,7 @@ public class UnitRank : MonoBehaviour
 {
     private List<Rank> _ranks = new List<Rank>();
 
-    void Awake()
+    private void Awake()
     {
         CreateRankList();
     }

@@ -4,22 +4,22 @@ public class Effect : MonoBehaviour
 {
     [SerializeField] private GameObject _bonusPrefab;
 
-    private GameObject _bonusEffect;
+    private GameObject _bonusObject;
 
-    public void CreateEffect()
+    public void Create()
     {
-        _bonusEffect = Instantiate(_bonusPrefab);
-        _bonusEffect.SetActive(false);
+        _bonusObject = Instantiate(_bonusPrefab);
+        _bonusObject.SetActive(false);
     }
 
-    public void SetEffectPosition(Vector3 position)
+    public void SetPosition(Vector3 position)
     {
-        _bonusEffect.transform.position = position;
+        _bonusObject.transform.position = position;
     }
 
-    public void ActivateEffect()
+    public void Activate()
     {
-        _bonusEffect.SetActive(true);
-        _bonusEffect.GetComponentInChildren<ParticleSystem>().Play();
+        _bonusObject.SetActive(true);
+        _bonusObject.GetComponentInChildren<ParticleSystem>().Play();
     }
 }

@@ -6,7 +6,7 @@ public class CameraRotate : MonoBehaviour
     private float _turnSpeed = 60.0f;
     private Vector3 _anchor;
 
-    void Awake()
+    private void Awake()
     {
         _anchor = new Vector3(4, 0, 4);
     }

@@ -20,7 +20,7 @@ public class HealBonus : Bonus
         {
             TakeBonus(unit);
             BonusTaken?.Invoke();
-            GetComponent<Effect>().ActivateEffect();
+            GetComponent<Effect>().Activate();
             gameObject.SetActive(false);
         }
     }

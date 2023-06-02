@@ -15,7 +15,7 @@ public class CameraMover : MonoBehaviour
     private float _endXAngle = 50;
     private Coroutine _currentCoroutine;
 
-    void Awake()
+    private void Awake()
     {
         transform.position = _startPosition;
         _startRotation = Quaternion.Euler(_startXAngle, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);

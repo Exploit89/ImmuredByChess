@@ -10,7 +10,7 @@ public class HitPointBarCreator : MonoBehaviour
     private int _maxPiecesBySide = 16;
     private List<GameObject> _hitPointBars;
 
-    void Awake()
+    private void Awake()
     {
         _hitPointBars = new List<GameObject>();
     }

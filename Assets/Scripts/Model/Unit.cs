@@ -29,8 +29,12 @@ public class Unit : MonoBehaviour
     }
     private void OnEnable()
     {
-        GameObject skillsObject = GameObject.FindGameObjectWithTag("Skills");
-        BaseAttack baseAttack = skillsObject.GetComponentInChildren<BaseAttack>();
+        GameObject piece = GetComponentInParent<Transform>().gameObject;
+        GameObject playerPieces = piece.GetComponentInParent<PiecesGroup>().gameObject;
+        GameObject board = playerPieces.GetComponentInParent<Board>().gameObject;
+        Skills skills = board.GetComponentInChildren<Skills>();
+        BaseAttack baseAttack = skills.GetComponentInChildren<BaseAttack>();
+
         _piece = GetComponent<Piece>();
         Name = _piece.Type.ToString();
         UnitRank = Rank.Basic;
@@ -86,7 +90,7 @@ public class Unit : MonoBehaviour
 
             foreach (var skill in _unitSkills)
             {
-                if (skill.name == "BaseAttack")
+                if (skill.TryGetComponent(out BaseAttack baseAttack))
                 {
                     skill.Activate(gameObject.GetComponent<Unit>());
                     damage = skill.GetValueAmount();
@@ -99,8 +103,11 @@ public class Unit : MonoBehaviour
     public void Support(GameObject pieceToCapture)
     {
         GameObject currentPiece = gameObject.GetComponentInParent<Transform>().GetComponentInParent<Transform>().gameObject;
-        GameObject gameplayRuler = GameObject.FindGameObjectWithTag("PieceTurnMover");
-        PieceTurnMover pieceTurnMover = gameplayRuler.GetComponent<PieceTurnMover>();
+        GameObject piece = GetComponentInParent<Transform>().gameObject;
+        GameObject playerPieces = piece.GetComponentInParent<PiecesGroup>().gameObject;
+        GameObject board = playerPieces.GetComponentInParent<Board>().gameObject;
+        PieceTurnMover pieceTurnMover = board.GetComponentInChildren<PieceTurnMover>();
+
         bool isPlayerCurrent = pieceTurnMover.CurrentPlayer.ContainsPiece(currentPiece);
         float heal = 0;
 
@@ -108,7 +115,7 @@ public class Unit : MonoBehaviour
         {
             foreach (var skill in _unitSkills)
             {
-                if (skill.name == "Heal")
+                if (skill.TryGetComponent(out Heal healSkill))
                 {
                     skill.Activate(gameObject.GetComponent<Unit>());
                     heal = skill.GetValueAmount();

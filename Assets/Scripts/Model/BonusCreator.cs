@@ -34,10 +34,10 @@ public class BonusCreator : MonoBehaviour
 
     private void Start()
     {
-        _healBonus = Instantiate(_healBonusPrefab);
+        _healBonus = Instantiate(_healBonusPrefab, gameObject.transform);
         _healBonus.SetActive(false);
         _healBonus.GetComponent<Effect>().CreateEffect();
-        _wallBonus = Instantiate(_wallBonusPrefab);
+        _wallBonus = Instantiate(_wallBonusPrefab, gameObject.transform);
         _wallBonus.SetActive(false);
         _wallBonus.GetComponent<Effect>().CreateEffect();
         _bonuses.Add(_healBonus);
@@ -113,8 +113,6 @@ public class BonusCreator : MonoBehaviour
         {
             _occupiedTiles.Add(item);
         }
-        _occupiedByBonus.Clear();
-
 
         for (int i = 0; i < _board.MaxSideLength; i++)
         {

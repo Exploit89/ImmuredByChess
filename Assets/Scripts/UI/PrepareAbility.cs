@@ -78,7 +78,8 @@ public class PrepareAbility : MonoBehaviour
                 toggles[_abilityNumber].GetComponentInChildren<Text>().text = abilities[_abilityNumber].name;
                 _ability = Instantiate(abilities[_abilityNumber]);
                 _ability.tag = "BoardAbility";
-                Destroy(_ability.GetComponent<Effect>());
+                //Destroy(_ability.GetComponent<Effect>());
+                _ability.GetComponent<Effect>().enabled = false;
                 Destroy(_ability.GetComponent<Bonus>());
                 _ability.SetActive(isOn);
                 _pieceTurnMover.Player.RemoveItem(_abilityNumber);

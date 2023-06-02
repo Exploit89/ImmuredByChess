@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameLevelSetup
 {
-    private List<Skill> skillList;
+    private List<Skill> _skillList;
     private int _baseHealth = 20;
     private int _baseMana = 20;
     private int _advancedLevel = 10;
@@ -21,7 +21,7 @@ public class GameLevelSetup
 
     private void GetBasicSkills(List<Skill> skills)
     {
-        skills.Add(skills[0]);
+        skills.Add(_skillList[0]);
     }
 
     private void GetExpertSkills(List<Skill> skills)
@@ -31,6 +31,7 @@ public class GameLevelSetup
 
     public List<Skill> GetSkills()
     {
+        List<Skill> skillList = new List<Skill>();
         switch (UnitRank)
         {
             case Rank.Basic:
@@ -87,6 +88,7 @@ public class GameLevelSetup
         {
             if (skills[i].GetComponent<Skill>().PieceSkillClass.ToString() == pieceType.ToString())
             {
+                GetBasicSkills(_skillList);
                 skills.Add(skills[i].GetComponent<Skill>());
             }
         }
@@ -94,8 +96,8 @@ public class GameLevelSetup
 
     public GameLevelSetup(int gameLevel, PieceType pieceType, List<Skill> skills)
     {
-        skillList = new List<Skill>();
-        skillList = skills;
+        _skillList = new List<Skill>();
+        _skillList = skills;
         Piece = pieceType;
         Level = gameLevel;
         UnitRank = GetUnitRank();

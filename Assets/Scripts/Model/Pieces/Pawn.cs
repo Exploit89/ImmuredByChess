@@ -5,26 +5,26 @@ public class Pawn : Piece
 {
     public override List<Vector2Int> MoveLocations(Vector2Int gridPoint)
     {
-        GameObject gameplayRuler = GameObject.FindGameObjectWithTag("PieceTurnMover");
-        PieceTurnMover _gameplayRuler = gameplayRuler.GetComponent<PieceTurnMover>();
+        PieceTurnMover pieceTurnMover = GetPieceTurnMover();
         List<Vector2Int> locations = new List<Vector2Int>();
-        int forwardDirection = _gameplayRuler.CurrentPlayer.Forward;
+        int forwardDirection = pieceTurnMover.CurrentPlayer.Forward;
         Vector2Int forwardOne = new Vector2Int(gridPoint.x, gridPoint.y + forwardDirection);
 
-        if (_gameplayRuler.PieceAtGrid(forwardOne) == false)
+        if (pieceTurnMover.PieceAtGrid(forwardOne) == false)
             locations.Add(forwardOne);
         Vector2Int forwardDouble = new Vector2Int(gridPoint.x, gridPoint.y + 2 * forwardDirection);
 
-        if (_gameplayRuler.IsPawnMoved(gameObject) == false && _gameplayRuler.PieceAtGrid(forwardDouble) == false)
+        if (pieceTurnMover.IsPawnMoved(gameObject) == false && pieceTurnMover.PieceAtGrid(forwardDouble) == false)
             locations.Add(forwardDouble);
         Vector2Int forwardRight = new Vector2Int(gridPoint.x + 1, gridPoint.y + forwardDirection);
 
-        if (_gameplayRuler.PieceAtGrid(forwardRight))
+        if (pieceTurnMover.PieceAtGrid(forwardRight))
             locations.Add(forwardRight);
         Vector2Int forwardLeft = new Vector2Int(gridPoint.x - 1, gridPoint.y + forwardDirection);
 
-        if (_gameplayRuler.PieceAtGrid(forwardLeft))
+        if (pieceTurnMover.PieceAtGrid(forwardLeft))
             locations.Add(forwardLeft);
+
         return locations;
     }
 }

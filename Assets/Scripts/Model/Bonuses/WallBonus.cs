@@ -20,8 +20,10 @@ public class WallBonus : Bonus
 
     public override void TakeBonus(Unit unit)
     {
-        GameObject gameplayRuler = GameObject.FindGameObjectWithTag("PieceTurnMover");
-        PieceTurnMover pieceTurnMover = gameplayRuler.GetComponent<PieceTurnMover>();
+        GameObject piece = GetComponentInParent<Transform>().gameObject;
+        GameObject playerPieces = piece.GetComponentInParent<BonusCreator>().gameObject;
+        GameObject board = playerPieces.GetComponentInParent<Board>().gameObject;
+        PieceTurnMover pieceTurnMover = board.GetComponentInChildren<PieceTurnMover>();
         pieceTurnMover.OtherPlayer.AddItem(gameObject);
     }
 }
